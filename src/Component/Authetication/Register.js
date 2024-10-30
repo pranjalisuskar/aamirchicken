@@ -52,9 +52,9 @@ const Register = (props) => {
       const response = await http.post(
         `${process.env.REACT_APP_API_URL}user/register`,
         formData,
-        {
-          headers: { 'Content-Type': 'application/json' },
-        }
+        
+            { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+        
       );
 
       console.log('Register data:', response.data);
@@ -142,9 +142,9 @@ const Register = (props) => {
                       required
                     />
 
-                    <Button type="submit" className="custom-register-btn mt-3">
+                    <button type="submit" className="custom-register-btn mt-3">
                       Continue
-                    </Button>
+                    </button>
                   </div>
                 </Col>
               </Row>

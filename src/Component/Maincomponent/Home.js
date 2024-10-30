@@ -33,7 +33,6 @@ const Home = () => {
     {
       img: "https://fryit.co/wp-content/uploads/2023/04/thawed-chicken-wings_01-mcw.jpg",
       title: "Chinken Curry",
-      //   description: "Description for Product 4",
     },
     {
       img: "https://www.inspiredtaste.net/wp-content/uploads/2023/08/Simple-Whole-Roasted-Recipe-Video.jpg",
