@@ -15,14 +15,17 @@ import {
     ModalBody,
     Row,
     Col,
-    Button,
+    // Button,
     Form,
+    Input,
+    Button,
   } from 'reactstrap';
-  import { Toast } from 'react-bootstrap';
+//   import { Toast } from 'react-bootstrap';
+import Authuser from "./Authuser";
 
 const Login = (props) => {
     const [modalStates, setModalStates] = useState(false);
-//   const { http } = Authuser();
+  const { http } = Authuser();
   const [loginData, setLoginData] = useState({ user_phoneno: "", user_Name: "", user_Email: "", user_Password: "" });
   const [otp, setOtp] = useState(""); // Store OTP as a single string
   const [isOtpSent, setIsOtpSent] = useState(false); // Track OTP status
@@ -36,6 +39,9 @@ const Login = (props) => {
   useEffect(() => {
     setModal(props.modalStates);
   }, [props.modalStates]);
+//   const navigate = useNavigate();
+
+  // Handle input change for login form
   const navigate = useNavigate();
 
   // Handle input change for login form
@@ -54,7 +60,7 @@ const Login = (props) => {
     console.log("Register Value: " + register);
     // check if register form is shown
     if(register) {
-      fetch
+      http
       .post(process.env.REACT_APP_API_URL + "user/register", loginData, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       })
@@ -72,7 +78,7 @@ const Login = (props) => {
         toast.error("An error occurred. Please try again.");
       });
     } else {
-      fetch
+      http
       .post(process.env.REACT_APP_API_URL + "user/send-otp", loginData, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       })
@@ -119,7 +125,7 @@ const Login = (props) => {
       otp: otp,
     };
 
-    fetch
+    http
       .post(process.env.REACT_APP_API_URL + "user/verify-otp", data, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       })
@@ -141,6 +147,7 @@ const Login = (props) => {
       });
   };
 
+
 //   const handleCloseRegister = () => setShowRegisterModal(false);
 
   return (
@@ -148,7 +155,7 @@ const Login = (props) => {
       {/* Login Modal */}
       <Modal id="showModal" isOpen={modal} toggle={toggle} centered>
       <ModalHeader className="bg-light p-3" toggle={toggle}>
-        <Modal.Title className="mx-auto">Login</Modal.Title>
+           <h5 className="mx-auto">Login</h5>
         
       </ModalHeader>
         <Form onSubmit={handleFormSubmit}>
@@ -170,7 +177,7 @@ const Login = (props) => {
             {/* Phone Number Input */}
             <div className="container">
             {/* <div className="floating-label"> */}
-              <input
+              <Input
               style={{ height: '7vh' }}
                 className="form-control"
                 type="text"
@@ -187,7 +194,7 @@ const Login = (props) => {
             {register && (
               <div className="container mt-3">
                 <div className="form-group">
-                  <input
+                  <Input
                     type="text"
                     name="user_Name"
                     className="form-control"
@@ -198,7 +205,7 @@ const Login = (props) => {
                 </div>
 
                 <div className="form-group">
-                  <input
+                  <Input
                     type="text"
                     name="user_Email"
                     className="form-control"
@@ -209,7 +216,7 @@ const Login = (props) => {
                 </div>
 
                 <div className="form-group">
-                  <input
+                  <Input
                     type="password"
                     name="user_Password"
                     className="form-control"
@@ -231,7 +238,7 @@ const Login = (props) => {
                 {isOtpSent ? (
                   // OTP Input Section
                   <div className="mt-3">
-                    <input
+                    <Input
                       className="form-control otp-input"
                       type="text"
                       placeholder="Enter OTP"
@@ -239,20 +246,20 @@ const Login = (props) => {
                       onChange={(e) => setOtp(e.target.value)}
                       maxLength="6"
                     />
-                    <button
+                    <Button
                       type="button"
                       className="btn btn-danger mt-3"
                       onClick={verifyOtp}
                     >
                       Verify OTP
-                    </button>
+                    </Button>
                   </div>
                 ) : (
                   // Login Button Section
                   <div className="container mt-2">
-                    <button type="submit" className="custom-login-btn mt-3">
+                    <Button type="submit" className="custom-login-btn mt-3">
                       Continue
-                    </button>
+                    </Button>
                   </div>
                 )}
               </>
@@ -270,6 +277,7 @@ const Login = (props) => {
                     modalStates={modalStates}
                     setModalStates={() => {
                       setModalStates(false);
+                      setModal(false)
                     }}
                     // checkchang={handleCallback}
                   />

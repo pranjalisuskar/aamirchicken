@@ -8,22 +8,27 @@ import {
   Col,
   Button,
   Form,
+  Input,
 } from 'reactstrap';
 import { Toast } from 'react-bootstrap'; // Toast imported correctly
 import './Loginreg.css';
+import Login from './Loginr';
+import Authuser from './Authuser';
 
 const Register = (props) => {
+    const{http}=Authuser();
   const [modal, setModal] = useState(false);
+  const [loginmodalStates, setloginModalStates] = useState(false);
+  
+
+  const [error, setError] = useState('');
+  const [showToast, setShowToast] = useState(false);
   const [formData, setFormData] = useState({
     user_Name: '',
     user_Email: '',
     user_phoneno: '',
     user_Password: '',
   });
-
-  const [error, setError] = useState('');
-  const [showToast, setShowToast] = useState(false);
-
   const toggle = useCallback(() => {
     setModal((prev) => !prev);
     if (modal) props.setModalStates(); // Close modal if already open
@@ -33,6 +38,9 @@ const Register = (props) => {
     setModal(props.modalStates);
   }, [props.modalStates]);
 
+
+
+  
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -41,35 +49,36 @@ const Register = (props) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
+      const response = await http.post(
         `${process.env.REACT_APP_API_URL}user/register`,
+        formData,
         {
-          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
         }
       );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Registration failed.');
-      }
+      console.log('Register data:', response.data);
+      alert('Register successfully');
 
-      console.log('Register data:', await response.json());
-      alert('Registered successfully');
-      setError('');
-      setShowToast(true);
+      setError(''); // Clear errors
+      setShowToast(true); // Show success toast
+
+      setModal(false); // Close the registration modal
+      setloginModalStates(false); // Open the login modal
     } catch (err) {
       console.error('Error:', err);
-      setError(err.message);
+      const errorMessage =
+        err.response?.data?.message || 'Registration failed. Please try again.';
+      setError(errorMessage); // Set error message
     }
   };
+
 
   return (
     <div>
       <Modal id="showModal" isOpen={modal} toggle={toggle} centered>
         <ModalHeader className="bg-light p-3" toggle={toggle}>
-          <h5 className="mx-auto">Please Sign Up</h5>
+          <h5 className="mx-auto"onClick={() => setloginModalStates(!loginmodalStates)} >Please Sign Up</h5>
         </ModalHeader>
 
         <Form onSubmit={handleFormSubmit}>
@@ -89,7 +98,7 @@ const Register = (props) => {
                       <Toast.Body>Registration Successful!</Toast.Body>
                     </Toast>
 
-                    <input
+                    <Input
                       style={{ height: '7vh' }}
                       type="text"
                       name="user_Name"
@@ -100,7 +109,7 @@ const Register = (props) => {
                       required
                     />
 
-                    <input
+                    <Input
                       style={{ height: '7vh' }}
                       type="text"
                       name="user_phoneno"
@@ -111,7 +120,7 @@ const Register = (props) => {
                       required
                     />
 
-                    <input
+                    <Input
                       style={{ height: '7vh' }}
                       type="email"
                       name="user_Email"
@@ -122,7 +131,7 @@ const Register = (props) => {
                       required
                     />
 
-                    <input
+                    <Input
                       style={{ height: '7vh' }}
                       type="password"
                       name="user_Password"
@@ -143,6 +152,17 @@ const Register = (props) => {
           </ModalBody>
         </Form>
       </Modal>
+      {loginmodalStates === true ? (
+                  <Login
+                  loginmodalStates={loginmodalStates}
+                  setloginModalStates={() => {
+                    setloginModalStates(false);
+                    }}
+                    // checkchang={handleCallback}
+                  />
+                ) : (
+                  ""
+                )}
     </div>
   );
 };

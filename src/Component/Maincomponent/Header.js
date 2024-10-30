@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './Header.css'
+import Login from '../Authetication/Loginr'
 const Header = () => {
 
     const [showCityModal, setShowCityModal] = useState(false);
 
-    // const [showLoginModal, setShowLoginModal] = useState(false);
+    const [modalStates, setModalStates] = useState(false);
   
     const handleCloseCity = () => setShowCityModal(false);
     const handleShowCity = () => setShowCityModal(true);
@@ -104,7 +105,7 @@ const Header = () => {
 
                 {/* My Account Button with custom class */}
                 {/* {!token ? ( */}
-                  <Link to="#" className="nav-link" >
+                  <Link to="#" className="nav-link" onClick={() => setModalStates(!modalStates)}>
                 {/* //   onClick={handleShowLogin} */}
                   
                     <i className="fa-solid fa-user me-1" /> Sign In
@@ -175,10 +176,18 @@ const Header = () => {
           </div>
         </nav>
 
-        {/* <Login
-          showLoginModal={showLoginModal}
-          handleCloseLogin={handleCloseLogin}
-        /> */}
+        
+        {modalStates === true ? (
+                  <Login
+                  modalStates={modalStates}
+                  setModalStates={() => {
+                    setModalStates(false);
+                    }}
+                    // checkchang={handleCallback}
+                  />
+                ) : (
+                  ""
+                )}
       </header>
     </div>
   )
