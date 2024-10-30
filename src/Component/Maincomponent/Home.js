@@ -29,7 +29,6 @@ const Home = () => {
     {
       img: "https://i0.wp.com/www.thegoodeatsdiner.com/wp-content/uploads/2020/08/28_chicken_wings_jumbo.jpg?fit=1000%2C736&ssl=1",
       title: "Boneless Chinken",
-      //   description: "Description for Product 3",
     },
     {
       img: "https://fryit.co/wp-content/uploads/2023/04/thawed-chicken-wings_01-mcw.jpg",
