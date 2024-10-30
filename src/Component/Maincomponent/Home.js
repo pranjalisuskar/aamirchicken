@@ -25,7 +25,6 @@ const Home = () => {
     {
       img: "https://cdn4.volusion.store/etwvu-tkhop/v/vspfiles/photos/420-2.jpg",
       title: "Chinken Wing",
-      //   description: "Description for Product 2",
     },
     {
       img: "https://i0.wp.com/www.thegoodeatsdiner.com/wp-content/uploads/2020/08/28_chicken_wings_jumbo.jpg?fit=1000%2C736&ssl=1",
