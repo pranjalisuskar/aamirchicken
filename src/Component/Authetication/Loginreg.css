@@ -1,0 +1,91 @@
+/* General Modal Styling */
+.custom-modal-right .modal-content {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+  }
+  
+  /* Title Centered */
+  .modal-title {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  /* Register Link Styling */
+  .text-red {
+    color: #d9534f;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .text-red {
+    text-decoration: underline;
+  }
+  
+  /* Floating Label for Inputs */
+  /* .floating-label {
+    position: relative;
+  } */
+  
+  /* .floating-label input {
+    border: 1px solid #ddd;
+    padding: 1.5rem 1rem 0.5rem;
+    border-radius: 5px;
+    outline: none;
+  } */
+  
+  /* .floating-label label {
+    position: absolute;
+    top: 10px;
+    left: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  } */
+  
+  /* .floating-label input:focus + label,
+  .floating-label input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 0.8rem;
+    font-size: 0.8rem;
+    color: #333;
+    background-color: white;
+    padding: 0 0.2rem;
+  } */
+  
+  /* OTP Input */
+  .otp-input {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+  }
+  
+  /* Button Styling */
+  .custom-login-btn,
+  .custom-register-btn,
+  .verify-otp-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #9A292F;
+    color: white;
+    border: none;
+  }
+  
+  .custom-login-btn:hover,
+  .custom-register-btn:hover,
+  .verify-otp-btn:hover {
+    background-color: #9A292F;
+  }
+  

@@ -1,0 +1,105 @@
+.circular-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #9a292f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 768px) {
+    .circular-image {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  .slide-item {
+    padding: 10px;
+  }
+  
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .slick-dots {
+    bottom: -30px;
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    color: #9a292f;
+  }
+  
+  /* SHOP CARDS CSS */
+  .shop-card {
+    background-color: #9a292f; /* Card background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners */
+    transition: transform 0.2s; /* Animation for hover effect */
+    position: relative; /* Enable absolute positioning for the price */
+  }
+  
+  .shop-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+  }
+  
+  .card-img-top {
+    width: 100%; /* Makes the image take the full width of the card */
+    height: auto; /* Maintains aspect ratio */
+    border-top-left-radius: 10px; /* Round top left corner */
+    border-top-right-radius: 10px; /* Round top right corner */
+  }
+  
+  .rating i {
+    margin: 0 2px; /* Space between stars */
+  }
+  
+  /* Custom gold color for stars */
+  .text-gold {
+    color: gold; /* Change to gold color */
+  }
+  
+  /* Price styling */
+  .price {
+    position: absolute; /* Position the price in the corner */
+    top: 10px; /* Adjust position */
+    right: 10px; /* Adjust position */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: background for readability */
+    color: #9a292f; /* Price text color */
+    padding: 5px; /* Padding for the price */
+    border-radius: 5px; /* Rounded corners for price badge */
+  }
+  
+  
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 1024px) {
+    .slick-slide img {
+      width: 80px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .slick-slide img {
+      width: 70px;
+    }
+  
+    .shop-card {
+      margin: 0 auto;
+    }
+  
+    .circular-image {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .no-underline {
+    text-decoration: none;
+    font-weight: bold;
+     color: #9A292F
+  }
+  
