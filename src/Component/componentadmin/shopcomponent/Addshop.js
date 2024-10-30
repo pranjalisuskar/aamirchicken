@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import './Addshop.css';
-// import Authuser from '../Authetication/Authuser';
-
 
 const Addshps = () => {
-  // const { http } = Authuser();
-  const [formData, setformData] = useState({
+  const [formData, setFormData] = useState({
     shopName: '',
     shopLocation: '',
     address: '',
@@ -13,24 +10,22 @@ const Addshps = () => {
     pincode: '',
     mobileNumber: '',
     emailAddress: '',
-    // shopImages: [] // Array to store images
+    shopImages: [] // Array to store images
   });
-
-  console.log(formData);
 
   const onInputChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === "file") {
-      setformData({ ...formData, [name]: files }); // Update shopImages with selected files
+      setFormData({ ...formData, [name]: files });
     } else {
-      setformData({ ...formData, [name]: value });
+      setFormData({ ...formData, [name]: value });
     }
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
-  
+
     for (const key in formData) {
       if (Array.isArray(formData[key])) {
         for (let i = 0; i < formData[key].length; i++) {
@@ -40,8 +35,8 @@ const Addshps = () => {
         data.append(key, formData[key]);
       }
     }
-  
-    fetch(`${process.env.REACT_APP_API_URL}/shops`, {
+
+    fetch('http://localhost:5001/api/shop/create', {
       method: 'POST',
       body: data,
     })
@@ -60,73 +55,95 @@ const Addshps = () => {
         alert(`Error: ${error.message}`);
       });
   };
-  
 
   return (
     <div className="container shopform-container">
-    <h2 className="form-title">Shop Information</h2>
-    <div className="shopform">
-      <div className="row">
-        <div className="form-group col-md-6 custom-input">
-          <input
-            className="form-control triangle-input"
-            type="text"
-            placeholder="Shop Name"
-          />
+      <h2 className="form-title">Shop Information</h2>
+      <form className="shopform" onSubmit={onSubmit}>
+        <div className="row">
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="shopName"
+              value={formData.shopName}
+              onChange={onInputChange}
+              placeholder="Shop Name"
+              required
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="shopLocation"
+              value={formData.shopLocation}
+              onChange={onInputChange}
+              placeholder="Shop Location"
+              required
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={onInputChange}
+              placeholder="Address"
+              required
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="pincode"
+              value={formData.pincode}
+              onChange={onInputChange}
+              placeholder="Pincode"
+              required
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="mobileNumber"
+              value={formData.mobileNumber}
+              onChange={onInputChange}
+              placeholder="Mobile No"
+              required
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="email"
+              name="emailAddress"
+              value={formData.emailAddress}
+              onChange={onInputChange}
+              placeholder="Email Address"
+              required
+            />
+          </div>
+          <div className="form-group col-12 custom-input">
+            <input
+              type="file"
+              id="shopImages"
+              name="file"
+              multiple
+              className="form-control-file"
+              onChange={onInputChange}
+              required
+            />
+          </div>
         </div>
-        <div className="form-group col-md-6 custom-input">
-          <input
-            className="form-control triangle-input"
-            type="text"
-            placeholder="Shop Location"
-          />
-        </div>
-        <div className="form-group col-md-6 custom-input">
-          <input
-            className="form-control triangle-input"
-            type="text"
-            placeholder="Address"
-          />
-        </div>
-        <div className="form-group col-md-6 custom-input">
-          <input
-            className="form-control triangle-input"
-            type="text"
-            placeholder="Pincode"
-          />
-        </div>
-        <div className="form-group col-md-6 custom-input">
-          <input
-            className="form-control triangle-input"
-            type="text"
-            placeholder="Mobile No"
-          />
-        </div>
-        <div className="form-group col-md-6 custom-input">
-          <input
-            className="form-control triangle-input"
-            type="text"
-            placeholder="Email Address"
-          />
-        </div>
-        <div className="form-group col-12 custom-input">
-        {/* <label className="file-label">Shop Images</label> */}
-        <input
-          type="file"
-          id="shopImages"
-          name="shopImages"
-          multiple
-          className="form-control-file"
-          required
-        />
-      </div>
-      </div>
-      <button type="submit" className="submit-button">
-        Submit
-      </button>
+        <button type="submit" className="submit-button">
+          Submit
+        </button>
+      </form>
     </div>
-  </div>
-  
   );
 };
 
