@@ -8,6 +8,7 @@ import Tableshop from './Component/componentadmin/shopcomponent/Tableshop';
 import Productadd from './Component/componentadmin/Productcomponent/Productadd';
 import Addshps from './Component/componentadmin/shopcomponent/Addshop';
 import Allcontent from './Component/componentadmin/Allcontent';
+import Shoponeview from './Component/componentadmin/shopcomponent/Shoponeview';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path='/'element={<Master Rcf={Home} />}/>
+        <Route path='/shop/:id' element={<Master Rcf={Shoponeview}/>}/>
         {/* <Route path='/dashboard' element={<Master Rcf={Dashboard}/>}/> */}
         <Route path='/dash' element={<Allcontent />}/>
         {/* <Route path='/shop/:shopName' element={<Master Rcf={Shoplist}/>}/> */}

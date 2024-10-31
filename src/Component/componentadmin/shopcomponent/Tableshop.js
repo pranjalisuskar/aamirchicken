@@ -4,6 +4,7 @@ import {
   Modal, ModalHeader, ModalBody, Row, Nav,
   
 } from 'reactstrap';
+import Shopupdate from './Shopupdate';
 // import Authuser from '../../Authentigation/Authuser';
 
 const Tableshop = () => {
@@ -15,6 +16,7 @@ const Tableshop = () => {
 
   const toggleAddModal = () => setAddModal(!addModal);  // Toggle Add Modal
   const toggleDetailsModal = () => setDetailsModal(!detailsModal);  // Toggle Details Modal
+  const [modalStates, setModalStates] = useState(false);
 
   const handleRowClick = (shop) => {
     setSelectedShop(shop);  // Set selected shop data
@@ -41,7 +43,11 @@ const Tableshop = () => {
 
     fetchShopData(); // Call the fetch function
   }, []); // Empty dependency array to run only on component mount
-
+  const handleViewClick = (shop) => {
+    setSelectedShop(shop);  // Set selected shop data
+    toggleDetailsModal();  // Open details modal
+  };
+  
   return (
     <div className="page-content">
       <Container fluid>
@@ -65,10 +71,10 @@ const Tableshop = () => {
                   </Col>
                 </Row>
               </CardHeader>
-
+  
               <CardBody className="pt-0">
                 <Nav className="nav-tabs nav-tabs-custom nav-success" role="tablist"></Nav>
-
+  
                 <table className="table align-middle table-hover table-striped mt-3">
                   <thead className="table-light text-muted text-uppercase">
                     <tr>
@@ -80,14 +86,22 @@ const Tableshop = () => {
                   <tbody>
                     {shopData.length > 0 ? (
                       shopData.map((item, index) => (
-                        <tr key={item.id} onClick={() => handleRowClick(item)} style={{ cursor: 'pointer' }}>
+                        <tr key={item.id} style={{ cursor: 'pointer' }}>
                           <td>{index + 1}</td>
                           <td>{item.shopName}</td>
                           <td>
                             <ul className="list-inline hstack gap-2 mb-0">
                               <li className="list-inline-item">
-                                <button className="btn btn-sm btn-outline-primary">
+                                <button
+                                  className="btn btn-sm btn-outline-primary"
+                                  onClick={() => handleViewClick(item)}  // Use handleViewClick here
+                                >
                                   <i className="ri-pencil-fill"></i> View
+                                </button>
+                              </li>
+                              <li className="list-inline-item">
+                                <button className="btn btn-sm btn-outline-danger"  onClick={() => setModalStates(!modalStates)}>
+                                  <i className="ri-delete-bin-5-fill"></i> Update
                                 </button>
                               </li>
                               <li className="list-inline-item">
@@ -113,7 +127,7 @@ const Tableshop = () => {
           </Col>
         </Row>
       </Container>
-
+  
       {/* Add to Shop Modal */}
       <Modal isOpen={addModal} toggle={toggleAddModal} size="lg">
         <ModalHeader toggle={toggleAddModal}>Add to Shop</ModalHeader>
@@ -121,7 +135,7 @@ const Tableshop = () => {
           {/* Add your form logic here */}
         </ModalBody>
       </Modal>
-
+  
       {/* Shop Details Modal */}
       <Modal isOpen={detailsModal} toggle={toggleDetailsModal} size="lg">
         <ModalHeader toggle={toggleDetailsModal}>
@@ -135,11 +149,20 @@ const Tableshop = () => {
               <p><strong>Pincode:</strong> {selectedShop.pincode}</p>
               <p><strong>Mobile No:</strong> {selectedShop.mobileNumber}</p>
               <p><strong>Email:</strong> {selectedShop.emailAddress}</p>
-              {/* You can add more details if needed */}
             </div>
           )}
         </ModalBody>
       </Modal>
+     
+      {modalStates && (
+                <Shopupdate
+                    modalStates={modalStates}
+                    setModalStates={() => {
+                        setModalStates(false);
+                        // setModal(false);
+                    }}
+                />
+            )}
     </div>
   );
 };

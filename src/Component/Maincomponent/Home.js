@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import Authuser from "../Authetication/Authuser";
 
 const Home = () => {
+  const{http}=Authuser();
   const settings = {
     dots: true,
     infinite: true,
@@ -51,81 +53,100 @@ const Home = () => {
     },
   ];
 
-  const shopsData = [
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    {
-      img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-      name: "Balaji Chicken",
-      rating: 4.7,
-      address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-      pincode: "ZB53S7H",
-      availability: { serviceAvailable: true, serviceNotAvailable: false },
-      reviews: 31,
-    },
-    // Add other shops if necessary
-  ];
+
+  const [shop, setShop] = useState([]);
+
+  useEffect(() => {
+    http.get('http://localhost:5001/api/shops')
+      .then(response => {
+        const data = response.data.data; // Access the array inside `data`
+        if (Array.isArray(data)) {
+          setShop(data);
+          console.log(data);
+          
+        } else {
+          console.error('Unexpected response format:', response.data);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+  
+
+  // const shopsData = [
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   {
+  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
+  //     name: "Balaji Chicken",
+  //     rating: 4.7,
+  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
+  //     pincode: "ZB53S7H",
+  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
+  //     reviews: 31,
+  //   },
+  //   // Add other shops if necessary
+  // ];
   return (
     <div className="page-content">
       <div className="container mt-5">
@@ -152,37 +173,31 @@ const Home = () => {
             Shops To Explore - Admin - Shop Admin
           </h2>
         </Link>
-
         <div className="row">
-          {shopsData.map((shop, index) => (
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
-              <Link to={`/shop/${shop.name}`}>
-                <div className="card shop-card shadow position-relative">
-                  <img
-                    src={shop.img}
-                    alt={shop.name}
-                    className="card-img-top"
-                  />
-                  <div className="card-body text-center">
-                    <h5 className="card-title">{shop.name}</h5>
-                    <div className="rating">
-                      {Array.from({ length: 5 }, (_, i) => (
-                        <i
-                          key={i}
-                          className={`fas fa-star ${
-                            i < shop.rating ? "text-gold" : "text-secondary"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <p className="price">${shop.price}</p>{" "}
-                    {/* Display the price */}
-                  </div>
+    {Array.isArray(shop) && shop.length > 0 ? (
+      shop.map((item, index) => (
+        <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
+          <Link to={`/shop/${item.id}`}>
+            <div className="card shop-card shadow position-relative">
+              <img src={item.shopImage} alt={item.shopName} className="card-img-top" />
+              <div className="card-body text-center">
+                <h5 className="card-title">{item.shopName}</h5>
+                <div className="rating">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <i key={i} className={`fas fa-star ${i < item.rating ? "text-gold" : "text-secondary"}`} />
+                  ))}
                 </div>
-              </Link>
+                <p className="price">${item.price}</p>
+              </div>
             </div>
-          ))}
+          </Link>
         </div>
+      ))
+    ) : (
+      <p>No shops available.</p>
+    )}
+  </div>
+
       </div>
     </div>
   );

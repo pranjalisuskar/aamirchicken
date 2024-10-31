@@ -58,7 +58,7 @@ const Register = (props) => {
       );
 
       console.log('Register data:', response.data);
-      alert('Register successfully');
+      // alert('Register successfully');
 
       setError(''); // Clear errors
       setShowToast(true); // Show success toast
@@ -136,7 +136,7 @@ const Register = (props) => {
                       type="password"
                       name="user_Password"
                       className="form-control"
-                      placeholder="Password"
+                      placeholder="Pincode"
                       value={formData.user_Password}
                       onChange={handleInputChange}
                       required

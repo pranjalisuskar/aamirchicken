@@ -61,7 +61,7 @@ const Login = (props) => {
           .then((res) => {
             console.log("login otp", res.data);
             if (res.status === 200) {
-              alert("User Registered successfully!");
+              // alert("User Registered successfully!");
               setIsOtpSent(true); // Display OTP input field
             } 
           })
@@ -77,7 +77,7 @@ const Login = (props) => {
           .then((res) => {
             console.log("login otp", res.data);
             if (res.status === 200) {
-              alert("OTP sent successfully!");
+              // alert("OTP sent successfully!");
               setIsOtpSent(true); // Display OTP input field
             } 
             // Below condition doesn't occur ever
@@ -123,7 +123,7 @@ const Login = (props) => {
           .then((res) => {
             console.log("OTP verification response", res.data);
             if (res.status === 200) {
-              alert("OTP verified successfully!");
+              // alert("OTP verified successfully!");
               navigate("/dash"); // Navigate to dashboard
             } else {
               toast.error(res.data.message || "OTP verification failed");

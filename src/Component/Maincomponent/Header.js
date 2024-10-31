@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './Header.css'
 import Login from '../Authetication/Loginr'
+import Authuser from '../Authetication/Authuser'
 const Header = () => {
+  const { user, token, logout } = Authuser();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
 
     const [showCityModal, setShowCityModal] = useState(false);
 
@@ -11,6 +17,10 @@ const Header = () => {
   
     const handleCloseCity = () => setShowCityModal(false);
     const handleShowCity = () => setShowCityModal(true);
+
+    useEffect(() => {
+
+    }, [token]);
   return (
     <div className='page-content'>
 <header>
@@ -104,44 +114,45 @@ const Header = () => {
                 </a>
 
                 {/* My Account Button with custom class */}
-                {/* {!token ? ( */}
-                  <Link to="#" className="nav-link" onClick={() => setModalStates(!modalStates)}>
-                {/* //   onClick={handleShowLogin} */}
+                {!token ? (
+                  // console.error(token);
                   
-                    <i className="fa-solid fa-user me-1" /> Sign In
-                  </Link>
-                {/* // ) : (
-                  // Dropdown Trigger with User Name */}
-                  <div className="dropdown-trigger" 
-                //   onClick={toggleDropdown}
-                  >
-                    {/* <i className="fa fa-user me-1"></i> */}
-                     {/* {user?.user_Name || "User"} */}
-                  </div>
-                {/* // )} */}
+                  
+        <Link to="#" className="nav-link" onClick={() => setModalStates((prev) => !prev)}>
+          <i className="fa-solid fa-user me-1" /> Sign In
+        </Link>
+      ) : (
+        // console.error(name);
+        <div className="dropdown-trigger" onClick={toggleDropdown}>
+          <i className="fa fa-user me-1" />
+          {user?.user_Name || "User"}
+        </div>
+      )}
 
-                {/* {isOpen && token && ( */}
-                  <div className="dropdown-menu">
-                    <ul>
-                      <li>
-                        <Link to="/profile">Profile</Link>
-                      </li>
-                      <li>
-                        <Link to="/orders">Orders</Link>
-                      </li>
-                      <li>
-                        <Link to="/swiggy-one">Amar chicken One</Link>
-                      </li>
-                      <li>
-                        <Link to="/favourites">Favourites</Link>
-                      </li>
-                      <li>
-                        <Link to="/" >logout</Link>
-                      </li>
-                    </ul>
-                  </div>
-                {/* )} */}
-              </div>
+      {isOpen && token && (
+        <div className="dropdown-menu">
+          <ul>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/orders">Orders</Link>
+            </li>
+            <li>
+              <Link to="/swiggy-one">Amar Chicken One</Link>
+            </li>
+            <li>
+              <Link to="/favourites">Favourites</Link>
+            </li>
+            <li>
+              <button onClick={logout} className="logout-button">
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
 
               {/* Account Modal */}
               {/* <Modal show={showAccountModal} onHide={handleCloseAccount}>
