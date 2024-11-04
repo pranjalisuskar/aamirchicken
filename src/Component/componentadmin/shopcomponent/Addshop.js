@@ -10,13 +10,13 @@ const Addshps = () => {
     pincode: '',
     mobileNumber: '',
     emailAddress: '',
-    shopImages: [] // Array to store images
+    file: [] // Array to store images
   });
 
   const onInputChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === "file") {
-      setFormData({ ...formData, [name]: files });
+      setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -36,13 +36,22 @@ const Addshps = () => {
       }
     }
 
+    console.log(data);
+
     fetch('http://localhost:5001/api/shop/create', {
       method: 'POST',
       body: data,
+      headers: {
+        'x-auth-token': localStorage.getItem('token')
+      }
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
+          if(res.status === 403) {
+            throw new Error(`Access Denied`);
+          } else {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
         }
         return res.json();
       })
@@ -130,7 +139,7 @@ const Addshps = () => {
           <div className="form-group col-12 custom-input">
             <input
               type="file"
-              id="shopImages"
+              id="file"
               name="file"
               multiple
               className="form-control-file"

@@ -123,7 +123,9 @@ const Login = (props) => {
           .then((res) => {
             console.log("OTP verification response", res.data);
             if (res.status === 200) {
-              // alert("OTP verified successfully!");
+              alert("OTP verified successfully!");
+              localStorage.setItem('token', res.data.token);
+
               navigate("/dash"); // Navigate to dashboard
             } else {
               toast.error(res.data.message || "OTP verification failed");
