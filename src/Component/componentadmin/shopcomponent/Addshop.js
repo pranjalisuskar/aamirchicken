@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Addshop.css';
 
 const Addshps = () => {
+  const [shopOwners, setShopOwners] = useState([]);
   const [formData, setFormData] = useState({
     shopName: '',
     shopLocation: '',
@@ -65,11 +66,47 @@ const Addshps = () => {
       });
   };
 
+  useEffect(() => {
+    async function fetchMyAPI() {
+     
+      let response = await fetch('http://localhost:5001/api/users/Shop-Owner', {
+        method: 'GET',
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        }
+      })
+        .then((res) => {
+          if (!res.ok) {
+            if(res.status === 403) {
+              throw new Error(`Access Denied`);
+            } else {
+              throw new Error(`HTTP error! status: ${res.status}`);
+            }
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // console.log(data);
+          setShopOwners(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert(`Error: ${error.message}`);
+        });
+    }
+
+    fetchMyAPI()
+  }, [])
+
+   
+  console.log(shopOwners);
+
   return (
     <div className="container shopform-container">
       <h2 className="form-title">Shop Information</h2>
       <form className="shopform" onSubmit={onSubmit}>
         <div className="row">
+          {/* Add Shopowner DD here */}
           <div className="form-group col-md-6 custom-input">
             <input
               className="form-control triangle-input"

@@ -179,7 +179,7 @@ const Home = () => {
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
           <Link to={`/shop/${item.id}`}>
             <div className="card shop-card shadow position-relative">
-              <img src={item.shopImage} alt={item.shopName} className="card-img-top" />
+              <img src={"http://localhost:5001/uploads/shop/" +item.shopImage} alt={item.shopName} className="card-img-top" />
               <div className="card-body text-center">
                 <h5 className="card-title">{item.shopName}</h5>
                 <div className="rating">
