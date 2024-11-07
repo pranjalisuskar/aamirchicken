@@ -27,7 +27,7 @@ function App() {
        
         <Route path='/shoptale' element={<Master Rcf={Tableshop}/>}/>
         <Route path='/addproduct' element={<Master Rcf={Productadd}/>}/>
-        <Route path="/product/:productId" element={<Productdetails />} />
+        <Route path="/product/:productId" element={< Master Rcf={Productdetails}/>} />
 
       </Routes>
       </BrowserRouter>
