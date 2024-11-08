@@ -286,3 +286,13 @@
     justify-content: space-between;
   }
   
+
+  .custom-view-cart-btn {
+    font-weight: bold;
+    color:  #d9534f; /* Change this to any color you prefer */
+    /* background-color: red; */
+    width: 10px;
+    height: 10px;
+  }
+  
+  

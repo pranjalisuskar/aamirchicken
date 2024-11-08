@@ -128,18 +128,20 @@ function Productdetails() {
 
       {/* Modal for Cart Notification */}
       <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        className="bottom-modal"
-        style={{ marginTop: '400px' }}
-      >
+  show={showModal}
+  onHide={() => setShowModal(false)}
+  className="bottom-modal"
+  style={{ marginTop: '400px' }}
+  size="lg"
+>
         <Modal.Body>
           <div className="row justify-content-center">
             <div className="col-sm-6">
               <p>Your item has been added to the cart.</p>
             </div>
             <div className="col-sm-6">
-              <Button variant="primary">View Cart</Button>
+            <button className="custom-view-cart-btn" style={{height:"40px",width:"190px"}}>View Cart</button>
+
             </div>
           </div>
         </Modal.Body>
