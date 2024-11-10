@@ -102,4 +102,27 @@
     font-weight: bold;
      color: #9A292F
   }
+  .fixed-card {
+    width: 200%;
+    max-width: 300px; /* Set a fixed width for the card */
+    height: 350px; /* Set a fixed height for the card */
+    margin: 0 auto; /* Center the card within its column */
+  }
+  
+  .fixed-image {
+    height: 280px; /* Set height for the image */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px; /* Remainder of card height for the body */
+  }
+  .no-underline {
+    text-decoration: none; /* Removes the underline */
+    color: none; /* Inherits the parent color */
+  }
   

@@ -1,89 +1,90 @@
-import React, { useState } from 'react'
-import '../shopcomponent/Addshop.css'
+import React, { useState } from "react";
+import axios from "axios";
 
-const Productadd = () => {
-  // Initialize form data state
-  const [formData, setFormData] = useState({
-    shop_id: '',
-    product_name:'',
-    description: '',
-    price: '',
-    category: '',
-    image_url: [] // Array to store images
+const ProductAdd = () => {
+  // Initialize productData with image_url as an empty array
+  const [productData, setProductData] = useState({
+    productName: "",
+    price: "",
+    category: "",
+    file: [], // Ensure it's an array for image files
   });
 
-  // Update form data state on input change
-  const onInputChange = (e) => {
-    const { name, value, type, files } = e.target;
-    if (type === "file") {
-      setFormData({ ...formData, [name]: Array.from(files) }); // Corrected to store all files in an array
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  // Handle form submission
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const data = new FormData();
-
-    // Append each key-value to the FormData object
-    for (const key in formData) {
-      if (Array.isArray(formData[key])) {
-        formData[key].forEach(file => data.append(key, file)); // Append each file
-      } else {
-        data.append(key, formData[key]);
-      }
-    }
-
-    // Make API call
-    fetch('http://localhost:5001/api/products', {
-      method: 'POST',
-      body: data,
-      headers: {
-        'x-auth-token': localStorage.getItem('token')
-      }
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.status === 403 ? 'Access Denied' : `HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        alert('Added successfully');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert(`Error: ${error.message}`);
-      });
-  };
-
-  // State for image previews
   const [imagePreviews, setImagePreviews] = useState([]);
 
-  // Update image previews on file change
-  const handleImageChange = (event) => {
-    const files = Array.from(event.target.files);
-    const previews = [];
-
-    files.forEach((file, index) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        previews[index] = reader.result; // Store preview in array
-        if (previews.length === files.length) {
-          setImagePreviews(previews);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+  // Handle input changes for text fields
+  const onInputChange = (e) => {
+    const { name, value,type, files  } = e.target;
+    setProductData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+
+    // Handle image file changes
+    const handleImageChange = (e) => {
+      const files = e.target.files;
+  
+      if (files.length > 0) {
+        setProductData((prevData) => ({
+          ...prevData,
+          image_url: Array.from(files), // Convert FileList to array
+        }));
+  
+        const imagePreviews = Array.from(files).map((file) =>
+          URL.createObjectURL(file)
+        );
+        setImagePreviews(imagePreviews);
+      }
+    };
+  // Handle form submission
+  const onSubmit = async (event) => {
+    event.preventDefault(); // Prevent the form from refreshing the page
+  
+    // Declare and initialize formData properly
+    const formData = new FormData();
+    formData.append("productName", productData.productName);
+    formData.append("price", productData.price);
+    formData.append("category", productData.category);
+  
+    // Check if image_url is an array and append files correctly
+    if (Array.isArray(productData.image_url) && productData.image_url.length > 0) {
+      productData.image_url.forEach((file) => {
+        formData.append("image_url", file);
+      });
+    }
+  
+    try {
+      const response = await fetch("http://localhost:5001/api/product/create", {
+        method: "POST",
+        headers: {
+          // Content-Type should not be set when sending FormData, it will be set automatically by the browser
+        },
+        body: formData, // FormData goes as the request body
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        alert("Product added successfully!");
+      } else {
+        console.error("Error adding product:", response.statusText);
+        alert("There was an error adding the product. Please try again.");
+      }
+    } catch (error) {
+      console.error("Network error adding product:", error);
+      alert("There was an error adding the product. Please try again.");
+    }
+  };
+  
 
   return (
     <div className="container shopform-container">
       <h2 className="form-title">Product Information</h2>
-      <form className="shopform" encType="multipart/form-data" onSubmit={onSubmit}>
+      <form
+        className="shopform"
+        encType="multipart/form-data"
+        onSubmit={onSubmit}
+      >
         <div className="row">
           <div className="form-group col-md-6 custom-input">
             <input
@@ -91,6 +92,7 @@ const Productadd = () => {
               type="text"
               name="productName"
               placeholder="Product Name"
+              value={productData.productName}
               onChange={onInputChange}
             />
           </div>
@@ -100,6 +102,7 @@ const Productadd = () => {
               type="text"
               name="price"
               placeholder="Product Price"
+              value={productData.price}
               onChange={onInputChange}
             />
           </div>
@@ -109,13 +112,14 @@ const Productadd = () => {
               type="text"
               name="category"
               placeholder="Product Category"
+              value={productData.category}
               onChange={onInputChange}
             />
           </div>
           <div className="form-group col-md-6 custom-input">
             <button
               type="button"
-              onClick={() => document.getElementById('shopImages').click()}
+              onClick={() => document.getElementById("shopImages").click()}
               style={{
                 display: "inline-block",
                 padding: "10px 20px",
@@ -124,7 +128,7 @@ const Productadd = () => {
                 borderRadius: "5px",
                 cursor: "pointer",
                 textAlign: "center",
-                border: "none"
+                border: "none",
               }}
             >
               Choose Images
@@ -135,7 +139,7 @@ const Productadd = () => {
               name="image_url"
               multiple
               className="form-control-file"
-              onChange={(e) => { handleImageChange(e); onInputChange(e); }} // Combine change handlers
+              onChange={(e) => handleImageChange(e)}
               style={{ display: "none" }}
             />
             <div className="image-preview-container mt-3">
@@ -151,17 +155,19 @@ const Productadd = () => {
                     objectFit: "cover",
                     margin: "5px",
                     borderRadius: "5px",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)"
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                   }}
                 />
               ))}
             </div>
           </div>
         </div>
-        <button type="submit" className="submit-button">Submit</button>
+        <button type="submit" className="submit-button">
+          Submit
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Productadd;
+export default ProductAdd;

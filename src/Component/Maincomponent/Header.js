@@ -1,29 +1,87 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import './Header.css'
-import Login from '../Authetication/Loginr'
-import Authuser from '../Authetication/Authuser'
+import React, { useEffect, useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import "./Header.css";
+import Login from "../Authetication/Loginr";
+import Authuser from "../Authetication/Authuser";
+
 const Header = () => {
-  const { user, token, logout } = Authuser();
+  const [userDetails, setuserDetails] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  const [showCityModal, setShowCityModal] = useState(false);
 
-    const [showCityModal, setShowCityModal] = useState(false);
+  const [modalStates, setModalStates] = useState(false);
 
-    const [modalStates, setModalStates] = useState(false);
+  const handleCloseCity = () => setShowCityModal(false);
+  const handleShowCity = () => setShowCityModal(true);
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem("userDetails");
+    if (storedUserName) {
+      console.log(storedUserName);
+      setuserDetails(JSON.parse(storedUserName));
+    }
+  }, []);
+
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/');
+  };
+
+  const handleSignIn = () => {
+    setModalStates((prev) => !prev);
+  };
+
   
-    const handleCloseCity = () => setShowCityModal(false);
-    const handleShowCity = () => setShowCityModal(true);
+  // Handle logout functionality
+  // const handleLogout = async () => {
+  //   try {
+  //     console.log("Logging out...");
+      
+  //     // Send the logout request to the backend
+  //     const response = await fetch("http://localhost:5001/api/user/logout/current-user", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       credentials: "include",  // Ensure cookies are included in the request if using cookies for session
+  //     });
+      
+  //     // Check if the logout request was successful
+  //     if (response.ok) {
+  //       console.log("Logout successful");
+        
+  //       // Clear user data from localStorage or sessionStorage
+  //       localStorage.removeItem("userDetails");
+  //       sessionStorage.removeItem("token");
+  //       setuserDetails(null); // Clear user details from the state
 
-    useEffect(() => {
+  //       // Show a success message or alert
+  //       alert("You have successfully logged out.");
+        
+  //       // Redirect user to the homepage after logout
+  //       navigate("/");  // Redirect to the home page after logout
+  //     } else {
+  //       // Handle the error case from the backend
+  //       const errorData = await response.json();
+  //       alert(`Logout failed: ${errorData.message || 'Unknown error'}`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during logout:", error);
+  //     alert("An error occurred during logout. Please try again.");
+  //   }
+  // };
 
-    }, [token]);
+
+
   return (
-    <div className='page-content'>
-<header>
+    <div className="page-content">
+      <header>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
             {/* Logo and Name */}
@@ -32,10 +90,11 @@ const Header = () => {
                 src="https://t3.ftcdn.net/jpg/06/55/69/72/360_F_655697217_GclwFgFfhS8Tw1V3dRbplhWKouXgQ9SL.jpg"
                 alt="Logo"
                 className="logo"
-                style={{ alignItems: "center", height:'50PX'}}
+                style={{ alignItems: "center", height: "50PX" }}
               />
               <span className="ms-2">Amir Chicken</span>
             </Link>
+
             {/* Search Bar */}
             <div className="mx-auto d-flex">
               <input
@@ -50,24 +109,25 @@ const Header = () => {
                 }}
               />
             </div>
+
             {/* Product and My Account Buttons */}
             &nbsp;
             <div className="d-flex align-items-center custom-nav">
-              {/* City Link */}
-              <Link to="#" className="nav-link" onClick={handleShowCity}>
+              {/* Location Link */}
+              <Link
+                to="#"
+                className="nav-link me-3"
+                onClick={handleShowCity}
+                style={{ marginRight: "1rem" }}
+              >
                 <i className="fa-solid fa-city me-1" /> Location
               </Link>
 
               {/* City Modal */}
               <Modal show={showCityModal} onHide={handleCloseCity}>
-                <Modal.Header closeButton></Modal.Header>
-
-                {/* <Modal.Title className="text-center mt-3">
-                  Amir chicken
-                </Modal.Title> */}
-
+                <Modal.Header closeButton />
                 <Modal.Body>
-                  <p className="text-center">Choose Your location</p>
+                  <p className="text-center">Choose Your Location</p>
                   <div className="d-flex justify-content-center">
                     <input
                       className="form-control"
@@ -75,9 +135,6 @@ const Header = () => {
                       placeholder="Search your city or pincode..."
                       aria-label="Search"
                       style={{
-                        // width: "100%",
-                        // maxWidth: "400px",
-                        // borderRadius: "10px",
                         textAlign: "center",
                         width: "80%",
                         height: "8vh",
@@ -87,7 +144,6 @@ const Header = () => {
                     />
                   </div>
                 </Modal.Body>
-
                 <Modal.Footer>
                   <div className="d-flex justify-content-center w-100">
                     <Button
@@ -106,102 +162,73 @@ const Header = () => {
                 </Modal.Footer>
               </Modal>
 
-              {/* Products Button */}
-              <div className="d-flex align-items-center">
-                {/* Products Link */}
-                <a href="/product" className="nav-link">
-                  <i className="fa-solid fa-box me-1" /> Products
-                </a>
+              {/* Products Link */}
+              <a
+                href="/product"
+                className="nav-link me-3"
+                style={{ marginRight: "1rem" }}
+              >
+                <i className="fa-solid fa-box me-1" /> Products
+              </a>
 
-                {/* My Account Button with custom class */}
-                {!token ? (
-                  // console.error(token);
-                  
-                  
-        <Link to="#" className="nav-link" onClick={() => setModalStates((prev) => !prev)}>
-          <i className="fa-solid fa-user me-1" /> Sign In
-        </Link>
-      ) : (
-        // console.error(name);
-        <div className="dropdown-trigger" onClick={toggleDropdown}>
-          <i className="fa fa-user me-1" />
-          {user?.user_Name || "User"}
-        </div>
-      )}
-
-      {isOpen && token && (
-        <div className="dropdown-menu">
-          <ul>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/orders">Orders</Link>
-            </li>
-            <li>
-              <Link to="/swiggy-one">Amar Chicken One</Link>
-            </li>
-            <li>
-              <Link to="/favourites">Favourites</Link>
-            </li>
-            <li>
-              <button onClick={logout} className="logout-button">
-                Logout
-              </button>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
-
-              {/* Account Modal */}
-              {/* <Modal show={showAccountModal} onHide={handleCloseAccount}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Log In/Sign Up</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <div className="d-flex justify-content-center">
-                    <button
-                      className="form-control sty"
-                     
-                      onClick={handleShowLogin}
+              {/* User Menu */}
+              <div className="user-menu ms-auto">
+                {userDetails ? (
+                  <div
+                    className="user-dropdown"
+                    onMouseEnter={() => setShowDropdown(true)}
+                    onMouseLeave={() => setShowDropdown(false)}
+                  >
+                    <span
+                      className="user-name"
+                      style={{ cursor: "pointer", marginRight: "1rem" }}
                     >
-                      Log in Existing Account
-                    </button>
+                      <i className="fa-solid fa-user me-1" />{" "}
+                      {userDetails.userName}
+                    </span>
+                    {showDropdown && (
+                      <div className="dropdown-menu">
+                        <Link to="/profile" className="dropdown-item">
+                          <i className="fa-solid fa-user me-2" /> Profile
+                        </Link>
+                        <button
+                          onClick={logOut}
+                          className="dropdown-item"
+                        >
+                          <i className="fa-solid fa-sign-out-alt me-2" /> Logout
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  <br />
-                  <div className="d-flex justify-content-center">
-                  <button
-        className="form-control sty"
-        onClick={handleShowRegister}  // <-- Updated this line
-      >
-        Create New Account
-      </button>
-                  </div>
-                </Modal.Body>
-                <Modal.Footer>
-                  {/* <Button variant="secondary" onClick={handleCloseAccount}>Close</Button> */}
-              {/* </Modal.Footer> */}
-              {/* </Modal>  */}
+                ) : (
+                  <Link
+                  to="#"
+                  className="nav-link"
+                  onClick={() => setModalStates((prev) => !prev)}
+                  style={{ marginRight: "1rem" }}
+                >
+                  <i className="fa-solid fa-user me-1" /> Sign In
+                </Link>
+                
+                )}
+              </div>
             </div>
           </div>
         </nav>
 
-        
         {modalStates === true ? (
-                  <Login
-                  modalStates={modalStates}
-                  setModalStates={() => {
-                    setModalStates(false);
-                    }}
-                    // checkchang={handleCallback}
-                  />
-                ) : (
-                  ""
-                )}
+          <Login
+            modalStates={modalStates}
+            setModalStates={() => {
+              setModalStates(false);
+            }}
+          />
+        ) : (
+          ""
+        )}
       </header>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import './Addshop.css';
+import React, { useState, useEffect } from "react";
+import "./Addshop.css";
 
 const Addshps = () => {
   const [shopOwners, setShopOwners] = useState([]);
   const [formData, setFormData] = useState({
-    shopName: '',
-    shopLocation: '',
-    address: '',
-    street: '',
-    pincode: '',
-    mobileNumber: '',
-    emailAddress: '',
-    file: [] // Array to store images
+    shopName: "",
+    shopLocation: "",
+    address: "",
+    street: "",
+    pincode: "",
+    mobileNumber: "",
+    emailAddress: "",
+    file: [], // Array to store images
   });
 
   const onInputChange = (e) => {
@@ -39,16 +39,16 @@ const Addshps = () => {
 
     console.log(data);
 
-    fetch('http://localhost:5001/api/shop/create', {
-      method: 'POST',
+    fetch("http://localhost:5001/api/shop/create", {
+      method: "POST",
       body: data,
       headers: {
-        'x-auth-token': localStorage.getItem('token')
-      }
+        "x-auth-token": localStorage.getItem("token"),
+      },
     })
       .then((res) => {
         if (!res.ok) {
-          if(res.status === 403) {
+          if (res.status === 403) {
             throw new Error(`Access Denied`);
           } else {
             throw new Error(`HTTP error! status: ${res.status}`);
@@ -58,26 +58,25 @@ const Addshps = () => {
       })
       .then((data) => {
         console.log(data);
-        alert('Added successfully');
+        alert("Added successfully");
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
         alert(`Error: ${error.message}`);
       });
   };
 
   useEffect(() => {
     async function fetchMyAPI() {
-     
-      let response = await fetch('http://localhost:5001/api/users/Shop-Owner', {
-        method: 'GET',
+      let response = await fetch("http://localhost:5001/api/users/Shop-Owner", {
+        method: "GET",
         headers: {
-          'x-auth-token': localStorage.getItem('token')
-        }
+          "x-auth-token": localStorage.getItem("token"),
+        },
       })
         .then((res) => {
           if (!res.ok) {
-            if(res.status === 403) {
+            if (res.status === 403) {
               throw new Error(`Access Denied`);
             } else {
               throw new Error(`HTTP error! status: ${res.status}`);
@@ -90,20 +89,21 @@ const Addshps = () => {
           setShopOwners(data);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
           alert(`Error: ${error.message}`);
         });
     }
 
-    fetchMyAPI()
-  }, [])
+    fetchMyAPI();
+  }, []);
 
-   
   console.log(shopOwners);
 
   return (
     <div className="container shopform-container">
-      <h2 className="form-title">Shop Information</h2>
+      <h2 className="form-title" style={{ fontWeight: "bold" }}>
+        Shop Information
+      </h2>
       <form className="shopform" onSubmit={onSubmit}>
         <div className="row">
           {/* Add Shopowner DD here */}
@@ -114,7 +114,7 @@ const Addshps = () => {
               name="shopName"
               value={formData.shopName}
               onChange={onInputChange}
-              placeholder="Shop Name"
+              placeholder="Enter Shop Name"
               required
             />
           </div>
@@ -125,18 +125,21 @@ const Addshps = () => {
               name="shopLocation"
               value={formData.shopLocation}
               onChange={onInputChange}
-              placeholder="Shop Location"
+              placeholder="Enter Shop Location"
               required
             />
           </div>
-          <div className="form-group col-md-6 custom-input">
+          <div
+            className="form-group col-md-6 custom-input"
+            style={{ paddingTop: "5px" }}
+          >
             <input
               className="form-control triangle-input"
               type="text"
               name="address"
               value={formData.address}
               onChange={onInputChange}
-              placeholder="Address"
+              placeholder="Enter Shop Address"
               required
             />
           </div>
@@ -147,7 +150,7 @@ const Addshps = () => {
               name="pincode"
               value={formData.pincode}
               onChange={onInputChange}
-              placeholder="Pincode"
+              placeholder="Enter Pincode"
               required
             />
           </div>
@@ -158,18 +161,19 @@ const Addshps = () => {
               name="mobileNumber"
               value={formData.mobileNumber}
               onChange={onInputChange}
-              placeholder="Mobile No"
+              placeholder="Enter Mobile Number"
               required
             />
           </div>
           <div className="form-group col-md-6 custom-input">
             <input
+              style={{ textAlign: "center" }}
               className="form-control triangle-input"
               type="email"
               name="emailAddress"
               value={formData.emailAddress}
               onChange={onInputChange}
-              placeholder="Email Address"
+              placeholder="Enter Email Address"
               required
             />
           </div>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Card,
   Modal,
@@ -9,25 +9,24 @@ import {
   Button,
   Form,
   Input,
-} from 'reactstrap';
-import { Toast } from 'react-bootstrap'; // Toast imported correctly
-import './Loginreg.css';
-import Login from './Loginr';
-import Authuser from './Authuser';
+} from "reactstrap";
+import { Toast } from "react-bootstrap"; // Toast imported correctly
+import "./Loginreg.css";
+import Login from "./Loginr";
+import Authuser from "./Authuser";
 
 const Register = (props) => {
-    const{http}=Authuser();
+  const { http } = Authuser();
   const [modal, setModal] = useState(false);
   const [loginmodalStates, setloginModalStates] = useState(false);
-  
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [formData, setFormData] = useState({
-    user_Name: '',
-    user_Email: '',
-    user_phoneno: '',
-    user_Password: '',
+    user_Name: "",
+    user_Email: "",
+    user_phoneno: "",
+    user_Password: "",
   });
   const toggle = useCallback(() => {
     setModal((prev) => !prev);
@@ -38,11 +37,16 @@ const Register = (props) => {
     setModal(props.modalStates);
   }, [props.modalStates]);
 
-
-
-  
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Allow only numbers and limit to 10 digits
+    if (/^\d{0,10}$/.test(value)) {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleFormSubmit = async (e) => {
@@ -52,33 +56,37 @@ const Register = (props) => {
       const response = await http.post(
         `${process.env.REACT_APP_API_URL}user/register`,
         formData,
-        
-            { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
-        
+
+        { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
 
-      console.log('Register data:', response.data);
+      console.log("Register data:", response.data);
       // alert('Register successfully');
 
-      setError(''); // Clear errors
+      setError(""); // Clear errors
       setShowToast(true); // Show success toast
 
       setModal(false); // Close the registration modal
       setloginModalStates(false); // Open the login modal
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error:", err);
       const errorMessage =
-        err.response?.data?.message || 'Registration failed. Please try again.';
+        err.response?.data?.message || "Registration failed. Please try again.";
       setError(errorMessage); // Set error message
     }
   };
-
 
   return (
     <div>
       <Modal id="showModal" isOpen={modal} toggle={toggle} centered>
         <ModalHeader className="bg-light p-3" toggle={toggle}>
-          <h5 className="mx-auto"onClick={() => setloginModalStates(!loginmodalStates)} >Please Sign Up</h5>
+          <h5
+            className="mx-auto"
+            onClick={() => setloginModalStates(!loginmodalStates)}
+            style={{ fontWeight: "bold" }}
+          >
+            Please Sign Up
+          </h5>
         </ModalHeader>
 
         <Form onSubmit={handleFormSubmit}>
@@ -87,7 +95,9 @@ const Register = (props) => {
               <Row>
                 <Col lg={12}>
                   <div className="container">
-                    {error && <div className="alert alert-danger mt-2">{error}</div>}
+                    {error && (
+                      <div className="alert alert-danger mt-2">{error}</div>
+                    )}
 
                     <Toast
                       onClose={() => setShowToast(false)}
@@ -99,44 +109,44 @@ const Register = (props) => {
                     </Toast>
 
                     <Input
-                      style={{ height: '7vh' }}
+                      style={{ height: "7vh" }}
                       type="text"
                       name="user_Name"
                       className="form-control"
-                      placeholder="Username"
+                      placeholder=" Enter Your Name"
                       value={formData.user_Name}
                       onChange={handleInputChange}
                       required
                     />
 
                     <Input
-                      style={{ height: '7vh' }}
+                      style={{ height: "7vh"}}
                       type="text"
                       name="user_phoneno"
                       className="form-control"
-                      placeholder="Mobile Number"
+                      placeholder="Enter Your Mobile Number"
                       value={formData.user_phoneno}
                       onChange={handleInputChange}
                       required
                     />
 
                     <Input
-                      style={{ height: '7vh' }}
+                      style={{ height: "7vh", textAlign: "center" }}
                       type="email"
                       name="user_Email"
-                      className="form-control"
-                      placeholder="Email"
+                      // className="form-control"
+                      placeholder="Enter Your Email"
                       value={formData.user_Email}
                       onChange={handleInputChange}
                       required
                     />
 
                     <Input
-                      style={{ height: '7vh' }}
+                      style={{ height: "7vh" }}
                       type="password"
                       name="user_Password"
                       className="form-control"
-                      placeholder="Pincode"
+                      placeholder="Enter Your Pincode"
                       value={formData.user_Password}
                       onChange={handleInputChange}
                       required
@@ -153,16 +163,16 @@ const Register = (props) => {
         </Form>
       </Modal>
       {loginmodalStates === true ? (
-                  <Login
-                  loginmodalStates={loginmodalStates}
-                  setloginModalStates={() => {
-                    setloginModalStates(false);
-                    }}
-                    // checkchang={handleCallback}
-                  />
-                ) : (
-                  ""
-                )}
+        <Login
+          loginmodalStates={loginmodalStates}
+          setloginModalStates={() => {
+            setloginModalStates(false);
+          }}
+          // checkchang={handleCallback}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

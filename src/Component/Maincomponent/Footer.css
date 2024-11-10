@@ -1,87 +1,67 @@
+/* Footer styling */
+.footer-container {
+  background-color: #fcfbfb;
+}
 
+.footer-heading {
+  color: #9A292F;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
 
+.footer-col {
+  text-align: left;
+}
 
+.footer-address, .footer-phone, .footer-social {
+  color: #9A292F;
+  margin-top: 10px;
+}
 
+.footer-links,
+.footer-contact {
+  padding-left: 0;
+}
 
-.footer {
-    font-family: 'Arial', sans-serif;
-    background-color: #fcfbfb;
+.footer-link {
+  color: #9A292F;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-link:hover {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+.footer-links li, .footer-contact li {
+  padding-bottom: 10px;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  border-top: 1px solid #ffffff;
+  padding-top: 15px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .footer-heading {
+    text-align: center;
   }
-  
-  .footer-row {
-    border-top: 1px solid #fef6f6;
+
+  .footer-col {
+    text-align: center;
   }
-  
-  .footer-col h5 {
-    font-size: 18px;
-    color: #faf9f9;
+
+  .footer-bottom {
+    font-size: 0.85rem;
   }
-  
-  .footer-link {
-    color: #fcf9f9;
-    text-decoration: none;
-    transition: color 0.3s ease;
+}
+
+@media (max-width: 991px) {
+  .footer-bottom {
+    font-size: 0.9rem;
   }
-  
-  .footer-link:hover {
-    color: #fe1919;
-  }
-  
-  .bg-dark {
-    background-color: #fefefe !important;
-    
-  }
-  
-  .text-light {
-    color: #0b0b0b !important;
-  }
-  
-  .text-warning {
-    color: #060606 !important;
-  }
-  
-  .footer-row .footer-col p,
-  .footer-row .footer-col ul {
-    font-size: 15px;
-    color: #faf4f4;
-  }
-  
-  .footer-col i {
-    font-size: 1.2rem;
-  }
-  
-  #copy-right {
-    border-top: 1px solid #fffbfb;
-    padding-top: 20px;
-  }
-  
-  #copy-right .footer-link {
-    color: #f9f6f6;
-  }
-  
-  #copy-right .footer-link:hover {
-    color: #f8f5f5;
-  }
-  
-  @media (max-width: 768px) {
-    #copy-right {
-      padding-top: 10px;
-    }
-    
-  }
-  
-  /* Apply blue background to the footer container */
-  .footer {
-    background-color: #ccc; /* Blue background */
-    padding: 3rem 1rem;
-    border-radius: 10px;
-  }
-  
-  .footer-hr {
-    width: 40%;  /* Set desired width */
-   /* Set color */
-    margin: 0.5rem 0;  /* Adjust spacing if needed */
-    /* borderColor: "#9A292F" */
-    border-color:"#9A292F"
-  }
-  
+}
