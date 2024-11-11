@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, CssBaseline } from '@mui/material';
 import Sidebar from './Sidebar';
-import Content from './Content';
+import Content from './AdminAllCards';
 
 import Footer from './Footer';
 import Header from '../Maincomponent/Header';

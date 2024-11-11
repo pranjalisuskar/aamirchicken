@@ -116,7 +116,7 @@ const Register = (props) => {
                       placeholder=" Enter Your Name"
                       value={formData.user_Name}
                       onChange={handleInputChange}
-                      required
+                      
                     />
 
                     <Input

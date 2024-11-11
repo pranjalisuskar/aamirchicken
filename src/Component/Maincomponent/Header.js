@@ -163,13 +163,13 @@ const Header = () => {
               </Modal>
 
               {/* Products Link */}
-              <a
+              {/* <a
                 href="/product"
                 className="nav-link me-3"
                 style={{ marginRight: "1rem" }}
               >
                 <i className="fa-solid fa-box me-1" /> Products
-              </a>
+              </a> */}
 
               {/* User Menu */}
               <div className="user-menu ms-auto">

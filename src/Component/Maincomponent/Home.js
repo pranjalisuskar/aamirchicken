@@ -148,7 +148,7 @@ const Home = () => {
   return (
     <div className="page-content">
       <div className="container mt-5">
-        <h2 className="text-center" style={{ color: "#9A292F" }}>
+        <h2 className="text-left" style={{ color: "#9A292F",fontWeight:"bold",fontSize:"32px",fontStyle:"italic" }}>
           Order Fresh Chicken & Egg Online In Your City
         </h2>
         <Slider {...settings}>
@@ -167,8 +167,10 @@ const Home = () => {
       </div>
       <div className="container mt-5">
         <Link to="/dash" className="no-underline">
-          <h2 className="text-center" style={{ color: "#9A292F" }}>
-            Shops To Explore - Admin - Shop Admin
+          <h2 className="text-center" style={{ color: "#9A292F",fontWeight:"bold",fontSize:"35px",fontStyle:"italic" }}>
+            Shops To Explore 
+            {/* - Admin  */}
+            {/* - Shop Admin */}
           </h2>
         </Link>
         <div className="row">

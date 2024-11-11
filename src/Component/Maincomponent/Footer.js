@@ -35,13 +35,13 @@ const Footer = () => {
             <ul className="footer-contact list-unstyled">
               <li><a href="#" className="footer-link">Get in Touch</a></li>
               <li className="footer-phone">
-                <i className="fa-solid fa-phone text-danger me-2" /> +91 000000000
+                <i className="fa-solid fa-phone text-danger me-2" style={{fontSize:"15px",marginRight:"5px"}} /> +91 000000000
               </li>
               <li className="footer-social">
                 Follow Us:
-                <i className="fa-brands fa-instagram mx-2 text-danger" />
-                <i className="fa-brands fa-facebook-f mx-2 text-danger" />
-                <i className="fa-brands fa-youtube mx-2 text-danger" />
+                <i className="fa-brands fa-instagram mx-2 text-danger"style={{fontSize:"15px",marginRight:"5px"}} />
+                <i className="fa-brands fa-facebook-f mx-2 text-danger"style={{fontSize:"15px",marginRight:"5px"}} />
+                <i className="fa-brands fa-youtube mx-2 text-danger" style={{fontSize:"15px",marginRight:"5px"}}/>
               </li>
             </ul>
           </div>
