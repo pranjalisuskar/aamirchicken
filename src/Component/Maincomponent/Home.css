@@ -1,128 +1,178 @@
+/* Circular Image Styling */
 .circular-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #9a292f;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .circular-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .circular-image {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Slide Item Styling */
+.slide-item {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Slick Carousel Controls */
+.slick-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #9a292f;
+}
+
+/* Shop Card Styling */
+.shop-card {
+  background-color: #9a292f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.shop-card:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Rating Stars */
+.rating i {
+  margin: 0 2px;
+}
+
+.text-gold {
+  color: gold;
+}
+
+/* Price Badge */
+.price {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #9a292f;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* No Underline Links */
+.no-underline {
+  text-decoration: none;
+  font-weight: bold;
+  color: #9a292f;
+}
+
+/* Fixed Card Layout */
+.fixed-card {
+  width: 100%;
+  max-width: 300px;
+  height: 350px;
+  margin: 0 auto;
+}
+
+.fixed-image {
+  height: 280px;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .slick-slide img {
     width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #9a292f;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .slick-slide img {
+    width: 70px;
+  }
+
+  .shop-card {
     margin: 0 auto;
   }
-  
-  @media (min-width: 768px) {
-    .circular-image {
-      width: 100px;
-      height: 100px;
-    }
+
+  .circular-image {
+    width: 60px;
+    height: 60px;
   }
-  
-  .slide-item {
-    padding: 10px;
-  }
-  
-  .slick-slide {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .slick-dots {
-    bottom: -30px;
-  }
-  
-  .slick-prev:before,
-  .slick-next:before {
-    color: #9a292f;
-  }
-  
-  /* SHOP CARDS CSS */
+}
+
+@media (max-width: 768px) {
   .shop-card {
-    background-color: #9a292f; /* Card background color */
-    color: white; /* Text color */
-    border: none; /* No border */
-    border-radius: 10px; /* Rounded corners */
-    transition: transform 0.2s; /* Animation for hover effect */
-    position: relative; /* Enable absolute positioning for the price */
+    height: auto;
+    margin-bottom: 1rem;
   }
-  
-  .shop-card:hover {
-    transform: scale(1.05); /* Scale effect on hover */
+
+  .card-title {
+    font-size: 1rem;
   }
-  
-  .card-img-top {
-    width: 100%; /* Makes the image take the full width of the card */
-    height: auto; /* Maintains aspect ratio */
-    border-top-left-radius: 10px; /* Round top left corner */
-    border-top-right-radius: 10px; /* Round top right corner */
-  }
-  
-  .rating i {
-    margin: 0 2px; /* Space between stars */
-  }
-  
-  /* Custom gold color for stars */
-  .text-gold {
-    color: gold; /* Change to gold color */
-  }
-  
-  /* Price styling */
-  .price {
-    position: absolute; /* Position the price in the corner */
-    top: 10px; /* Adjust position */
-    right: 10px; /* Adjust position */
-    background-color: rgba(255, 255, 255, 0.8); /* Optional: background for readability */
-    color: #9a292f; /* Price text color */
-    padding: 5px; /* Padding for the price */
-    border-radius: 5px; /* Rounded corners for price badge */
-  }
-  
-  
-  
-  /* Media queries for responsiveness */
-  @media (max-width: 1024px) {
-    .slick-slide img {
-      width: 80px;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .slick-slide img {
-      width: 70px;
-    }
-  
-    .shop-card {
-      margin: 0 auto;
-    }
-  
-    .circular-image {
-      width: 60px;
-      height: 60px;
-    }
-  }
-  .no-underline {
-    text-decoration: none;
-    font-weight: bold;
-     color: #9A292F
-  }
-  .fixed-card {
-    width: 200%;
-    max-width: 300px; /* Set a fixed width for the card */
-    height: 350px; /* Set a fixed height for the card */
-    margin: 0 auto; /* Center the card within its column */
-  }
-  
-  .fixed-image {
-    height: 280px; /* Set height for the image */
-    object-fit: cover; /* Ensures the image covers the area without stretching */
-  }
-  
+
   .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80px; /* Remainder of card height for the body */
+    padding: 0.5rem;
   }
-  .no-underline {
-    text-decoration: none; /* Removes the underline */
-    color: none; /* Inherits the parent color */
+
+  .rating i {
+    font-size: 0.8rem;
   }
-  
+}
+
+@media (max-width: 576px) {
+  .card-img-top {
+    height: 150px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  /* Adjust for narrower screens */
+  .slick-slide img {
+    width: 60px;
+  }
+
+  .slide-item h5 {
+    font-size: 0.9rem;
+  }
+
+  .slide-item p {
+    font-size: 0.8rem;
+  }
+}

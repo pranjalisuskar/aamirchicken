@@ -71,6 +71,7 @@ button:hover {
   z-index: 1000;
   border-radius: 5px;
   flex-direction: column;
+  margin-right: 15px;
 }
 
 .dropdown-item {
@@ -104,6 +105,7 @@ button:hover {
   }
   input.form-control {
     width: 100%;
+    margin-left: 50%;
   }
 }
 
@@ -134,3 +136,85 @@ button:hover {
 .button-group .user-menu {
   margin-right: 10px;
 }
+
+.logo{
+height: 50px;
+}
+
+
+/* .navbar .nav-link {
+  color: #fff; White text for links 
+ }  */
+
+/* .nav-link {
+  color: #aa1515; 
+  margin-left: 10%;
+} */
+
+/* User Menu */
+.user-name {
+  color: #c62828;; /* White color for user name */
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  background-color: #d32f2f; /* Red background color */
+  border: 1px solid #c62828; /* Darker border for distinction */
+  border-radius: 6px; /* Rounded corners */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  min-width: 180px; /* Wider width for easier readability */
+  padding: 0.5rem 0;
+  overflow: hidden; /* Ensures a clean dropdown boundary */
+}
+
+/* Dropdown Item Styling */
+.dropdown-item {
+  color: #fff;
+  font-size: 0.95rem;
+  padding: 10px 15px; /* Increased padding for better touch targets */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item i {
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.dropdown-item:hover {
+  background-color: #c62828; /* Darker background on hover */
+}
+
+/* Additional Styles for Mobile */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    min-width: 100%; /* Full width on mobile */
+    border-radius: 0; /* Removing border-radius for mobile style consistency */
+  }
+}
+
+
+.btn-submit {
+  background-color: #f44336; /* Red color for the submit button */
+  border: none;
+}
+
+.btn-submit:hover {
+  background-color: #c62828; /* Darker red on hover */
+}
+
+/* Search bar */
+.form-control {
+  border: 1px solid #c62828; /* Darker border for the search bar */
+}
+
+.form-control:focus {
+  border-color: #f44336; /* Focused border with red */
+  box-shadow: 0 0 0 0.25rem rgba(244, 67, 54, 0.25); /* Light red shadow on focus */
+}
+
+.nam{
+  color:  #c62828; /* White text for dropdown items */
+  margin-left: 40%;
+}
+
