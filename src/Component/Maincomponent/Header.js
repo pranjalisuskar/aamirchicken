@@ -14,7 +14,7 @@ const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(prevState => !prevState);
+    setMobileMenuOpen((prevState) => !prevState);
   };
 
   const [showCityModal, setShowCityModal] = useState(false);
@@ -31,7 +31,7 @@ const Header = () => {
 
   const logOut = () => {
     localStorage.clear();
-    navigate('/');
+    navigate("/");
   };
 
   const handleSignIn = () => {
@@ -51,41 +51,45 @@ const Header = () => {
                 className="logo"
               />
               <span className="ms-2">Amir Chicken</span>
+              <div style={{ marginLeft: "140px" }}>
+                {/* Toggler for mobile */}
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  aria-controls="navbar-menu"
+                  aria-expanded={isMobileMenuOpen ? "true" : "false"}
+                  aria-label="Toggle navigation"
+                  onClick={toggleMobileMenu}
+                >
+                  <i className="fa fa-bars" />
+                </button>
+              </div>
             </Link>
 
-            {/* Toggler for mobile */}
-            <button
-              className="navbar-toggler"
-              type="button"
-              aria-controls="navbar-menu"
-              aria-expanded={isMobileMenuOpen ? 'true' : 'false'}
-              aria-label="Toggle navigation"
-              onClick={toggleMobileMenu}
-            >
-              <i className="fa fa-bars" />
-            </button>
-
             {/* Navbar items container */}
-            <div className={`collapse navbar-collapse ${isMobileMenuOpen ? 'show' : ''}`} id="navbar-menu">
-              <div className="d-flex align-items-center w-100">
+            <div
+              className={`collapse navbar-collapse ${
+                isMobileMenuOpen ? "show" : ""
+              }`}
+              id="navbar-menu"
+            >
+              <div className="d-flex align-items-center w-100 justify-content-center justify-content-lg-start" style={{marginLeft:"80px"}}>
                 {/* Search Bar */}
                 <input
-                // style={{marginleft:"50%"}}
-                  className="form-control me-2 w-100"
+                  className="form-control w-100"
                   type="search"
                   placeholder="Search..."
                   aria-label="Search"
-                  style={{marginLeft: "50%"}}
                 />
               </div>
 
               {/* Navigation Links */}
-              <div className="d-flex align-items-center w-100 mt-2">
+              <div className="d-flex w-100 ">
                 {/* Location Link */}
                 <span
-                style={{color:" #c62828"}}
+                  style={{ color: " #c62828", marginLeft: "300px" }}
                   to="#"
-                  className="nam me-3 "
+                  className=" me-3 "
                   onClick={handleShowCity}
                 >
                   <i className="fa-solid fa-city me-1" /> Location
@@ -95,20 +99,35 @@ const Header = () => {
                 <Modal show={showCityModal} onHide={handleCloseCity} centered>
                   <Modal.Header closeButton />
                   <Modal.Body>
-                    <p className="text-center">Choose Your Location</p>
+                    <p
+                      className="text-center"
+                      style={{
+                        fontSize: "20px",
+                        color: "#9A292F",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Choose Your Location
+                    </p>
                     <div className="d-flex justify-content-center">
                       <input
                         className="form-control"
                         type="search"
-                        placeholder="Search your city or pincode..."
+                        placeholder="Enter Your Pincode"
                         aria-label="Search"
+                        style={{ textAlign: "center" }}
                       />
                     </div>
                   </Modal.Body>
                   <Modal.Footer>
                     <div className="d-flex justify-content-center w-100">
                       <Button
-                        className="btn-submit"
+                        style={{
+                          backgroundColor: "#9A292F",
+                          border: "#9A292F",
+                          height: "40px",
+                        }}
+                        className="btn-submit "
                         onClick={() => alert("Search performed!")}
                       >
                         Submit
@@ -126,25 +145,26 @@ const Header = () => {
                       onMouseLeave={() => setShowDropdown(false)}
                     >
                       <span className="user-name">
-                        <i className="fa-solid fa-user me-1" /> {userDetails.userName}
+                        <i className="fa-solid fa-user me-1" />{" "}
+                        {userDetails.userName}
                       </span>
                       {showDropdown && (
-                       <div className="dropdown-menu">
-                       <Link to="/profile" className="dropdown-item">
-                         <i className="fa-solid fa-user me-2" /> Profile
-                       </Link>
-                       <button onClick={logOut} className="dropdown-item">
-                         <i className="fa-solid fa-sign-out-alt me-2" /> Logout
-                       </button>
-                     </div>
-                     
+                        <div className="dropdown-menu">
+                          <Link to="/profile" className="dropdown-item">
+                            <i className="fa-solid fa-user me-2" /> Profile
+                          </Link>
+                          <button onClick={logOut} className="dropdown-item">
+                            <i className="fa-solid fa-sign-out-alt me-2" />{" "}
+                            Logout
+                          </button>
+                        </div>
                       )}
                     </div>
                   ) : (
                     <span
-                    style={{color:" #c62828"}}
+                      style={{ color: " #c62828", marginRight: "50px" }}
                       to="#"
-                      className=" nams"
+                      className=""
                       onClick={handleSignIn}
                     >
                       <i className="fa-solid fa-user me-1" /> Sign In
@@ -158,10 +178,7 @@ const Header = () => {
 
         {/* Login Modal */}
         {isOpen && (
-          <Login
-            modalStates={isOpen}
-            setModalStates={() => setIsOpen(false)}
-          />
+          <Login modalStates={isOpen} setModalStates={() => setIsOpen(false)} />
         )}
       </header>
     </div>

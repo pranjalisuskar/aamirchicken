@@ -8,6 +8,8 @@ const Shoponeview = () => {
   const { id } = useParams();
   const [shop, setShop] = useState({});
   const [dropdownStates, setDropdownStates] = useState({}); // Track dropdown visibility for each product
+  const [cart, setCart] = useState({});
+  
 
   const products = [
     {
@@ -32,12 +34,11 @@ const Shoponeview = () => {
     },
   ];
 
-  const productOptions = [
-    { weight: "500 g", pieces: "2 - 4 pcs approx.", discount: "23% OFF", price: "₹189", originalPrice: "₹246" },
-    { weight: "250 g", pieces: "1 - 2 pcs approx.", discount: "23% OFF", price: "₹99", originalPrice: "₹129" },
-    { weight: "1 kg", pieces: "4 - 6 pcs approx.", discount: "23% OFF", price: "₹449", originalPrice: "₹584" }
+  const chatOptions = [
+    { message: "23% OFF on 500g (2 - 4 pcs approx.) - ₹189" },
+    { message: "23% OFF on 250g (1 - 2 pcs approx.) - ₹99" },
+    { message: "23% OFF on 1kg (4 - 6 pcs approx.) - ₹449" },
   ];
-
   const getShopData = () => {
     fetch(`http://localhost:5001/api/shop/${id}`)
       .then((response) => {
@@ -60,11 +61,40 @@ const Shoponeview = () => {
   }, [id, token]);
 
   // Function to toggle dropdown visibility for each product
-  const toggleDropdown = (productName) => {
+  const toggleDropdownChat = (productName) => {
     setDropdownStates((prevStates) => ({
       ...prevStates,
       [productName]: !prevStates[productName],
     }));
+  };
+
+  // Add product to cart or increase its quantity
+  const addToCart = (productName) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [productName]: prevCart[productName] ? prevCart[productName] + 1 : 1,
+    }));
+  };
+
+  // Increase quantity of a product in the cart
+  const incrementQuantity = (productName) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [productName]: prevCart[productName] + 1,
+    }));
+  };
+
+  // Decrease quantity of a product in the cart
+  const decrementQuantity = (productName) => {
+    setCart((prevCart) => {
+      const newQuantity = prevCart[productName] - 1;
+      if (newQuantity > 0) {
+        return { ...prevCart, [productName]: newQuantity };
+      } else {
+        const { [productName]: _, ...restCart } = prevCart;
+        return restCart;
+      }
+    });
   };
 
   return (
@@ -81,7 +111,9 @@ const Shoponeview = () => {
           <p>Pincode: {shop.pincode || "N/A"}</p>
           <div className="shop-status">
             <span className="status-available">
-              {shop.availability?.serviceAvailable ? "Service available" : "Service not available"}
+              {shop.availability?.serviceAvailable
+                ? "Service available"
+                : "Service not available"}
             </span>
             <span className="shop-rating">
               <strong>{shop.rating || "N/A"}</strong>
@@ -100,57 +132,176 @@ const Shoponeview = () => {
         />
       </div>
       <div className="products-section">
-        <h2 className="section-title" style={{ color: "#9a292f", fontWeight: "bold", fontSize: "35px", fontStyle: "italic", paddingTop: "20px", marginBottom: "20px" }}>
+        <h2
+          className="section-title"
+          style={{
+            color: "#9a292f",
+            fontWeight: "bold",
+            fontSize: "35px",
+            fontStyle: "italic",
+            paddingTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
           Products
         </h2>
         <div className="products">
           {products.map((product) => (
-            <div key={product.name} className="product-card">
-              <img src={product.img} alt={product.name} />
-              <h5>{product.name}</h5>
-              <p className="no-underline" style={{ backgroundColor: "#9a292f", height: "40px" }}>
-                {product.price}
-              </p>
-              <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <div
+              key={product.name}
+              className="product-card"
+              style={{
+                position: "relative",
+                marginBottom: "20px",
+                padding: "10px",
+                border: "1px solid #ddd",
+                borderRadius: "8px",
+                width: "100%",
+              }}
+            >
+              <img
+                src={product.img}
+                alt={product.name}
+                style={{ width: "100%", borderRadius: "8px", height: "200px" }}
+              />
+              <h5 style={{ textAlign: "center", marginTop: "10px" }}>
+                {product.name}
+              </h5>
+
+              <div
+                className="dropdown-container"
+                style={{ textAlign: "center" }}
+              >
                 <button
-                  onClick={() => toggleDropdown(product.name)}
+                  className="dropdown-button"
                   style={{
-                    padding: "10px 20px",
-                    fontSize: "16px",
+                    // padding: "10px 20px",
+                    // fontSize: "16px",
                     width: "100%",
                     backgroundColor: "#9a292f",
                     borderRadius: "5px",
                     color: "white",
+                    textAlign: "center",
+                    marginRight: "30px",
                   }}
+                  onClick={() => toggleDropdownChat(product.name)}
                 >
-                  Add to Cart
+                  Chat with us
                 </button>
-              </div>
-              {dropdownStates[product.name] && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    width: "100%",
-                    backgroundColor: "#ffffff",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)",
-                    zIndex: 1,
-                    borderRadius: "8px",
-                    padding: "10px",
-                    marginTop: "8px",
-                  }}
-                >
-                  {productOptions.map((option, idx) => (
-                    <div key={idx} className="dropdown-option" style={{ padding: "8px 0", display: "flex", justifyContent: "space-between" }}>
-                      <span>{option.weight} - {option.pieces}</span>
-                      <span>{option.price}</span>
-                    </div>
-                  ))}
-                  <div style={{ padding: "10px", color: "#007bff", cursor: "pointer", fontSize: "14px", textAlign: "center", fontWeight: "bold" }}>
-                    +20 More Combos
+
+                {dropdownStates[product.name] && (
+                  <div
+                    className="chat-dropdown"
+                    style={{
+                      position: "absolute",
+                      top: "100%",
+                      width: "110%",
+                      backgroundColor: "#ffffff",
+                      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)",
+                      zIndex: 1,
+                      borderRadius: "8px",
+                      padding: "10px",
+                      marginTop: "8px",
+                      left: 0,
+                      textAlign: "center",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {chatOptions.map((option, idx) => (
+                      <div
+                        key={idx}
+                        className="chat-message"
+                        style={{
+                          padding: "8px",
+                          backgroundColor:
+                            idx % 2 === 0 ? "#f0f0f0" : "#e0e0e0",
+                          borderRadius: "12px",
+                          marginBottom: "6px",
+                          textAlign: idx % 1 === 0 ? "left" : "right",
+                          height: "60px",
+                          margin: "30px",
+                          width: "100%",
+                        }}
+                      >
+                        {option.message}
+                      </div>
+                    ))}
+                    <button
+                      className="more-options"
+                      style={{
+                        padding: "10px",
+                        color: "#9A292F",
+                        cursor: "pointer",
+                        fontSize: "14px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        background: "none",
+                        border: "none",
+                      }}
+                    >
+                      +20 More Combos
+                    </button>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
+              {/* Add to Cart and Quantity Buttons */}
+              <div style={{ textAlign: "center", marginTop: "20px" }}>
+                {cart[product.name] ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
+                      onClick={() => decrementQuantity(product.name)}
+                      style={{
+                        padding: "5px 10px",
+                        fontSize: "16px",
+                        backgroundColor: "#9a292f",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "5px",
+                        marginRight: "10px",
+                      }}
+                    >
+                      -
+                    </button>
+                    <span style={{ fontSize: "16px", margin: "0 10px" }}>
+                      {cart[product.name]}
+                    </span>
+                    <button
+                      onClick={() => incrementQuantity(product.name)}
+                      style={{
+                        padding: "5px 10px",
+                        fontSize: "16px",
+                        backgroundColor: "#9a292f",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "5px",
+                        marginLeft: "10px",
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => addToCart(product.name)}
+                    style={{
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                      width: "100%",
+                      backgroundColor: "#9a292f",
+                      borderRadius: "5px",
+                      color: "white",
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>

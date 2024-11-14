@@ -10,6 +10,7 @@ import Addshps from './Component/componentadmin/shopcomponent/Addshop';
 import Allcontent from './Component/componentadmin/Allcontent';
 import Shoponeview from './Component/componentadmin/shopcomponent/Shoponeview';
 import Productdetails from './Component/componentadmin/Productcomponent/Productdetails';
+import AdminLogin from './Component/componentadmin/AdminLogin';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/shoptale' element={<Master Rcf={Tableshop}/>}/>
         <Route path='/addproduct' element={<Master Rcf={Productadd}/>}/>
         <Route path="/product/:productId" element={< Master Rcf={Productdetails}/>} />
+        <Route path="/admin" element={<AdminLogin />} />
 
       </Routes>
       </BrowserRouter>

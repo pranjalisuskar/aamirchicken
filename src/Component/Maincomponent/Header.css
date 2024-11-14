@@ -215,6 +215,22 @@ height: 50px;
 
 .nam{
   color:  #c62828; /* White text for dropdown items */
-  margin-left: 40%;
+  margin-left: 40%;  
 }
 
+/* Make the search bar take full width on mobile screens */
+
+/* Make the search bar take full width on mobile screens */
+@media (max-width: 768px) {
+  .form-control {
+    max-width: 100%;
+    margin: 0 auto; /* Center the input on mobile */
+  }
+}
+
+/* Add some spacing around the input on larger screens */
+@media (min-width: 992px) {
+  .form-control {
+    max-width: 80%;
+  }
+}

@@ -148,7 +148,15 @@ const Home = () => {
   return (
     <div className="page-content">
       <div className="container mt-5">
-        <h2 className="text-left" style={{ color: "#9A292F",fontWeight:"bold",fontSize:"32px",fontStyle:"italic" }}>
+        <h2
+          className="text-left"
+          style={{
+            color: "#9A292F",
+            fontWeight: "bold",
+            fontSize: "32px",
+            fontStyle: "italic",
+          }}
+        >
           Order Fresh Chicken & Egg Online In Your City
         </h2>
         <Slider {...settings}>
@@ -166,48 +174,61 @@ const Home = () => {
         </Slider>
       </div>
       <div className="container mt-5">
-  <Link to="/dash" className="no-underline">
-    <h2 className="text-center" style={{ color: "#9A292F", fontWeight: "bold", fontSize: "35px", fontStyle: "italic" }}>
-      Shops To Explore
-    </h2>
-  </Link>
-  <div className="row">
-    {Array.isArray(shop) && shop.length > 0 ? (
-      shop.map((item, index) => (
-        <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
-          <Link to={`/shop/${item.id}`}>
-            <div className="card shop-card shadow position-relative">
-              <img
-                src={`http://localhost:5001/uploads/shop/${item.shopImage}`}
-                alt={item.shopName}
-                className="card-img-top"
-                style={{
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "200px", // Adjust height for mobile view
-                }}
-              />
-              <div className="card-body text-center">
-                <h5 className="card-title">{item.shopName}</h5>
-                <div className="rating">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <i
-                      key={i}
-                      className={`fas fa-star ${i < item.rating ? "text-gold" : "text-secondary"}`}
+        <Link to="/dash" className="no-underline">
+          <h2
+            className="text-center"
+            style={{
+              color: "#9A292F",
+              fontWeight: "bold",
+              fontSize: "35px",
+              fontStyle: "italic",
+            }}
+          >
+            Shops To Explore
+          </h2>
+        </Link>
+        <div className="row">
+          {Array.isArray(shop) && shop.length > 0 ? (
+            shop.map((item, index) => (
+              <div
+                className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+                key={index}
+              >
+                <Link to={`/shop/${item.id}`}>
+                  <div className="card shop-card shadow position-relative" style={{height:"380px"}}>
+                    <img
+                      src={`http://localhost:5001/uploads/shop/${item.shopImage}`}
+                      alt={item.shopName}
+                      className="card-img-top"
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "300px", // Adjust height for mobile view
+                        // objectFit:"contain"
+                      }}
                     />
-                  ))}
-                </div>
+                    <div className="card-body text-center">
+                      <h5 className="card-title">{item.shopName}</h5>
+                      <div className="rating">
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <i
+                            key={i}
+                            className={`fas fa-star ${
+                              i < item.rating ? "text-gold" : "text-secondary"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </div>
-            </div>
-          </Link>
+            ))
+          ) : (
+            <p>No shops available.</p>
+          )}
         </div>
-      ))
-    ) : (
-      <p>No shops available.</p>
-    )}
-  </div>
-</div>
-
+      </div>
     </div>
   );
 };
