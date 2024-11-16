@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Shoponeview.css";
 import Authuser from "../../Authetication/Authuser";
+import { Modal, ModalBody, Button, ModalHeader } from 'reactstrap';
 
 const Shoponeview = () => {
   const { token } = Authuser();
   const { id } = useParams();
   const [shop, setShop] = useState({});
   const [dropdownStates, setDropdownStates] = useState({}); // Track dropdown visibility for each product
-  const [cart, setCart] = useState({});
+  // const [cart, setCart] = useState({});
+  // const [showModal, setShowModal] = useState(false);
   
 
   const products = [
@@ -68,15 +70,35 @@ const Shoponeview = () => {
     }));
   };
 
+
+  const [showModals, setShowModals] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [cart, setCart] = useState({});
+
+
+  const [modal, setModal] = useState(false);
+  const toggle = () => {
+    setModal(!modal);
+    
+  };
+  
   // Add product to cart or increase its quantity
   const addToCart = (productName) => {
+    setShowModals(!showModals);
     setCart((prevCart) => ({
       ...prevCart,
       [productName]: prevCart[productName] ? prevCart[productName] + 1 : 1,
     }));
   };
 
-  // Increase quantity of a product in the cart
+  // Sample decrement and increment functions
+  const decrementQuantity = (productName) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [productName]: prevCart[productName] > 1 ? prevCart[productName] - 1 : 1,
+    }));
+  };
+
   const incrementQuantity = (productName) => {
     setCart((prevCart) => ({
       ...prevCart,
@@ -84,18 +106,6 @@ const Shoponeview = () => {
     }));
   };
 
-  // Decrease quantity of a product in the cart
-  const decrementQuantity = (productName) => {
-    setCart((prevCart) => {
-      const newQuantity = prevCart[productName] - 1;
-      if (newQuantity > 0) {
-        return { ...prevCart, [productName]: newQuantity };
-      } else {
-        const { [productName]: _, ...restCart } = prevCart;
-        return restCart;
-      }
-    });
-  };
 
   return (
     <div className="container mt-5 shop-container">
@@ -287,6 +297,7 @@ const Shoponeview = () => {
                     </button>
                   </div>
                 ) : (
+                  <Link to='/view'>
                   <button
                     onClick={() => addToCart(product.name)}
                     style={{
@@ -300,12 +311,42 @@ const Shoponeview = () => {
                   >
                     Add to Cart
                   </button>
+                  </Link>
                 )}
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      
+
+
+
+
+    
+
+
+       {/* Modal for Cart Notification */}
+       <Modal
+  show={showModals}
+  onHide={() => setShowModals(false)}
+  className="bottom-modal"
+  style={{ marginTop: '400px' }}
+  size="lg"
+>
+        <Modal.Body>
+          <div className="row justify-content-center">
+            <div className="col-sm-6">
+              <p>Your item has been added to the cart.</p>
+            </div>
+            <div className="col-sm-6">
+            <button className="custom-view-cart-btn" style={{height:"40px",width:"190px"}}>View Cart</button>
+
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

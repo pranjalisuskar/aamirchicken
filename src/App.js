@@ -11,6 +11,7 @@ import Allcontent from './Component/componentadmin/Allcontent';
 import Shoponeview from './Component/componentadmin/shopcomponent/Shoponeview';
 import Productdetails from './Component/componentadmin/Productcomponent/Productdetails';
 import AdminLogin from './Component/componentadmin/AdminLogin';
+import Viewcart from './Component/componentadmin/shopcomponent/Viewcart';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path='/addproduct' element={<Master Rcf={Productadd}/>}/>
         <Route path="/product/:productId" element={< Master Rcf={Productdetails}/>} />
         <Route path="/admin" element={<AdminLogin />} />
+        <Route path='/view' element={< Master Rcf={Viewcart}/>}/>
 
       </Routes>
       </BrowserRouter>
