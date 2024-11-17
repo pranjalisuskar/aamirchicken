@@ -11,6 +11,7 @@ import Allcontent from './Component/componentadmin/Allcontent';
 import Shoponeview from './Component/componentadmin/shopcomponent/Shoponeview';
 import Productdetails from './Component/componentadmin/Productcomponent/Productdetails';
 import AdminLogin from './Component/componentadmin/AdminLogin';
+import ShopCards from './Component/componentadmin/ShopCards';
 
 
 function App() {
