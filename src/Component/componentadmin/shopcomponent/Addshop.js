@@ -101,7 +101,10 @@ const Addshps = () => {
 
   return (
     <div className="container shopform-container">
-      <h2 className="form-title" style={{ fontWeight: "bold" }}>
+      <h2
+        className="form-title"
+        style={{ fontWeight: "bold", color: "#9a292f" }}
+      >
         Shop Information
       </h2>
       <form className="shopform" onSubmit={onSubmit}>
@@ -109,6 +112,7 @@ const Addshps = () => {
           {/* Add Shopowner DD here */}
           <div className="form-group col-md-6 custom-input">
             <input
+              style={{fontWeight:"bold"}}
               className="form-control triangle-input"
               type="text"
               name="shopName"
@@ -120,6 +124,7 @@ const Addshps = () => {
           </div>
           <div className="form-group col-md-6 custom-input">
             <input
+              style={{fontWeight:"bold"}}
               className="form-control triangle-input"
               type="text"
               name="shopLocation"
@@ -135,6 +140,7 @@ const Addshps = () => {
           >
             <input
               className="form-control triangle-input"
+              style={{fontWeight:"bold"}}
               type="text"
               name="address"
               value={formData.address}
@@ -146,17 +152,19 @@ const Addshps = () => {
           <div className="form-group col-md-6 custom-input">
             <input
               className="form-control triangle-input"
+              style={{fontWeight:"bold"}}
               type="text"
               name="pincode"
               value={formData.pincode}
               onChange={onInputChange}
-              placeholder="Enter Pincode"
+              placeholder="Enter Your Pincode"
               required
             />
           </div>
           <div className="form-group col-md-6 custom-input">
             <input
               className="form-control triangle-input"
+              style={{fontWeight:"bold"}}
               type="text"
               name="mobileNumber"
               value={formData.mobileNumber}
@@ -167,9 +175,9 @@ const Addshps = () => {
           </div>
           <div className="form-group col-md-6 custom-input">
             <input
-              style={{ textAlign: "center" }}
               className="form-control triangle-input"
-              type="email"
+              style={{fontWeight:"bold"}}
+              type="text"
               name="emailAddress"
               value={formData.emailAddress}
               onChange={onInputChange}
@@ -177,8 +185,16 @@ const Addshps = () => {
               required
             />
           </div>
-          <div className="form-group col-12 custom-input">
+
+          <div className="form-group custom-input d-flex align-items-center">
             <input
+              style={{
+                width: "40%", 
+                height: "40px", 
+                padding: "10px", 
+                borderRadius: "5px", 
+                border: "1px solid #ccc", 
+              }}
               type="file"
               id="file"
               name="file"
@@ -187,12 +203,106 @@ const Addshps = () => {
               onChange={onInputChange}
               required
             />
+            <button
+              type="submit"
+              className="submit-button"
+              style={{
+                marginLeft: "140px",
+
+                width: "40%",
+                height: "40px",
+                borderRadius: "5px",
+                border: "1px solid #ccc",
+                backgroundColor: "#9a292f",
+                color: "#fff",
+              }}
+            >
+              Submit
+            </button>
           </div>
         </div>
-        <button type="submit" className="submit-button">
-          Submit
-        </button>
       </form>
+
+      {/* <button type="submit" className="submit-button">
+              Submit
+            </button> */}
+
+      <div className="container shopform-container"style={{marginBottom:"50px"}}>
+        <h2
+          className="form-title"
+          style={{ fontWeight: "bold", color: "#9a292f",marginTop:"30px" }}
+        >
+          Products Information
+        </h2>
+        <form className="shopform" onSubmit={onSubmit}>
+          <div className="row">
+            {/* Add Shopowner DD here */}
+            <div className="form-group col-md-6 custom-input">
+              <input
+              style={{fontWeight:"bold"}}
+                className="form-control triangle-input"
+                type="text"
+                name="shopName"
+                value={formData.shopName}
+                onChange={onInputChange}
+                placeholder="Enter Product Name"
+                required
+              />
+            </div>
+            <div className="form-group col-md-6 custom-input">
+              <input
+                  style={{fontWeight:"bold"}}
+                className="form-control triangle-input"
+                type="text"
+                name="shopLocation"
+                value={formData.shopLocation}
+                onChange={onInputChange}
+                placeholder="Enter Product Price"
+                required
+              />
+            </div>
+            <div
+              className="form-group col-md-6 custom-input"
+              style={{ paddingTop: "5px" }}
+            >
+              <input
+                  style={{fontWeight:"bold"}}
+                className="form-control triangle-input"
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={onInputChange}
+                placeholder="Enter Product Category "
+                required
+              />
+            </div>
+
+            <div className="form-group col-md-6 custom-input">
+              <input
+                style={{
+                  width: "80%", 
+                  height: "45px", 
+                  padding: "10px", 
+                  borderRadius: "5px", 
+                  border: "1px solid #ccc", 
+                  marginTop: "10px", 
+                }}
+                type="file"
+                id="file"
+                name="file"
+                multiple
+                className="form-control-file"
+                onChange={onInputChange}
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

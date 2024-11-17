@@ -1,5 +1,6 @@
 .shopform-container {
     margin-top: 10px;
+    width: 100px;
   }
   
   .form-title {
@@ -45,7 +46,7 @@
     align-items: center;
     align-items: center;
     font-weight: "bold";
-    /* margin-left: 40%; */
+    margin-left: 40%;
   }
   
   .submit-button:hover {

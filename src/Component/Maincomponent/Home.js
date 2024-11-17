@@ -149,12 +149,13 @@ const Home = () => {
     <div className="page-content">
       <div className="container mt-5">
         <h2
-          className="text-left"
+          className=""
           style={{
             color: "#9A292F",
             fontWeight: "bold",
-            fontSize: "32px",
+            fontSize: "30px",
             fontStyle: "italic",
+            textAlign:"center"
           }}
         >
           Order Fresh Chicken & Egg Online In Your City
@@ -174,19 +175,19 @@ const Home = () => {
         </Slider>
       </div>
       <div className="container mt-5">
-        <Link to="/dash" className="no-underline">
+        {/* <Link to="" className="no-underline"> */}
           <h2
             className="text-center"
             style={{
               color: "#9A292F",
               fontWeight: "bold",
-              fontSize: "35px",
+              fontSize: "30px",
               fontStyle: "italic",
             }}
           >
             Shops To Explore
           </h2>
-        </Link>
+        {/* </Link> */}
         <div className="row">
           {Array.isArray(shop) && shop.length > 0 ? (
             shop.map((item, index) => (
@@ -195,7 +196,7 @@ const Home = () => {
                 key={index}
               >
                 <Link to={`/shop/${item.id}`}>
-                  <div className="card shop-card shadow position-relative" style={{height:"380px"}}>
+                  <div className="card shop-card shadow position-relative" style={{height:"380px",borderColor:"#9a292f"}}>
                     <img
                       src={`http://localhost:5001/uploads/shop/${item.shopImage}`}
                       alt={item.shopName}

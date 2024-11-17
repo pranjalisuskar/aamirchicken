@@ -140,7 +140,7 @@ const ProductAdd = () => {
               multiple
               className="form-control-file"
               onChange={(e) => handleImageChange(e)}
-              style={{ display: "none" }}
+              style={{ display: "none"}}
             />
             <div className="image-preview-container mt-3">
               {imagePreviews.map((src, index) => (

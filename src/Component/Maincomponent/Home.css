@@ -4,9 +4,10 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #9a292f;
+  border: 3px solid #e7d7d8;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
+  border-color: #9a292f;
 }
 
 @media (min-width: 768px) {
@@ -27,6 +28,7 @@
 .slide-item {
   padding: 10px;
   text-align: center;
+
 }
 
 /* Slick Carousel Controls */

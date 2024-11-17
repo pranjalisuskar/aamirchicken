@@ -17,10 +17,12 @@
 }
 
 .form-title {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 25px;
+  font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
+  font-style: italic;
+  color: #9a292f;
 }
 
 .form-group {
@@ -39,12 +41,14 @@ label {
 }
 
 .form-control {
-  width: 100%;
+  width: 150%;
   padding: 12px;
   margin-top: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  margin-left: 30px;
+  text-align: center;
 }
 
 .form-control:focus {
@@ -59,7 +63,7 @@ label {
 }
 
 .submit-btn {
-  width: 100%;
+  width: 80%;
   padding: 12px;
   background-color: #007bff;
   border: none;
@@ -68,8 +72,12 @@ label {
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: 30px;
 }
 
+.harsha{
+  margin-left: 30px;
+}
 .submit-btn:hover {
   background-color: #0056b3;
 }
