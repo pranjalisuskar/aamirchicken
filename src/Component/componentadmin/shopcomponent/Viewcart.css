@@ -1,0 +1,200 @@
+/* body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+  } */
+  
+  /* Container Styling */
+  /* .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+  } */
+  
+  /* Section Styling */
+
+
+  /* .container {
+    display: flex;
+    justify-content: space-between; /* Optional, to give space between sections */
+    /* padding: 20px;
+  } */ 
+  
+  .account-section,
+  .order-summary {
+    flex: 1;
+    padding: 20px;
+    height: 500px;
+  }
+  
+  .account-section .indicator,
+   .indicator {
+    height: 4px;
+    background-color: #ccc;
+    margin-bottom: 10px;
+    width: 500px;
+  }
+
+  .accontent{
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    height: 30%;
+    width: 510px;
+  }
+  
+  .account-content, .order-content {
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+  }
+  
+  .button-group button {
+    margin-right: 10px;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Indicator Styling */
+  .indicator {
+    width: 10px;
+    height: 50px;
+    background-color: #8B0000;
+    border-radius: 5px;
+    position: absolute;
+    top: 20px;
+    left: -10px;
+  }
+  
+  /* Content Styling */
+  .account-content, .order-content {
+    flex: 1;
+    width: 100%;
+  }
+  
+  /* Account Section Styling */
+  h5, h6 {
+    color: #8B0000;
+    margin: 0 0 10px;
+  }
+  
+  p {
+    margin: 0 0 10px;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .btn-light, .btn-danger {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    max-width: 180px;
+  }
+  
+  .btn-light {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ddd;
+  }
+  
+  .btn-danger {
+    background-color: #8B0000;
+    color: #fff;
+  }
+  
+  /* Order Summary Section */
+  .order-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .product-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+  }
+  
+  .shop-name {
+    color: #8B0000;
+    margin: 0;
+  }
+  
+  .summary-item, .summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  
+  .summary-total {
+    font-weight: bold;
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .account-section, .order-summary {
+      padding: 15px;
+    }
+  
+    .button-group {
+      flex-direction: column;
+    }
+  
+    .btn-light, .btn-danger {
+      width: 100%;
+    }
+  
+    .order-header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .product-img {
+      width: 90px;
+      height: 90px;
+    }
+  
+    .summary-item, .summary-total {
+      font-size: 16px;
+    }
+  }
+  
+
+  .jkl{
+    margin-top: 40px;
+    margin-left: 160px;
+  }
