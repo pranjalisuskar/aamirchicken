@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Viewcart.css';
 import Login from '../../Authetication/Loginr';
 import Register from '../../Authetication/Register';
+import { Link } from 'react-router-dom';
 
 const Viewcart = () => {
   // const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -40,7 +41,12 @@ const Viewcart = () => {
         </div>
 
         <div className="accontent">
-          <h5 className="jkl">Payment</h5>
+          <h5 className="">Payment</h5>
+          <Link to='/placeorder'>
+          <button className="btn btn-primary place-order-btn" >
+              proceed to pay
+            </button>
+            </Link>
         </div>
       </div>
 
