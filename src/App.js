@@ -11,12 +11,12 @@ import Allcontent from './Component/componentadmin/Allcontent';
 import Shoponeview from './Component/componentadmin/shopcomponent/Shoponeview';
 import Productdetails from './Component/componentadmin/Productcomponent/Productdetails';
 import AdminLogin from './Component/componentadmin/AdminLogin';
-<<<<<<< HEAD
+
 import Viewcart from './Component/componentadmin/shopcomponent/Viewcart';
-import Placeorder from './Component/componentadmin/shopcomponent/Placeorder';
-=======
+// import Placeorder from './Component/componentadmin/shopcomponent/Placeorder';
+
 import ShopCards from './Component/componentadmin/ShopCards';
->>>>>>> 77c3290d3a57c9841c04570ba2ecce267070f6a8
+
 
 
 function App() {
@@ -38,12 +38,12 @@ function App() {
         <Route path='/addproduct' element={<Master Rcf={Productadd}/>}/>
         <Route path="/product/:productId" element={< Master Rcf={Productdetails}/>} />
         <Route path="/admin" element={<AdminLogin />} />
-<<<<<<< HEAD
-        <Route path='/view' element={< Master Rcf={Viewcart}/>}/>
-        <Route path='/placeorder' element={<Master Rcf={Placeorder}/>}/>
-=======
+        {/* <Route path="/shop/:id" element={<Shoponeview />} /> */}
+        <Route path="/viewcart" element={< Master Rcf= {Viewcart } />}/>
+        {/* <Route path='/placeorder' element={<Master Rcf={Placeorder}/>}/> */}
 
->>>>>>> 77c3290d3a57c9841c04570ba2ecce267070f6a8
+
+
 
       </Routes>
       </BrowserRouter>

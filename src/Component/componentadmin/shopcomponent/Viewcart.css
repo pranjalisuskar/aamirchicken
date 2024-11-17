@@ -31,7 +31,7 @@
   .order-summary {
     flex: 1;
     padding: 20px;
-    height: 500px;
+    height: 400px;
   }
   
   .account-section .indicator,
@@ -47,7 +47,7 @@
     padding: 10px;
     background-color: #f8f8f8;
     border-radius: 8px;
-    height: 30%;
+    height: 20%;
     width: 510px;
   }
   
@@ -162,9 +162,9 @@
   
   /* Media Queries for Responsiveness */
   @media (max-width: 768px) {
-    .container {
+    /* .container {
       padding: 10px;
-    }
+    } */
   
     .account-section, .order-summary {
       padding: 15px;
@@ -178,10 +178,10 @@
       width: 100%;
     }
   
-    .order-header {
+    /* .order-header {
       flex-direction: column;
       align-items: center;
-    }
+    } */
   
     .product-img {
       width: 90px;
@@ -195,6 +195,11 @@
   
 
   .jkl{
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: 160px;
+  }
+
+  .place-order-btn{
+    background-color: #8B0000;
+    text-decoration-color: #f8f8f8;
   }

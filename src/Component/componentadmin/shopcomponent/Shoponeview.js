@@ -244,9 +244,9 @@ const Shoponeview = () => {
             {addedProduct.name} has been added to your cart for ₹
             {addedProduct.price}!
           </p>
-          <button onClick={viewCart} className="view-cart-button">
+          <Link to='/viewcart'> <button onClick={viewCart} className="view-cart-button">
             View Cart
-          </button>
+          </button></Link>
         </div>
       )}
       </div>
