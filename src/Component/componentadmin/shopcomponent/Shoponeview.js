@@ -7,38 +7,91 @@ const Shoponeview = () => {
   const { token } = Authuser();
   const { id } = useParams();
   const [shop, setShop] = useState({});
-  const [dropdownStates, setDropdownStates] = useState({}); // Track dropdown visibility for each product
+  const [dropdownStates, setDropdownStates] = useState({}); 
   const [cart, setCart] = useState({});
-  
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [addedProduct, setAddedProduct] = useState("");
+
 
   const products = [
     {
       name: "Egg",
-      price: "100 / 10 p",
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpQADIrYbC5agt9OFuvI5I5hieNxIJAEcQHQ&s",
+      price: 249,
     },
     {
       name: "Chicken",
-      price: "144 / 500gm",
       img: "https://www.shutterstock.com/image-photo/fresh-raw-chicken-basil-isolated-260nw-1064429528.jpg",
-    },
-    {
-      name: "Chicken Wing",
-      price: "144 / 500gm",
-      img: "https://t4.ftcdn.net/jpg/02/92/77/85/360_F_292778539_JeGMFXajaQtXpq5nRZLo87suJZkqJ7oS.jpg",
-    },
-    {
-      name: "1 Full Chicken Curry Cut",
-      price: "144 / 500gm",
-      img: "https://newzealandfresh.sg/cdn/shop/products/Screen_Shot_2018-08-14_at_12.16.53_AM_grande.png?v=1563071603",
+      price: 449,
     },
   ];
 
+
   const chatOptions = [
-    { message: "23% OFF on 500g (2 - 4 pcs approx.) - ₹189" },
-    { message: "23% OFF on 250g (1 - 2 pcs approx.) - ₹99" },
-    { message: "23% OFF on 1kg (4 - 6 pcs approx.) - ₹449" },
+    {
+      message: "1 kg - (22 - 28 pcs approx) 23%OFF Rs-249",
+      buttonLabel: "Add to Cart",
+      price: 249,
+    },
+    {
+      message: "23% OFF on 250g (1 - 2 pcs approx.) - ₹99",
+      buttonLabel: "Add to Cart",
+      price: 99,
+    },
+    {
+      message: "23% OFF on 1kg (4 - 6 pcs approx.) - ₹449",
+      buttonLabel: "Add to Cart",
+      price: 449,
+    },
   ];
+
+
+  const toggleDropdownChat = (productName) => {
+    setDropdownStates((prevStates) => ({
+      ...prevStates,
+      [productName]: !prevStates[productName],
+    }));
+  };
+
+  const addToCart = (productName, price) => {
+    // Add product to the cart with name and price
+    setCart((prevCart) => {
+    // Ensure prevCart is always an array
+    const updatedCart = Array.isArray(prevCart) ? [...prevCart] : [];
+    updatedCart.push({ name: productName, price });
+    return updatedCart;
+  });
+    // Set the added product's name and price to display in the popup
+    setAddedProduct({ name: productName, price });
+
+    // Show the popup
+    setPopupVisible(true);
+
+    // Hide the popup after 2 seconds
+    setTimeout(() => {
+      setPopupVisible(false);
+    }, 2000);
+  };
+
+  const viewCart = () => {
+    // Generate a string representation of the cart showing product names and prices
+    const cartItems = cart
+      .map((item) => `${item.name} - ₹${item.price}`)
+      .join("\n");
+
+    alert("Viewing Cart:\n" + cartItems);
+  };
+
+
+
+
+
+
+  chatOptions.forEach((option) => {
+    console.log(option.message); // Display the message
+    console.log(option.buttonLabel); // Add button functionality here
+  });
+
   const getShopData = () => {
     fetch(`http://localhost:5001/api/shop/${id}`)
       .then((response) => {
@@ -61,20 +114,20 @@ const Shoponeview = () => {
   }, [id, token]);
 
   // Function to toggle dropdown visibility for each product
-  const toggleDropdownChat = (productName) => {
-    setDropdownStates((prevStates) => ({
-      ...prevStates,
-      [productName]: !prevStates[productName],
-    }));
-  };
+  // const toggleDropdownChat = (productName) => {
+  //   setDropdownStates((prevStates) => ({
+  //     ...prevStates,
+  //     [productName]: !prevStates[productName],
+  //   }));
+  // };
 
-  // Add product to cart or increase its quantity
-  const addToCart = (productName) => {
-    setCart((prevCart) => ({
-      ...prevCart,
-      [productName]: prevCart[productName] ? prevCart[productName] + 1 : 1,
-    }));
-  };
+  // // Add product to cart or increase its quantity
+  // const addToCart = (productName) => {
+  //   setCart((prevCart) => ({
+  //     ...prevCart,
+  //     [productName]: prevCart[productName] ? prevCart[productName] + 1 : 1,
+  //   }));
+  // };
 
   // Increase quantity of a product in the cart
   const incrementQuantity = (productName) => {
@@ -141,170 +194,61 @@ const Shoponeview = () => {
             fontStyle: "italic",
             paddingTop: "20px",
             marginBottom: "20px",
+            textAlign: "center",
           }}
         >
           Products
         </h2>
         <div className="products">
-          {products.map((product) => (
-            <div
-              key={product.name}
-              className="product-card"
-              style={{
-                position: "relative",
-                marginBottom: "20px",
-                padding: "10px",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                width: "100%",
-              }}
+        {products.map((product) => (
+          <div key={product.name} className="product-card">
+            <img src={product.img} alt={product.name} className="product-img" />
+            <h5>{product.name}</h5>
+            <button
+              className="dropdown-button"
+              onClick={() => toggleDropdownChat(product.name)}
             >
-              <img
-                src={product.img}
-                alt={product.name}
-                style={{ width: "100%", borderRadius: "8px", height: "200px" }}
-              />
-              <h5 style={{ textAlign: "center", marginTop: "10px" }}>
-                {product.name}
-              </h5>
+              Select Options
+            </button>
 
-              <div
-                className="dropdown-container"
-                style={{ textAlign: "center" }}
-              >
-                <button
-                  className="dropdown-button"
-                  style={{
-                    // padding: "10px 20px",
-                    // fontSize: "16px",
-                    width: "100%",
-                    backgroundColor: "#9a292f",
-                    borderRadius: "5px",
-                    color: "white",
-                    textAlign: "center",
-                    marginRight: "30px",
-                  }}
-                  onClick={() => toggleDropdownChat(product.name)}
-                >
-                  Chat with us
-                </button>
-
-                {dropdownStates[product.name] && (
-                  <div
-                    className="chat-dropdown"
-                    style={{
-                      position: "absolute",
-                      top: "100%",
-                      width: "110%",
-                      backgroundColor: "#ffffff",
-                      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)",
-                      zIndex: 1,
-                      borderRadius: "8px",
-                      padding: "10px",
-                      marginTop: "8px",
-                      left: 0,
-                      textAlign: "center",
-                      marginRight: "30px",
-                    }}
-                  >
-                    {chatOptions.map((option, idx) => (
-                      <div
-                        key={idx}
-                        className="chat-message"
-                        style={{
-                          padding: "8px",
-                          backgroundColor:
-                            idx % 2 === 0 ? "#f0f0f0" : "#e0e0e0",
-                          borderRadius: "12px",
-                          marginBottom: "6px",
-                          textAlign: idx % 1 === 0 ? "left" : "right",
-                          height: "60px",
-                          margin: "30px",
-                          width: "100%",
-                        }}
+            {dropdownStates[product.name] && (
+              <div className="chat-dropdown">
+                {chatOptions.map((option, idx) => (
+                  <div key={idx} className="chat-option">
+                    <div className="option-message">{option.message}</div>
+                    <div
+                      className="option-button"
+                      onMouseEnter={() =>
+                        console.log(`Hovered on: ${option.buttonLabel}`)
+                      }
+                    >
+                      <button
+                        onClick={() => addToCart(product.name, option.price)} // Add to cart with price
+                        className="add-to-cart-button"
                       >
-                        {option.message}
-                      </div>
-                    ))}
-                    <button
-                      className="more-options"
-                      style={{
-                        padding: "10px",
-                        color: "#9A292F",
-                        cursor: "pointer",
-                        fontSize: "14px",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        background: "none",
-                        border: "none",
-                      }}
-                    >
-                      +20 More Combos
-                    </button>
+                        {option.buttonLabel}
+                      </button>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
-              {/* Add to Cart and Quantity Buttons */}
-              <div style={{ textAlign: "center", marginTop: "20px" }}>
-                {cart[product.name] ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <button
-                      onClick={() => decrementQuantity(product.name)}
-                      style={{
-                        padding: "5px 10px",
-                        fontSize: "16px",
-                        backgroundColor: "#9a292f",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "5px",
-                        marginRight: "10px",
-                      }}
-                    >
-                      -
-                    </button>
-                    <span style={{ fontSize: "16px", margin: "0 10px" }}>
-                      {cart[product.name]}
-                    </span>
-                    <button
-                      onClick={() => incrementQuantity(product.name)}
-                      style={{
-                        padding: "5px 10px",
-                        fontSize: "16px",
-                        backgroundColor: "#9a292f",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "5px",
-                        marginLeft: "10px",
-                      }}
-                    >
-                      +
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => addToCart(product.name)}
-                    style={{
-                      padding: "10px 20px",
-                      fontSize: "16px",
-                      width: "100%",
-                      backgroundColor: "#9a292f",
-                      borderRadius: "5px",
-                      color: "white",
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Popup */}
+      {popupVisible && (
+        <div className="popup">
+          <p>
+            {addedProduct.name} has been added to your cart for ₹
+            {addedProduct.price}!
+          </p>
+          <button onClick={viewCart} className="view-cart-button">
+            View Cart
+          </button>
         </div>
+      )}
       </div>
     </div>
   );

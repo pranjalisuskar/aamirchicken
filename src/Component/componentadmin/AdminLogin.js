@@ -1,45 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // State for form fields and validation errors
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setError] = useState({ email: '', password: '' });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setError] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   // Handle form submission
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     let formErrors = { email: '', password: '' };
-
-//     // Basic validation for email and password
-//     if (!email) {
-//       formErrors.email = 'Email is required';
-//     } else if (!/\S+@\S+\.\S+/.test(email)) {
-//       formErrors.email = 'Email is invalid';
-//     }
-
-//     if (!password) {
-//       formErrors.password = 'Password is required';
-//     } else if (password.length < 6) {
-//       formErrors.password = 'Password must be at least 6 characters';
-//     }
-
-//     setErrors(formErrors);
-
-//     // If no errors, handle login logic here (e.g., call API)
-//     if (!formErrors.email && !formErrors.password) {
-//       alert('Login successful');
-//       navigate('/dash');
-//     }
-//   };
-
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch("http://localhost:5001/api/user/login", {
@@ -69,37 +39,61 @@ const handleSubmit = async (e) => {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2 className="form-title">Login</h2>
+    <div className="login-container" style={{ backgroundColor: "#9a292f" }}>
+      <form
+        className="login-form"
+        onSubmit={handleSubmit}
+        style={{
+          width: "75%",
+          maxWidth: "550px",
+          margin: "30px",
+        }}
+      >
+        {/* <h2 className="form-title"style={{color:"#9a292f",fontWeight:"bold"}}> Login</h2> */}
+        <img
+          src="/logo/logo.jpg"
+          alt="Logo"
+          className="logo"
+          style={{ width: "80px", height: "50px", marginLeft:"40%",fontSize:"30%" }}
+        />
+        
 
-        <div className="form-group">
-          {/* <label htmlFor="email">Email</label> */}
+        <div className="form-group" style={{ marginLeft: "20px" }}>
           <input
+            style={{ fontWeight: "bold" }}
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="form-control"
-            placeholder="Enter your email"
+            placeholder="Enter Your Email"
           />
+          {/* Display an error message if validation fails */}
           {errors.email && <span className="error-text">{errors.email}</span>}
         </div>
 
-        <div className="form-group">
-          {/* <label htmlFor="password">Password</label> */}
+        <div className="form-group" style={{ marginLeft: "20px" }}>
           <input
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="form-control"
-            placeholder="Enter your password"
+            placeholder="Enter Your Password"
+            style={{ marginLeft: "30px", fontWeight: "bold" }} // Inline styling for margin-left
           />
-          {errors.password && <span className="error-text">{errors.password}</span>}
+          {errors.password && (
+            <span className="error-text">{errors.password}</span>
+          )}
         </div>
 
-        <button type="submit" className="submit-btn" style={{backgroundColor:"#9a292f"}}>Login</button>
+        <button
+          type="submit"
+          className="submit-btn"
+          style={{ backgroundColor: "#9a292f", marginLeft: "45px",fontWeight:"bold" }}
+        >
+          Login
+        </button>
       </form>
     </div>
   );

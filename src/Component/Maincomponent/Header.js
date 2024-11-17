@@ -30,8 +30,10 @@ const Header = () => {
   }, []);
 
   const logOut = () => {
-    localStorage.clear();
-    navigate("/");
+    // Clear user session
+    localStorage.removeItem("authToken"); // Example for token-based authentication
+    setuserDetails(null); // Reset user details to null
+    navigate("/"); // Redirect to homepage or login page
   };
 
   const handleSignIn = () => {
@@ -46,11 +48,23 @@ const Header = () => {
             {/* Logo and Name */}
             <Link className="navbar-brand d-flex align-items-center" to="#">
               <img
-                src="https://t3.ftcdn.net/jpg/06/55/69/72/360_F_655697217_GclwFgFfhS8Tw1V3dRbplhWKouXgQ9SL.jpg"
+                src="/logo/logo.jpg"
                 alt="Logo"
                 className="logo"
+                style={{ width: "80px", height: "50px",marginLeft:"30px" }}
               />
-              <span className="ms-2">Amir Chicken</span>
+
+              {/* <span
+                className="ms-2"
+                style={{
+                  fontWeight: "bold",
+                  color: "#9A292F",
+                  fontSize: "28px",
+                  fontStyle: "italic",
+                }}
+              >
+                Amir Chicken
+              </span> */}
               <div style={{ marginLeft: "140px" }}>
                 {/* Toggler for mobile */}
                 <button
@@ -73,21 +87,27 @@ const Header = () => {
               }`}
               id="navbar-menu"
             >
-              <div className="d-flex align-items-center w-100 justify-content-center justify-content-lg-start" style={{marginLeft:"80px"}}>
+              <div
+                className="d-flex align-items-center w-100 justify-content-center justify-content-lg-start"
+                style={{ marginLeft: "80px" }}
+                
+              >
                 {/* Search Bar */}
                 <input
                   className="form-control w-100"
                   type="search"
                   placeholder="Search..."
                   aria-label="Search"
+                // step={{fontWeight:"bold",color:"#9a292f"}}
                 />
+                 {/* <i class="fas fa-search"></i> */}
               </div>
 
               {/* Navigation Links */}
               <div className="d-flex w-100 ">
                 {/* Location Link */}
                 <span
-                  style={{ color: " #c62828", marginLeft: "300px" }}
+                  style={{ color: " #c62828", marginLeft: "300px",fontWeight:"bold" }}
                   to="#"
                   className=" me-3 "
                   onClick={handleShowCity}
@@ -109,13 +129,20 @@ const Header = () => {
                     >
                       Choose Your Location
                     </p>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex">
                       <input
                         className="form-control"
-                        type="search"
+                        type="text"
                         placeholder="Enter Your Pincode"
                         aria-label="Search"
-                        style={{ textAlign: "center" }}
+                        style={{ textAlign: "center", width: "550px", marginLeft:"32px" ,fontWeight:"bold"}}
+                        maxLength="6"
+                        onInput={(e) => {
+                          e.target.value = e.target.value.replace(
+                            /[^0-9]/g,
+                            ""
+                          ); // Restrict non-numeric input
+                        }}
                       />
                     </div>
                   </Modal.Body>
@@ -126,6 +153,9 @@ const Header = () => {
                           backgroundColor: "#9A292F",
                           border: "#9A292F",
                           height: "40px",
+                          width: "385px",
+                          marginRight: "20px",
+                          fontWeight:"bold"
                         }}
                         className="btn-submit "
                         onClick={() => alert("Search performed!")}
@@ -137,9 +167,13 @@ const Header = () => {
                 </Modal>
 
                 {/* User Menu */}
-                <div className="user-menu ms-auto">
+                <div
+                  className="user-menu ms-auto"
+                  style={{ marginRight: "20px" }}
+                >
                   {userDetails ? (
                     <div
+                      style={{ marginRight: "50px" }}
                       className="user-dropdown"
                       onMouseEnter={() => setShowDropdown(true)}
                       onMouseLeave={() => setShowDropdown(false)}
@@ -162,9 +196,7 @@ const Header = () => {
                     </div>
                   ) : (
                     <span
-                      style={{ color: " #c62828", marginRight: "50px" }}
-                      to="#"
-                      className=""
+                      style={{ color: "#c62828", paddingRight: "50px",fontWeight:"bold" }}
                       onClick={handleSignIn}
                     >
                       <i className="fa-solid fa-user me-1" /> Sign In

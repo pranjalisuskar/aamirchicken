@@ -2,14 +2,13 @@ import React from 'react';
 import { Box, CssBaseline } from '@mui/material';
 import Sidebar from './Sidebar';
 import Content from './AdminAllCards';
-
-import Footer from './Footer';
-import Header from '../Maincomponent/Header';
+import ShopCards from './ShopCards';
 
 const Allcontent = () => {
     
   return (
-    <><Header/>
+    <>
+    {/* <Header/> */}
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <CssBaseline />
 
@@ -17,7 +16,7 @@ const Allcontent = () => {
      
 
       {/* Main Content Area */}
-      <Box sx={{ display: 'flex', flex: 1 }}>
+      {/* <Box sx={{ display: 'flex', flex: 1 }}> */}
         {/* Sidebar */}
         <Sidebar />
         
@@ -25,12 +24,16 @@ const Allcontent = () => {
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Content />
         </Box>
-      </Box>
+{/* 
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <ShopCards />
+        </Box> */}
+      {/* </Box> */}
 
       {/* Footer */}
     
     </Box>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   );
 };

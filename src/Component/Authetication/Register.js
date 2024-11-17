@@ -27,6 +27,7 @@ const Register = (props) => {
     user_Email: "",
     user_phoneno: "",
     user_Password: "",
+    user_pincode: "",
   });
   const toggle = useCallback(() => {
     setModal((prev) => !prev);
@@ -40,13 +41,13 @@ const Register = (props) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Allow only numbers and limit to 10 digits
-    if (/^\d{0,10}$/.test(value)) {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    // Allow only numbers and limit to 10 digit/s
+    // if (/^\d{0,10}$/.test(value)) {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    // }
   };
 
   const handleFormSubmit = async (e) => {
@@ -83,7 +84,7 @@ const Register = (props) => {
           <h5
             className="mx-auto"
             onClick={() => setloginModalStates(!loginmodalStates)}
-            style={{ fontWeight: "bold" }}
+            style={{ fontWeight: "bold",color:"#9a292f" }}
           >
             Please Sign Up
           </h5>
@@ -91,7 +92,10 @@ const Register = (props) => {
 
         <Form onSubmit={handleFormSubmit}>
           <ModalBody>
-            <Card className="border card-border-success p-3 shadow-lg">
+            <Card
+              className="border card-border-success p-3 shadow-lg"
+              style={{ width: "100%" }}
+            >
               <Row>
                 <Col lg={12}>
                   <div className="container">
@@ -109,51 +113,107 @@ const Register = (props) => {
                     </Toast>
 
                     <Input
-                      style={{ height: "7vh" }}
+                      style={{
+                        height: "7vh",
+                        width: "100%", // Adjust the width as needed
+                        maxWidth: "600px",
+                         fontWeight:"bold"
+                      }}
                       type="text"
                       name="user_Name"
                       className="form-control"
-                      placeholder=" Enter Your Name"
+                      placeholder="Enter Your Name"
                       value={formData.user_Name}
-                      onChange={handleInputChange}
-                      
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Allow only letters (uppercase, lowercase, and spaces)
+                        if (/^[a-zA-Z\s]*$/.test(value)) {
+                          handleInputChange(e); // Update state only with valid input
+                        }
+                      }}
                     />
 
                     <Input
-                      style={{ height: "7vh"}}
+                      style={{
+                        height: "7vh",
+                        width: "100%",
+                        maxWidth: "600px",
+                         fontWeight:"bold"
+                      }}
                       type="text"
                       name="user_phoneno"
                       className="form-control"
                       placeholder="Enter Your Mobile Number"
                       value={formData.user_phoneno}
-                      onChange={handleInputChange}
-                      required
+                      onChange={(e) => {
+                        // Only allow numeric input and ensure length is capped at 10 digits
+                        const value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+                        if (value.length <= 10) {
+                          // Limit to 10 digits
+                          handleInputChange({
+                            target: { name: "user_phoneno", value },
+                          });
+                        }
+                      }}
                     />
 
                     <Input
-                      style={{ height: "7vh", textAlign: "center" }}
-                      type="email"
+                      style={{
+                        height: "7vh",
+                        width: "100%",
+                        maxWidth: "600px",
+                        textAlign: "center",
+                        fontWeight:"bold"
+                      }}
+                      type="text"
                       name="user_Email"
-                      // className="form-control"
                       placeholder="Enter Your Email"
                       value={formData.user_Email}
                       onChange={handleInputChange}
-                      required
                     />
 
                     <Input
-                      style={{ height: "7vh" }}
+                      style={{
+                        height: "7vh",
+                        width: "100%",
+                        maxWidth: "600px",
+                         fontWeight:"bold"
+                      }}
                       type="password"
                       name="user_Password"
                       className="form-control"
-                      placeholder="Enter Your Pincode"
+                      placeholder="Enter Your Password"
                       value={formData.user_Password}
                       onChange={handleInputChange}
-                      required
+                    />
+                    <Input
+                      style={{
+                        height: "7vh",
+                        width: "100%",
+                        maxWidth: "600px",
+                         fontWeight:"bold"
+                      }}
+                      type="text"
+                      name="user_pincode"
+                      className="form-control"
+                      placeholder="Enter Your Pincode"
+                      value={formData.user_pincode}
+                      onChange={(e) => {
+                        // Allow only numeric input and ensure the length is capped at 6 digits
+                        const value = e.target.value.replace(/[^0-9]/g, ""); 
+                        if (value.length <= 6) {
+                          // Limit input to 6 digits (pincode length)
+                          handleInputChange({
+                            target: { name: "user_pincode", value },
+                          });
+                        }
+                      }}
+                      inputMode="numeric" 
+                      pattern="[0-9]*" 
                     />
 
                     <button type="submit" className="custom-register-btn mt-3">
-                      Continue
+                      Submit
                     </button>
                   </div>
                 </Col>
@@ -162,6 +222,7 @@ const Register = (props) => {
           </ModalBody>
         </Form>
       </Modal>
+
       {loginmodalStates === true ? (
         <Login
           loginmodalStates={loginmodalStates}
