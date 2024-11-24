@@ -31,7 +31,7 @@
   .order-summary {
     flex: 1;
     padding: 20px;
-    height: 400px;
+    height: 700px;
   }
   
   .account-section .indicator,
@@ -51,7 +51,7 @@
     width: 510px;
   }
   
-  .account-content, .order-content {
+  .account-contents, .order-contents {
     padding: 10px;
     background-color: #f8f8f8;
     border-radius: 10px;
@@ -59,6 +59,7 @@
   
   .button-group button {
     margin-right: 10px;
+    border-radius: 5px;
   }
   
   .summary-item {
@@ -98,17 +99,18 @@
   .button-group {
     display: flex;
     gap: 10px;
-    width: 100%;
+    width: 50%;
     flex-wrap: wrap;
+    /* width: 120px; */
   }
   
   .btn-light, .btn-danger {
     padding: 8px 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: px;
     font-weight: bold;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
     max-width: 180px;
   }
   
@@ -203,3 +205,66 @@
     background-color: #8B0000;
     text-decoration-color: #f8f8f8;
   }
+
+
+
+
+
+
+
+
+  .delivery-address-details {
+    display: flex;
+    justify-content: space-between; /* Space between the items */
+    gap: 20px; /* Spacing between items */
+  }
+  
+  .address-info,
+  .add-new-address {
+    flex: 1; /* Ensure both items take equal width */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .address-info {
+    text-align: left;
+  }
+  
+  .add-new-address {
+    text-align: center;
+  }
+  
+  /* Responsive for small screens */
+  @media (max-width: 768px) {
+    .delivery-address-details {
+      flex-direction: column; /* Stack items vertically */
+      gap: 20px;
+    }
+  }
+
+
+  .shadow-sm {
+    width: 100%;
+  }
+  .rdddf{
+    width: 100%;
+  }
+
+  .jklg{
+    width: 100%;
+    margin-bottom: 20%;
+  }
+  /* .card-body{
+    width: 1200px;
+  } */
+
+  /* .bhgh{
+    width: 1200px;
+  }
+   */
+  

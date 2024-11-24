@@ -1,80 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Card, CardBody, CardHeader, Col, Container,
-  Modal, ModalHeader, ModalBody, Row, Nav,
-  
-} from 'reactstrap';
-import Shopupdate from './Shopupdate';
-// import Authuser from '../../Authentigation/Authuser';
+import React, { useState, useEffect } from "react";
 
 const Tableshop = () => {
-  // const [http] = Authuser();
-  const [shopData, setShopData] = useState([]); // State to hold shop data
-  const [addModal, setAddModal] = useState(false);  // Add to Shop Modal
-  const [detailsModal, setDetailsModal] = useState(false);  // Shop Details Modal
-  const [selectedShop, setSelectedShop] = useState(null);  // Store selected shop data
+  const [shopData, setShopData] = useState([]);
+  const [addModal, setAddModal] = useState(false);
+  const [detailsModal, setDetailsModal] = useState(false);
+  const [selectedShop, setSelectedShop] = useState(null);
 
-  const toggleAddModal = () => setAddModal(!addModal);  // Toggle Add Modal
-  const toggleDetailsModal = () => setDetailsModal(!detailsModal);  // Toggle Details Modal
-  const [modalStates, setModalStates] = useState(false);
+  const toggleAddModal = () => setAddModal(!addModal);
+  const toggleDetailsModal = () => setDetailsModal(!detailsModal);
 
-  const handleRowClick = (shop) => {
-    setSelectedShop(shop);  // Set selected shop data
-    toggleDetailsModal();  // Open details modal
-  };
-
-  // Fetch shop data from the API
   useEffect(() => {
     const fetchShopData = async () => {
       try {
-        const response = await fetch( `${process.env.REACT_APP_API_URL}/shops`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/shops`);
         const result = await response.json();
         if (response.ok) {
-          setShopData(result.data); // Update state with fetched shop data
-          console.log(response.data);
-          
+          setShopData(result.data);
         } else {
-          console.error('Error fetching shop data:', result.message);
+          console.error("Error fetching shop data:", result.message);
         }
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error("Fetch error:", error);
       }
     };
 
-    fetchShopData(); // Call the fetch function
-  }, []); // Empty dependency array to run only on component mount
+    fetchShopData();
+  }, []);
+
   const handleViewClick = (shop) => {
-    setSelectedShop(shop);  // Set selected shop data
-    toggleDetailsModal();  // Open details modal
+    setSelectedShop(shop);
+    toggleDetailsModal();
   };
-  
+
   return (
-    <div className="page-content">
-      <Container fluid>
-        <Row>
-          <Col lg={12}>
-            <Card className="shadow-sm">
-              <CardHeader className="card-header border-0 bg-danger text-white shadow-sm rounded">
-                <Row className="align-items-center gy-2">
-                  <Col sm={6}>
-                    <h5 className="card-title mb-0 fw-semibold">🛍 Shop List</h5>
-                  </Col>
-                  <Col sm={6} className="text-sm-end">
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-light text-danger fw-bold d-flex align-items-center gap-1"
-                      style={{ width: '200px' }}
-                      onClick={toggleAddModal} // Open Add Modal
-                    >
-                      <i className="ri-add-line align-bottom-center"></i> Add
-                    </button>
-                  </Col>
-                </Row>
-              </CardHeader>
-  
-              <CardBody className="pt-0">
-                <Nav className="nav-tabs nav-tabs-custom nav-success" role="tablist"></Nav>
-  
+    <div className="container-fluid page-content">
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="card shadow-sm">
+            <div className="card-header border-0 text-white bg-danger rounded">
+              <div className="row align-items-center">
+                <div className="col-sm-6">
+                  <h5 className="card-title mb-0 fw-semibold">🛍 Shop List</h5>
+                </div>
+                <div className="col-sm-6 text-end">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-light text-danger fw-bold"
+                    onClick={toggleAddModal}
+                  >
+                    <i className="ri-add-line" /> Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="card-body pt-0">
+              <div className="table-responsive">
                 <table className="table align-middle table-hover table-striped mt-3">
                   <thead className="table-light text-muted text-uppercase">
                     <tr>
@@ -85,84 +65,85 @@ const Tableshop = () => {
                   </thead>
                   <tbody>
                     {shopData.length > 0 ? (
-                      shopData.map((item, index) => (
-                        <tr key={item.id} style={{ cursor: 'pointer' }}>
+                      shopData.map((shop, index) => (
+                        <tr key={shop.id} style={{ cursor: "pointer" }}>
                           <td>{index + 1}</td>
-                          <td>{item.shopName}</td>
+                          <td>{shop.name}</td>
                           <td>
-                            <ul className="list-inline hstack gap-2 mb-0">
-                              <li className="list-inline-item">
-                                <button
-                                  className="btn btn-sm btn-outline-primary"
-                                  onClick={() => handleViewClick(item)}  // Use handleViewClick here
-                                >
-                                  <i className="ri-pencil-fill"></i> View
-                                </button>
-                              </li>
-                              <li className="list-inline-item">
-                                <button className="btn btn-sm btn-outline-danger"  onClick={() => setModalStates(!modalStates)}>
-                                  <i className="ri-delete-bin-5-fill"></i> Update
-                                </button>
-                              </li>
-                              <li className="list-inline-item">
-                                <button className="btn btn-sm btn-outline-danger">
-                                  <i className="ri-delete-bin-5-fill"></i> Delete
-                                </button>
-                              </li>
-                            </ul>
+                            <button
+                              className="btn btn-sm btn-outline-primary"
+                              onClick={() => handleViewClick(shop)}
+                            >
+                              <i className="ri-eye-line" /> View
+                            </button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="3" className="text-center py-4">
-                          No shops available. <a href="#">Add a new shop</a>.
+                        <td colSpan="3" className="text-center">
+                          No shops available
                         </td>
                       </tr>
                     )}
                   </tbody>
                 </table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-  
-      {/* Add to Shop Modal */}
-      <Modal isOpen={addModal} toggle={toggleAddModal} size="lg">
-        <ModalHeader toggle={toggleAddModal}>Add to Shop</ModalHeader>
-        <ModalBody>
-          {/* Add your form logic here */}
-        </ModalBody>
-      </Modal>
-  
-      {/* Shop Details Modal */}
-      <Modal isOpen={detailsModal} toggle={toggleDetailsModal} size="lg">
-        <ModalHeader toggle={toggleDetailsModal}>
-          {selectedShop ? selectedShop.shopName : 'Shop Details'}
-        </ModalHeader>
-        <ModalBody>
-          {selectedShop && (
-            <div>
-              <p><strong>Location:</strong> {selectedShop.shopLocation}</p>
-              <p><strong>Address:</strong> {selectedShop.address}</p>
-              <p><strong>Pincode:</strong> {selectedShop.pincode}</p>
-              <p><strong>Mobile No:</strong> {selectedShop.mobileNumber}</p>
-              <p><strong>Email:</strong> {selectedShop.emailAddress}</p>
+              </div>
             </div>
-          )}
-        </ModalBody>
-      </Modal>
-     
-      {modalStates && (
-                <Shopupdate
-                    modalStates={modalStates}
-                    setModalStates={() => {
-                        setModalStates(false);
-                        // setModal(false);
-                    }}
-                />
-            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Add Modal */}
+      {addModal && (
+        <div className="modal fade show d-block" tabIndex={-1}>
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Add to Shop</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={toggleAddModal}
+                ></button>
+              </div>
+              <div className="modal-body"> {/* Add shop form here */}</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Details Modal */}
+      {detailsModal && selectedShop && (
+        <div className="modal fade show d-block" tabIndex={-1}>
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Shop Details</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={toggleDetailsModal}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <p>
+                  <strong>Name:</strong> {selectedShop.name}
+                </p>
+                <p>
+                  <strong>Location:</strong> {selectedShop.location}
+                </p>
+                <p>
+                  <strong>Address:</strong> {selectedShop.address}
+                </p>
+                <p>
+                  <strong>Contact:</strong> {selectedShop.contact}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

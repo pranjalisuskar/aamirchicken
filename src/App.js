@@ -16,6 +16,7 @@ import Viewcart from './Component/componentadmin/shopcomponent/Viewcart';
 // import Placeorder from './Component/componentadmin/shopcomponent/Placeorder';
 
 import ShopCards from './Component/componentadmin/ShopCards';
+import Shoptable from './Component/componentadmin/shopcomponent/Shoptable';
 
 
 
@@ -41,6 +42,7 @@ function App() {
         {/* <Route path="/shop/:id" element={<Shoponeview />} /> */}
         <Route path="/viewcart" element={< Master Rcf= {Viewcart } />}/>
         {/* <Route path='/placeorder' element={<Master Rcf={Placeorder}/>}/> */}
+        <Route path='/shoptable' element={<Master Rcf={Shoptable}/>}/>
 
 
 
