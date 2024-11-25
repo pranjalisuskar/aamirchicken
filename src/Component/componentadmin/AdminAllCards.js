@@ -67,12 +67,14 @@ const Content = () => {
                 className="fas fa-cogs fa-2x mr-3"
                 style={{ color: "#9a292f", fontSize: 30 }}
               />
+              <Link to='/producttable'>
               <div>
                 <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
                   Total Product
                 </h6>
                 <p>Customize your product.</p>
               </div>
+              </Link>
             </div>
           </div>
         </div>

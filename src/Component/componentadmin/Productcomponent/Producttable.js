@@ -10,9 +10,9 @@ import {
   ModalBody,
   Row,
 } from "reactstrap";
-import "./Viewcart.css";
 
-const Shoptable = () => {
+
+const Producttable = () => {
   const [shopData, setShopData] = useState([]);
   const [addModal, setAddModal] = useState(false);
   const [detailsModal, setDetailsModal] = useState(false);
@@ -41,7 +41,7 @@ const Shoptable = () => {
 
   return (
     <div className="page-content">
-      <div className="fluid" style={{marginTop:'20px'}}>
+      <div className="fluid " style={{marginTop:'20px'}}>
         < div className="row">
           <div className="col-lg-12" >
             {/* <Card className="shadow-sm"> */}
@@ -49,14 +49,15 @@ const Shoptable = () => {
               <CardHeader className="bg-danger text-white rounded">
                 <Row className="gy-3 align-items-center">
                   <Col xs={12} sm={6}>
-                    <h5 className="mb-0">🛍 Shop List</h5>
+                    <h5 className="mb-0">🛍 Product List</h5>
                   </Col>
                   <Col xs={12} sm={6} className="text-end">
                     <button
                       className="btn btn-light btn-sm text-danger"
-                      onClick={toggleAddModal}  style={{marginRight:'80px'}}
+                      onClick={toggleAddModal}
+                      style={{marginRight:'80px'}}
                     >
-                      <i className="ri-add-line"></i> Add Shop
+                      <i className="ri-add-line"></i> Add Product
                     </button>
                   </Col>
                 </Row>
@@ -68,7 +69,7 @@ const Shoptable = () => {
                     <thead>
                       <tr>
                         <th>Sr No</th>
-                        <th>Shop Name</th>
+                        <th>product Name</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -77,7 +78,7 @@ const Shoptable = () => {
     <td>1</td>
     <td>hjk</td>
     <td className="d-flex gap-2">
-    <button className="btn btn-sm btn-outline-primary">
+      <button className="btn btn-sm btn-outline-primary">
         View
       </button>
       <button className="btn btn-sm btn-outline-secondary">
@@ -106,76 +107,94 @@ const Shoptable = () => {
       </div>
 
       <Modal isOpen={addModal} toggle={toggleAddModal} size="lg">
-        <ModalHeader toggle={toggleAddModal}>Add Shop</ModalHeader>
+        <ModalHeader toggle={toggleAddModal}>Add product</ModalHeader>
         <ModalBody>
-        <form className="shopform" >
-          <div className="row">
-            {/* Add Shopowner DD here */}
-            <div className="form-group col-md-6 custom-input">
-              <input
-              style={{fontWeight:"bold"}}
-                className="form-control triangle-input"
-                type="text"
-                name="shopName"
-                // value={formData.shopName}
-                // onChange={onInputChange}
-                placeholder="Enter Product Name"
-                required
-              />
-            </div>
-            <div className="form-group col-md-6 custom-input">
-              <input
-                  style={{fontWeight:"bold"}}
-                className="form-control triangle-input"
-                type="text"
-                name="shopLocation"
-                // value={formData.shopLocation}
-                // onChange={onInputChange}
-                placeholder="Enter Product Price"
-                required
-              />
-            </div>
-            <div
-              className="form-group col-md-6 custom-input"
-              style={{ paddingTop: "5px" }}
+        <form
+        className="shopform"
+        encType="multipart/form-data"
+        // onSubmit={onSubmit}
+      >
+        <div className="row">
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="productName"
+              placeholder="Product Name"
+            //   value={productData.productName}
+            //   onChange={onInputChange}
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="price"
+              placeholder="Product Price"
+            //   value={productData.price}
+            //   onChange={onInputChange}
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              type="text"
+              name="category"
+              placeholder="Product Category"
+            //   value={productData.category}
+            //   onChange={onInputChange}
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <button
+              type="button"
+            //   onClick={() => document.getElementById("shopImages").click()}
+              style={{
+                display: "inline-block",
+                padding: "10px 20px",
+                backgroundColor: "#7a2226",
+                color: "#fff",
+                borderRadius: "5px",
+                cursor: "pointer",
+                textAlign: "center",
+                border: "none",
+              }}
             >
-              <input
-                  style={{fontWeight:"bold"}}
-                className="form-control triangle-input"
-                type="text"
-                name="address"
-                // value={formData.address}
-                // onChange={onInputChange}
-                placeholder="Enter Product Category "
-                required
-              />
-            </div>
-
-            <div className="form-group col-md-6 custom-input">
-              <input
-                style={{
-                  width: "80%", 
-                  height: "45px", 
-                  padding: "10px", 
-                  borderRadius: "5px", 
-                  border: "1px solid #ccc", 
-                  marginTop: "10px", 
-                }}
-                type="file"
-                id="file"
-                name="file"
-                multiple
-                className="form-control-file"
-                // onChange={onInputChange}
-                required
-              />
+              Choose Images
+            </button>
+            <input
+              type="file"
+              id="shopImages"
+              name="image_url"
+              multiple
+              className="form-control-file"
+            //   onChange={(e) => handleImageChange(e)}
+              style={{ display: "none"}}
+            />
+            <div className="image-preview-container mt-3">
+              
+                <img
+                 
+                  src=''
+                  alt=''
+                  className="image-preview"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                    margin: "5px",
+                    borderRadius: "5px",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              {/* ))} */}
             </div>
           </div>
-
-          <button type="submit" className="submit-button">
-            Submit
-          </button>
-        </form>
+        </div>
+        <button type="submit" className="submit-button">
+          Submit
+        </button>
+      </form>
         </ModalBody>
       </Modal>
 
@@ -205,4 +224,4 @@ const Shoptable = () => {
   );
 };
 
-export default Shoptable;
+export default Producttable;

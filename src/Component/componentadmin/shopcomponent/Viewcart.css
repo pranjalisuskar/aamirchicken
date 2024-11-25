@@ -52,10 +52,13 @@
   }
   
   .account-contents, .order-contents {
+   
     padding: 10px;
     background-color: #f8f8f8;
     border-radius: 10px;
   }
+
+  
   
   .button-group button {
     margin-right: 10px;
@@ -66,6 +69,9 @@
     display: flex;
     justify-content: space-between;
   }
+  
+
+ 
   
   /* Indicator Styling */
   .indicator {
@@ -248,7 +254,7 @@
   }
 
 
-  .shadow-sm {
+  /* .shadow-sm {
     width: 100%;
   }
   .rdddf{
@@ -258,7 +264,7 @@
   .jklg{
     width: 100%;
     margin-bottom: 20%;
-  }
+  } */
   /* .card-body{
     width: 1200px;
   } */
@@ -267,4 +273,6 @@
     width: 1200px;
   }
    */
+ 
+
   

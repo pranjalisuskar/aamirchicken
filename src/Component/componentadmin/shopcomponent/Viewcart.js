@@ -207,90 +207,99 @@ const Viewcart = (props) => {
     <div className="container d-flex">
       {/* Account Section */}
       <div className="account-section flex-grow-1">
-        {/* <div className="indicator" /> */}
-        <div className="account-contents">
-          <h5><strong>Account</strong></h5>
-          <p>To place your order now, log in to your existing account or sign up.</p>
-          <div className="button-group">
-          <button className="btn-light" onClick={() =>  setModal(!modal)}>
+  <div className="account-contents">
+    <h5><strong>Account</strong></h5>
+    <p>To place your order now, log in to your existing account or sign up.</p>
+    <div className="button-group d-flex justify-content-between align-items-center jklk">
+      <button 
+        className="btn btn-light mx-2 cokl" 
+        onClick={() => setModal(!modal)}
+      >
         Have an account? <strong>LOG IN</strong>
       </button>
-            <button className="btn-danger" onClick={handleRegisterClick}>
-              New to Meatzo? <strong>SIGN UP</strong>
-            </button>
-          </div>
-        </div>
-
-         {/* Delivery address section */}
-         {showAddressSection && (
-        <div className="delivery-container">
-          <h2 className="section-title" onClick={handleClick}>Delivery Address</h2>
-          <div className="address-cards">
-            {/* Saved Address Card */}
-            <div className="address-card">
-              <div className="address-details">
-                <span className="icon">🏠</span>
-                <div>
-                  <h3>Home</h3>
-                  <p>
-                    at post phaltan, 987, Pocket 25, Subhash Place, Rohini,
-                    Delhi, 110034, India
-                  </p>
-                  <strong>20 MINS</strong>
-                </div>
-              </div>
-              <button className="deliver-btn">Deliver Here</button>
-            </div>
-
-            {/* Add New Address Card */}
-            <div className="address-card">
-              <h3>Add New Address</h3>
-              <button className="add-address-btn">ADD New Address</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-
-
-
-<div className="delivery-address-container">
-  <div className="accontent">
-    <h5 onClick={toggleDetails}>Delivery Address</h5>
+      <button 
+        className="btn btn-danger mx-2 coi " 
+        onClick={handleRegisterClick}
+      >
+        New to Meatzo? <strong>SIGN UP</strong>
+      </button>
+    </div>
   </div>
-  {showDetails && (
-    <div className="delivery-address-details d-flex">
-      <div className="address-info">
-        <span className="home-icon">🏠</span>
-        <div className="address-text">
-          <p>Home</p>
-          <p>
-            at post phaltan, 987, Pocket 25, Subhash Place, Rohini, Delhi, 
-            110034, India
-          </p>
-          <p>20 MINS</p>
-          <button className="deliver-button" style={{borderRadius:"10px"}}>Deliver Here</button>
+
+  {/* Delivery Address Section */}
+  {showAddressSection && (
+    <div className="delivery-container">
+      <h2 className="section-title" onClick={handleClick}>Delivery Address</h2>
+      <div className="address-cards d-flex flex-wrap">
+        {/* Saved Address Card */}
+        <div className="address-card me-3">
+          <div className="address-details">
+            <span className="icon">🏠</span>
+            <div>
+              <h3>Home</h3>
+              <p>
+                at post phaltan, 987, Pocket 25, Subhash Place, Rohini, Delhi, 
+                110034, India
+              </p>
+              <strong>20 MINS</strong>
+            </div>
+          </div>
+          <button className="deliver-btn btn btn-success">Deliver Here</button>
         </div>
-      </div>
-      <div className="add-new-address">
-        <h6>Add New Address</h6>
-        <button className="add-button" style={{borderRadius:"10px"}}>ADD New Address</button>
+
+        {/* Add New Address Card */}
+        <div className="address-card">
+          <h3>Add New Address</h3>
+          <button className="add-address-btn btn btn-outline-primary">
+            ADD New Address
+          </button>
+        </div>
       </div>
     </div>
   )}
-</div>
 
-
-
-        <div className="accontent">
-          <h5 className="">Payment</h5>
-          <Link to='/placeorder'>
-          <button className="btn btn-primary place-order-btn" >
-              proceed to pay
+  {/* Delivery Address Section - Toggled */}
+  <div className="delivery-address-container">
+    <div className="accontent">
+      <h5 onClick={toggleDetails}>Delivery Address</h5>
+    </div>
+    {showDetails && (
+      <div className="delivery-address-details d-flex flex-wrap">
+        <div className="address-info me-3">
+          <span className="home-icon">🏠</span>
+          <div className="address-text">
+            <p>Home</p>
+            <p>
+              at post phaltan, 987, Pocket 25, Subhash Place, Rohini, Delhi, 
+              110034, India
+            </p>
+            <p>20 MINS</p>
+            <button className="deliver-button btn btn-success" style={{ borderRadius: "10px" }}>
+              Deliver Here
             </button>
-            </Link>
+          </div>
+        </div>
+        <div className="add-new-address">
+          <h6>Add New Address</h6>
+          <button className="add-button btn btn-outline-primary" style={{ borderRadius: "10px" }}>
+            ADD New Address
+          </button>
         </div>
       </div>
+    )}
+  </div>
+
+  {/* Payment Section */}
+  <div className="accontent">
+    <h5 className="">Payment</h5>
+    <Link to="/placeorder">
+      <button className="btn btn-primary place-order-btn">
+        Proceed to Pay
+      </button>
+    </Link>
+  </div>
+</div>
+
 
       {/* Order Summary Section */}
       <div className="order-summary flex-grow-1 ml-4">
