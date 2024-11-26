@@ -76,24 +76,59 @@ const ProductAdd = () => {
     }
   };
   
+  const categories = ["Chicken", "Mutton", "Fish", "Egg"];
 
   return (
-    <div className="container shopform-container">
-      <h2 className="form-title">Product Information</h2>
+    <div className="container shopform-container" style={{marginBottom:"70px",width:"1000"}}>
+      <h2 className="form-title" style={{fontWeight:"bold",color:"#9a292f"}}>Product Information</h2>
       <form
         className="shopform"
         encType="multipart/form-data"
         onSubmit={onSubmit}
       >
         <div className="row">
+
+        <div
+            className="form-group col-md-6 custom-input"
+            style={{ position: "relative" }}
+          >
+            <select
+              className="form-control triangle-input"
+              name="category"
+              value={productData.category}
+              onChange={onInputChange}
+              style={{
+                fontWeight: "bold",
+                // width: "50%",
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                appearance: "none", // Remove default dropdown styling
+                WebkitAppearance: "none", // For Safari
+                MozAppearance: "none", // For Firefox
+                background: "white",
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 10px center",
+                backgroundSize: "25px",
+                cursor: "pointer",
+              }}
+            >
+              <option value="" disabled>
+                Select Shop
+              </option>
+              <option>Chicken Shop</option>
+            </select>
+          </div>
           <div className="form-group col-md-6 custom-input">
             <input
               className="form-control triangle-input"
               type="text"
               name="productName"
-              placeholder="Product Name"
+              placeholder="Enter Product Name"
               value={productData.productName}
               onChange={onInputChange}
+              style={{fontWeight:"bold"}}
             />
           </div>
           <div className="form-group col-md-6 custom-input">
@@ -101,20 +136,47 @@ const ProductAdd = () => {
               className="form-control triangle-input"
               type="text"
               name="price"
-              placeholder="Product Price"
+              placeholder="Enter Product Price"
               value={productData.price}
               onChange={onInputChange}
+              style={{marginLeft:"30px",fontWeight:"bold"}}
             />
           </div>
-          <div className="form-group col-md-6 custom-input">
-            <input
+          <div
+            className="form-group col-md-6 custom-input"
+            style={{ position: "relative" }}
+          >
+            <select
               className="form-control triangle-input"
-              type="text"
               name="category"
-              placeholder="Product Category"
               value={productData.category}
               onChange={onInputChange}
-            />
+              style={{
+                fontWeight: "bold",
+                // width: "50%",
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                appearance: "none", // Remove default dropdown styling
+                WebkitAppearance: "none", // For Safari
+                MozAppearance: "none", // For Firefox
+                background: "white",
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 10px center",
+                backgroundSize: "25px",
+                cursor: "pointer",
+              }}
+            >
+              <option value="" disabled>
+                Select Product Category
+              </option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="form-group col-md-6 custom-input">
             <button
@@ -129,9 +191,11 @@ const ProductAdd = () => {
                 cursor: "pointer",
                 textAlign: "center",
                 border: "none",
+                width:"500px",
+                marginLeft:"30px"
               }}
             >
-              Choose Images
+              Select Product Images
             </button>
             <input
               type="file"
@@ -161,10 +225,25 @@ const ProductAdd = () => {
               ))}
             </div>
           </div>
+
+          <div className="form-group col-md-4 custom-input">
+            <button
+              type="submit"
+              className="submit-button"
+              style={{
+                width: "450px",
+                height: "45px",
+                marginLeft: "40px",
+                // marginRight: "50px",
+                fontWeight: "bold",
+                backgroundColor: "#9a292f",
+              }}
+            >
+              Submit
+            </button>
+          </div>
         </div>
-        <button type="submit" className="submit-button">
-          Submit
-        </button>
+       
       </form>
     </div>
   );

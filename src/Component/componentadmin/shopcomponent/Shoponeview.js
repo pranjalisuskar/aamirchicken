@@ -16,14 +16,25 @@ const Shoponeview = () => {
   const products = [
     {
       name: "Egg",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpQADIrYbC5agt9OFuvI5I5hieNxIJAEcQHQ&s",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1BeNXwduRlVooIfmtYmQNM_mLLuLdWxfGRHvu8lZljLcpHwNhBX7O30rJ4-JyEhJTX78&usqp=CAU",
       price: 249,
     },
     {
       name: "Chicken",
-      img: "https://www.shutterstock.com/image-photo/fresh-raw-chicken-basil-isolated-260nw-1064429528.jpg",
+      img: "https://i2.wp.com/mamaloli.com/wp-content/uploads/2012/02/kungpao-04.jpg",
       price: 449,
     },
+    {
+      name: "Fish",
+      img: "https://st4.depositphotos.com/1068090/39894/i/450/depositphotos_398948462-stock-photo-fresh-raw-fish-rudd-isolated.jpg",
+      price: 249,
+    },
+    {
+      name: "Mutton",
+      img: "https://t4.ftcdn.net/jpg/02/66/03/21/360_F_266032107_lre5ZWBTTVJmMvYWyf3zYdb40QhBYDGA.jpg",
+      price: 449,
+    },
+    
   ];
 
 
@@ -199,7 +210,7 @@ const Shoponeview = () => {
         >
           Products
         </h2>
-        <div className="products">
+        {/* <div className="products">
         {products.map((product) => (
           <div key={product.name} className="product-card">
             <img src={product.img} alt={product.name} className="product-img" />
@@ -235,7 +246,78 @@ const Shoponeview = () => {
             )}
           </div>
         ))}
+      </div> */}
+
+
+<div className="products" style={{ display: "flex", flexWrap: "wrap", gap: "20px", padding: "20px" }}>
+  {products.map((product) => (
+    <div
+      key={product.name}
+      className="product-card"
+      style={{
+        border: "1px solid #e0e0e0",
+        borderRadius: "10px",
+        width: "250px",
+        padding: "15px",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        backgroundColor: "#fff",
+      }}
+    >
+      <img
+        src={product.img}
+        alt={product.name}
+        className="product-img"
+        style={{
+          width: "100%",
+          height: "150px",
+          objectFit: "cover",
+          borderRadius: "8px",
+          marginBottom: "10px",
+        }}
+      />
+      <h5 style={{ fontSize: "18px", margin: "10px 0", fontWeight: "bold", color: "#333" }}>
+        {product.name}
+      </h5>
+      <div
+        className="product-details"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+          marginTop: "10px",
+        }}
+      >
+        <span style={{ fontSize: "16px", fontWeight: "bold", color: "#9a292f" }}>
+          ₹{product.price}
+        </span>
+        <button
+          className="add-to-cart-button"
+          onClick={() => addToCart(product.name, product.price)}
+          style={{
+            padding: "8px 12px",
+            backgroundColor: "#fc8019",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontSize: "14px",
+            width:"100px",
+            backgroundColor:"#9a292f"
+
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
+    </div>
+  ))}
+</div>
+
+
 
       {/* Popup */}
       {popupVisible && (
