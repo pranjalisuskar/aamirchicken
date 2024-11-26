@@ -12,6 +12,7 @@ import Shoponeview from './Component/componentadmin/shopcomponent/Shoponeview';
 import Productdetails from './Component/componentadmin/Productcomponent/Productdetails';
 import AdminLogin from './Component/componentadmin/AdminLogin';
 import ShopCards from './Component/componentadmin/ShopCards';
+import ProductMaster from './Component/componentadmin/Productcomponent/ProductMaster';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/shoptale' element={<Master Rcf={Tableshop}/>}/>
         <Route path='/addproduct' element={<Master Rcf={Productadd}/>}/>
         <Route path="/product/:productId" element={< Master Rcf={Productdetails}/>} />
+        <Route path='/productmaster' element={<Master Rcf={ProductMaster}/>}/>
         <Route path="/admin" element={<AdminLogin />} />
 
 

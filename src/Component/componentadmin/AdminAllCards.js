@@ -170,6 +170,29 @@ const Content = () => {
             </div>
           </div>
         </div>
+
+        <div className="col-md-3 col-sm-6 mb-3">
+        <Link
+            to="/productmaster"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+          <div className="card p-3">
+            <div className="d-flex align-items-center">
+              {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
+              <i
+                className="fas fa-store-alt fa-2x mr-3"
+                style={{ color: "#9a292f", fontSize: 30 }}
+              />
+              <div>
+                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
+                  Product Master
+                </h6>
+                <p>Manage your product master.</p>
+              </div>
+            </div>
+          </div>
+          </Link>
+        </div>
         {/* Add more cards as needed */}
       </div>
     </div>
