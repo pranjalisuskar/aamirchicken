@@ -67,12 +67,14 @@ const Content = () => {
                 className="fas fa-cogs fa-2x mr-3"
                 style={{ color: "#9a292f", fontSize: 30 }}
               />
+              <Link to='/producttable'>
               <div>
                 <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
                   Total Product
                 </h6>
                 <p>Customize your product.</p>
               </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -157,16 +159,20 @@ const Content = () => {
           <div className="card p-3">
             <div className="d-flex align-items-center">
               {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
+             
               <i
                 className="fas fa-store-alt fa-2x mr-3"
                 style={{ color: "#9a292f", fontSize: 30 }}
               />
+               <Link to='/shoptable'>
               <div>
+               
                 <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
                   Total Shops
                 </h6>
                 <p>Manage your add shops.</p>
               </div>
+              </Link>
             </div>
           </div>
         </div>

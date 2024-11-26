@@ -175,7 +175,7 @@ const Home = () => {
         </Slider>
       </div>
       <div className="container mt-5">
-        {/* <Link to="" className="no-underline"> */}
+        <Link to="/dash" className="no-underline">
           <h2
             className="text-center"
             style={{
@@ -187,7 +187,7 @@ const Home = () => {
           >
             Shops To Explore
           </h2>
-        {/* </Link> */}
+        </Link>
         <div className="row">
           {Array.isArray(shop) && shop.length > 0 ? (
             shop.map((item, index) => (
