@@ -19,13 +19,14 @@ const Content = () => {
             Add Shop
           </button>
         </Link>
-
-        <button
-          className="btn btn-success"
-          style={{ backgroundColor: "#9a292f", width: "150px" }}
-        >
-         Add Delivery Boy
-        </button>
+        <Link to="/deliveryboyform">
+          <button
+            className="btn btn-success"
+            style={{ backgroundColor: "#9a292f", width: "150px" }}
+          >
+            Add Delivery Boy
+          </button>
+        </Link>
       </div>
 
       {/* Dashboard Cards */}
@@ -59,41 +60,52 @@ const Content = () => {
             </div>
           </div>
         </div>
+       
+
         <div className="col-md-3 col-sm-6 mb-3">
-          <div className="card p-3">
-            <div className="d-flex align-items-center">
-              {/* <i class="fas fa-check-circle fa-2x mr-3"></i> */}
-              <i
-                className="fas fa-cogs fa-2x mr-3"
-                style={{ color: "#9a292f", fontSize: 30 }}
-              />
-              <Link to='/producttable'>
-              <div>
-                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
+          <Link
+            to="/producttable"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div className="card p-3">
+              <div className="d-flex align-items-center">
+                {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
+                <i
+                  className="fas fa-store-alt fa-2x mr-3"
+                  style={{ color: "#9a292f", fontSize: 30 }}
+                />
+                <div>
+                  <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
                   Total Product
-                </h6>
-                <p>Customize your product.</p>
+                  </h6>
+                  <p>Customize your product.</p>
+                </div>
               </div>
-              </Link>
             </div>
-          </div>
+          </Link>
         </div>
+       
         <div className="col-md-3 col-sm-6 mb-3">
-          <div className="card p-3">
-            <div className="d-flex align-items-center">
-              {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
-              <i
-                className="fas fa-box-open fa-2x mr-3"
-                style={{ color: "#9a292f", fontSize: 30 }}
-              />
-              <div>
-                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
-                  Pending Orders
-                </h6>
-                <p>Find helpful pending orders.</p>
+          <Link
+            to="/TotalOrdersForm"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div className="card p-3">
+              <div className="d-flex align-items-center">
+                {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
+                <i
+                  className="fas fa-store-alt fa-2x mr-3"
+                  style={{ color: "#9a292f", fontSize: 30 }}
+                />
+                <div>
+                  <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
+                  Total Orders (21)
+                  </h6>
+                  <p>Find helpful total orders.</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
         {/* Add more cards as needed */}
       </div>
@@ -135,7 +147,7 @@ const Content = () => {
           </Link>
         </div>
 
-        <div className="col-md-3 col-sm-6 mb-3">
+        {/* <div className="col-md-3 col-sm-6 mb-3">
           <Link
             to="/shopadd"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -153,50 +165,53 @@ const Content = () => {
               </div>
             </div>
           </Link>
-        </div>
+        </div> */}
+
+      
 
         <div className="col-md-3 col-sm-6 mb-3">
-          <div className="card p-3">
-            <div className="d-flex align-items-center">
-              {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
-             
-              <i
-                className="fas fa-store-alt fa-2x mr-3"
-                style={{ color: "#9a292f", fontSize: 30 }}
-              />
-               <Link to='/shoptable'>
-              <div>
-               
-                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
+          <Link
+            to="/shoptable"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div className="card p-3">
+              <div className="d-flex align-items-center">
+                {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
+                <i
+                  className="fas fa-store-alt fa-2x mr-3"
+                  style={{ color: "#9a292f", fontSize: 30 }}
+                />
+                <div>
+                  <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
                   Total Shops
-                </h6>
-                <p>Manage your add shops.</p>
+                  </h6>
+                  <p>Manage your add shops.</p>
+                </div>
               </div>
-              </Link>
             </div>
-          </div>
+          </Link>
         </div>
 
         <div className="col-md-3 col-sm-6 mb-3">
-        <Link
+          <Link
             to="/productmaster"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-          <div className="card p-3">
-            <div className="d-flex align-items-center">
-              {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
-              <i
-                className="fas fa-store-alt fa-2x mr-3"
-                style={{ color: "#9a292f", fontSize: 30 }}
-              />
-              <div>
-                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
-                  Product Master
-                </h6>
-                <p>Manage your product master.</p>
+            <div className="card p-3">
+              <div className="d-flex align-items-center">
+                {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
+                <i
+                  className="fas fa-store-alt fa-2x mr-3"
+                  style={{ color: "#9a292f", fontSize: 30 }}
+                />
+                <div>
+                  <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
+                    Product Master
+                  </h6>
+                  <p>Manage your product master.</p>
+                </div>
               </div>
             </div>
-          </div>
           </Link>
         </div>
         {/* Add more cards as needed */}

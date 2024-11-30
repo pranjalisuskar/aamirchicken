@@ -15,6 +15,8 @@ import ShopCards from './Component/componentadmin/ShopCards';
 import ProductMaster from './Component/componentadmin/Productcomponent/ProductMaster';
 import Shoptable from './Component/componentadmin/shopcomponent/Shoptable';
 import Producttable from './Component/componentadmin/Productcomponent/Producttable';
+import DeliveryboyForm from './Component/componentadmin/Delivery-Boy/DeliveryboyForm';
+import TotalOrdersForm from './Component/componentadmin/TotalOrdersForm';
 
 
 function App() {
@@ -38,6 +40,10 @@ function App() {
         {/* <Route path='/placeorder' element={<Master Rcf={Placeorder}/>}/> */}
         <Route path='/shoptable' element={<Master Rcf={Shoptable}/>}/>
         <Route path='/producttable' element={<Master Rcf={Producttable}/>}/>
+        <Route path='/deliveryboyform' element={<Master Rcf={DeliveryboyForm}/>}/>
+        <Route path='/TotalOrdersForm' element={<Master Rcf={TotalOrdersForm}/>}/>
+
+
       </Routes>
       </BrowserRouter>
     </div>

@@ -60,7 +60,7 @@ const Tableshop = () => {
                     <tr>
                       <th>Sr No</th>
                       <th>Shop Name</th>
-                      <th>Action</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>

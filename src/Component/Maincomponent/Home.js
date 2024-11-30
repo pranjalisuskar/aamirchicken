@@ -70,81 +70,7 @@ const Home = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  // const shopsData = [
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   {
-  //     img: "https://img.freepik.com/premium-vector/colorful-fried-chicken-shop-cartoon-vector-design_1080480-126900.jpg?semt=ais_hybrid",
-  //     name: "Balaji Chicken",
-  //     rating: 4.7,
-  //     address: "Balaji park, mhada colony, Kolhapur, Maharashtra",
-  //     pincode: "ZB53S7H",
-  //     availability: { serviceAvailable: true, serviceNotAvailable: false },
-  //     reviews: 31,
-  //   },
-  //   // Add other shops if necessary
-  // ];
+
   return (
     <div className="page-content">
       <div className="container mt-5">
@@ -175,7 +101,7 @@ const Home = () => {
         </Slider>
       </div>
       <div className="container mt-5">
-        <Link to="/dash" className="no-underline">
+        <Link to="/dash" className="">
           <h2
             className="text-center"
             style={{

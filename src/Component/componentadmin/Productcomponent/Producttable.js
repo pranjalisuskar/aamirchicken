@@ -16,6 +16,7 @@ const Producttable = () => {
   const [addModal, setAddModal] = useState(false);
   const [detailsModal, setDetailsModal] = useState(false);
   const [selectedShop, setSelectedShop] = useState(null);
+  // const categories = ["Chicken", "Mutton", "Fish", "Egg"];
 
   const toggleAddModal = () => setAddModal((prev) => !prev);
   const toggleDetailsModal = () => setDetailsModal((prev) => !prev);
@@ -38,6 +39,7 @@ const Producttable = () => {
     fetchShopData();
   }, []);
 
+  const categories = ["Chicken", "Mutton", "Fish", "Egg"];
   return (
     <div
       className=""
@@ -252,14 +254,65 @@ const Producttable = () => {
                         </span>
                       </td>
                     </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Eggs</td>
-                      <td>100</td>
-                      <td>abc</td>
-                      <td>
+                    <tr style={{ border: "none" }}>
+                      <td style={{ border: "none" }}>4</td>
+                      <td style={{ border: "none" }}>Eggs</td>
+                      <td style={{ border: "none" }}>100</td>
+                      <td style={{ border: "none" }}>abc</td>
+                      <td style={{ border: "none" }}>
                         <img
                           src="https://media.post.rvohealth.io/wp-content/uploads/2020/09/health-benefits-of-eggs-732x549-thumbnail-732x549.jpg"
+                          alt="Image description"
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </td>
+                      <td className="d-flex gap-2" style={{ border: "none" }}>
+                        <span>
+                          <i
+                            className="ri-eye-line"
+                            style={{
+                              fontSize: "1.2rem",
+                              textDecoration: "none",
+                              border: "none",
+                            }}
+                          ></i>
+                        </span>
+                        <span>
+                          <i
+                            className="ri-edit-line"
+                            style={{
+                              fontSize: "1.2rem",
+                              color: "green",
+                              textDecoration: "none",
+                              border: "none",
+                            }}
+                          ></i>
+                        </span>
+                        <span>
+                          <i
+                            className="ri-delete-bin-line"
+                            style={{
+                              fontSize: "1.2rem",
+                              color: "red",
+                              textDecoration: "none",
+                              border: "none",
+                            }}
+                          ></i>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr style={{ border: "none" }}>
+                      <td style={{ border: "none" }}>5</td>
+                      <td style={{ border: "none" }}>Chiken</td>
+                      <td style={{ border: "none" }}>100</td>
+                      <td style={{ border: "none" }}>abc</td>
+                      <td style={{ border: "none" }}>
+                        <img
+                          src="https://img.freepik.com/premium-photo/fried-chicken-legs-with-lemon-parsley_266870-45.jpg"
                           alt="Image description"
                           style={{
                             width: "50px",
@@ -312,91 +365,152 @@ const Producttable = () => {
       </div>
 
       <Modal isOpen={addModal} toggle={toggleAddModal} size="lg">
-        <ModalHeader toggle={toggleAddModal}>Add product</ModalHeader>
+        <ModalHeader toggle={toggleAddModal} className="modal-header">
+          Add Product
+        </ModalHeader>
         <ModalBody>
-          <form
-            className="shopform"
-            encType="multipart/form-data"
-            // onSubmit={onSubmit}
-          >
+          <form className="shopform" encType="multipart/form-data">
             <div className="row">
+              {/* Shop Selection */}
+              <div
+                className="form-group col-md-6 custom-input"
+                style={{ position: "relative" }}
+              >
+                <select
+                  className="form-control triangle-input"
+                  name="category"
+                  // value={productData.category}
+                  // onChange={onInputChange}
+                  style={{
+                    fontWeight: "bold",
+                    // width: "50%",
+                    padding: "10px",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    appearance: "none", // Remove default dropdown styling
+                    WebkitAppearance: "none", // For Safari
+                    MozAppearance: "none", // For Firefox
+                    background: "white",
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "right 10px center",
+                    backgroundSize: "25px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <option>Select Shop</option>
+                  <option>Cake Shop</option>
+                  <option>Aamir Shop</option>
+                </select>
+              </div>
+
+              {/* Product Name */}
               <div className="form-group col-md-6 custom-input">
                 <input
-                  className="form-control triangle-input"
+                  className="form-control styled-input"
                   type="text"
                   name="productName"
-                  placeholder="Product Name"
-                  //   value={productData.productName}
-                  //   onChange={onInputChange}
+                  placeholder=" Enter Product Name"
+                  style={{ fontWeight: "bold" }}
                 />
               </div>
+
+              {/* Product Price */}
               <div className="form-group col-md-6 custom-input">
                 <input
-                  className="form-control triangle-input"
+                  className="form-control styled-input"
                   type="text"
                   name="price"
-                  placeholder="Product Price"
-                  //   value={productData.price}
-                  //   onChange={onInputChange}
+                  placeholder="Enter Product Price"
+                  style={{ fontWeight: "bold", marginLeft: "30px" }}
                 />
               </div>
-              <div className="form-group col-md-6 custom-input">
-                <input
+
+              {/* Category Selection */}
+              <div
+                className="form-group col-md-6 custom-input"
+                style={{ position: "relative" }}
+              >
+                <select
                   className="form-control triangle-input"
-                  type="text"
                   name="category"
-                  placeholder="Product Category"
-                  //   value={productData.category}
-                  //   onChange={onInputChange}
-                />
+                  // value={productData.category}
+                  // onChange={onInputChange}
+                  style={{
+                    fontWeight: "bold",
+
+                    marginRight: "50px",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    appearance: "none",
+                    WebkitAppearance: "none",
+                    MozAppearance: "none",
+                    background: "white",
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "right 10px center",
+                    backgroundSize: "25px",
+                    cursor: "pointer",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <option>Select Product Category</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              {/* Image Upload */}
               <div className="form-group col-md-6 custom-input">
+                {/* Hidden file input field */}
+                <input
+                  type="file"
+                  id="shopImages"
+                  style={{ display: "none" }}
+                  accept="image/*" // Ensures only image files can be selected
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    if (files && files.length > 0) {
+                      console.log("Selected files:", files); // Handle the selected files
+                    }
+                  }}
+                />
+
+                {/* Visible button to trigger file input */}
                 <button
                   type="button"
-                  //   onClick={() => document.getElementById("shopImages").click()}
+                  className="choose-images-button"
+                  onClick={() => document.getElementById("shopImages").click()}
                   style={{
-                    display: "inline-block",
-                    padding: "10px 20px",
-                    backgroundColor: "#7a2226",
-                    color: "#fff",
+                    width: "300px",
+                    marginLeft: "5px",
+                    backgroundColor: "#9a292f",
                     borderRadius: "5px",
-                    cursor: "pointer",
-                    textAlign: "center",
-                    border: "none",
+                    marginLeft: "25px",
+                    height: "45px",
+                    fontWeight: "bold",
                   }}
                 >
                   Choose Images
                 </button>
-                <input
-                  type="file"
-                  id="shopImages"
-                  name="image_url"
-                  multiple
-                  className="form-control-file"
-                  //   onChange={(e) => handleImageChange(e)}
-                  style={{ display: "none" }}
-                />
-                <div className="image-preview-container mt-3">
-                  <img
-                    src=""
-                    alt=""
-                    className="image-preview"
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      objectFit: "cover",
-                      margin: "5px",
-                      borderRadius: "5px",
-                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    }}
-                  />
-                  {/* ))} */}
-                </div>
+              </div>
+              <div className="form-group col-md-6 custom-input">
+                <button
+                  type="submit"
+                  className="submit-button"
+                  style={{
+                    width: "300px",
+                    marginLeft: "5px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Submit
+                </button>
               </div>
             </div>
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
           </form>
         </ModalBody>
       </Modal>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./Addshop.css";
+// import "./Addshop.css";
 
-const Addshps = () => {
+const DeliveryboyForm = () => {
   const [shopOwners, setShopOwners] = useState([]);
   const [formData, setFormData] = useState({
     shopName: "",
@@ -23,79 +23,79 @@ const Addshps = () => {
     }
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const data = new FormData();
+//   const onSubmit = (e) => {
+//     e.preventDefault();
+//     const data = new FormData();
 
-    for (const key in formData) {
-      if (Array.isArray(formData[key])) {
-        for (let i = 0; i < formData[key].length; i++) {
-          data.append(key, formData[key][i]);
-        }
-      } else {
-        data.append(key, formData[key]);
-      }
-    }
+//     for (const key in formData) {
+//       if (Array.isArray(formData[key])) {
+//         for (let i = 0; i < formData[key].length; i++) {
+//           data.append(key, formData[key][i]);
+//         }
+//       } else {
+//         data.append(key, formData[key]);
+//       }
+//     }
 
-    console.log(data);
+//     console.log(data);
 
-    fetch("http://localhost:5001/api/shop/create", {
-      method: "POST",
-      body: data,
-      headers: {
-        "x-auth-token": localStorage.getItem("token"),
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          if (res.status === 403) {
-            throw new Error(`Access Denied`);
-          } else {
-            throw new Error(`HTTP error! status: ${res.status}`);
-          }
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        alert("Added successfully");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert(`Error: ${error.message}`);
-      });
-  };
+//     fetch("http://localhost:5001/api/shop/create", {
+//       method: "POST",
+//       body: data,
+//       headers: {
+//         "x-auth-token": localStorage.getItem("token"),
+//       },
+//     })
+//       .then((res) => {
+//         if (!res.ok) {
+//           if (res.status === 403) {
+//             throw new Error(`Access Denied`);
+//           } else {
+//             throw new Error(`HTTP error! status: ${res.status}`);
+//           }
+//         }
+//         return res.json();
+//       })
+//       .then((data) => {
+//         console.log(data);
+//         alert("Added successfully");
+//       })
+//       .catch((error) => {
+//         console.error("Error:", error);
+//         alert(`Error: ${error.message}`);
+//       });
+//   };
 
-  useEffect(() => {
-    async function fetchMyAPI() {
-      let response = await fetch("http://localhost:5001/api/users/Shop-Owner", {
-        method: "GET",
-        headers: {
-          "x-auth-token": localStorage.getItem("token"),
-        },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            if (res.status === 403) {
-              throw new Error(`Access Denied`);
-            } else {
-              throw new Error(`HTTP error! status: ${res.status}`);
-            }
-          }
-          return res.json();
-        })
-        .then((data) => {
-          // console.log(data);
-          setShopOwners(data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert(`Error: ${error.message}`);
-        });
-    }
+//   useEffect(() => {
+//     async function fetchMyAPI() {
+//       let response = await fetch("http://localhost:5001/api/users/Shop-Owner", {
+//         method: "GET",
+//         headers: {
+//           "x-auth-token": localStorage.getItem("token"),
+//         },
+//       })
+//         .then((res) => {
+//           if (!res.ok) {
+//             if (res.status === 403) {
+//               throw new Error(`Access Denied`);
+//             } else {
+//               throw new Error(`HTTP error! status: ${res.status}`);
+//             }
+//           }
+//           return res.json();
+//         })
+//         .then((data) => {
+//           // console.log(data);
+//           setShopOwners(data);
+//         })
+//         .catch((error) => {
+//           console.error("Error:", error);
+//           alert(`Error: ${error.message}`);
+//         });
+//     }
 
-    fetchMyAPI();
-  }, []);
+//     fetchMyAPI();
+//   }, []);
 
   console.log(shopOwners);
 
@@ -105,9 +105,9 @@ const Addshps = () => {
         className="form-title"
         style={{ fontWeight: "bold", color: "#9a292f" }}
       >
-        Shop Information
+        Delivery Boy Information
       </h2>
-      <form className="shopform" onSubmit={onSubmit}>
+      <form className="shopform" >
         <div className="row">
           {/* Add Shopowner DD here */}
           <div className="form-group col-md-6 custom-input">
@@ -118,7 +118,7 @@ const Addshps = () => {
               name="shopName"
               value={formData.shopName}
               onChange={onInputChange}
-              placeholder="Enter Shop Name"
+              placeholder="Enter Full Name"
               required
             />
           </div>
@@ -130,11 +130,11 @@ const Addshps = () => {
               name="shopLocation"
               value={formData.shopLocation}
               onChange={onInputChange}
-              placeholder="Enter Shop Location"
+              placeholder="Enter Vehicle Type"
               required
             />
           </div>
-          <div
+          {/* <div
             className="form-group col-md-6 custom-input"
             style={{ paddingTop: "5px" }}
           >
@@ -146,6 +146,18 @@ const Addshps = () => {
               value={formData.address}
               onChange={onInputChange}
               placeholder="Enter Shop Address"
+              required
+            />
+          </div> */}
+            <div className="form-group col-md-6 custom-input">
+            <input
+              className="form-control triangle-input"
+              style={{fontWeight:"bold"}}
+              type="text"
+              name="mobileNumber"
+              value={formData.mobileNumber}
+              onChange={onInputChange}
+              placeholder="Enter Vehicle Number"
               required
             />
           </div>
@@ -169,7 +181,7 @@ const Addshps = () => {
               name="mobileNumber"
               value={formData.mobileNumber}
               onChange={onInputChange}
-              placeholder="Enter Mobile Number"
+              placeholder="Enter Contact Number"
               required
             />
           </div>
@@ -186,8 +198,32 @@ const Addshps = () => {
             />
           </div>
 
-          <div className="form-group custom-input d-flex align-items-center">
+          <div className="form-group col-md-6 custom-input">
             <input
+              className="form-control triangle-input"
+              style={{fontWeight:"bold"}}
+              type="text"
+              name="mobileNumber"
+              value={formData.mobileNumber}
+              onChange={onInputChange}
+              placeholder="Enter Emergency Number"
+              required
+            />
+          </div>
+          <div className="form-group col-md-6 custom-input">
+            <input
+              style={{fontWeight:"bold"}}
+              className="form-control triangle-input"
+              type="text"
+              name="shopName"
+              value={formData.shopName}
+              onChange={onInputChange}
+              placeholder="Enter National ID/Passport"
+              required
+            />
+          </div>
+          <div className="form-group custom-input d-flex align-items-center">
+            {/* <input
               style={{
                 width: "40%", 
                 height: "40px", 
@@ -202,14 +238,14 @@ const Addshps = () => {
               className="form-control-file"
               onChange={onInputChange}
               required
-            />
+            /> */}
             <button
               type="submit"
               className="submit-button"
               style={{
-                marginLeft: "140px",
+                marginLeft: "510px",
 
-                width: "40%",
+                width: "10%",
                 height: "40px",
                 borderRadius: "5px",
                 border: "1px solid #ccc",
@@ -232,4 +268,4 @@ const Addshps = () => {
   );
 };
 
-export default Addshps;
+export default DeliveryboyForm;

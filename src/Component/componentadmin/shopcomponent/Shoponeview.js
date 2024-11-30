@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Shoponeview.css";
 import Authuser from "../../Authetication/Authuser";
+import { borderRadius, width } from "@mui/system";
 
 const Shoponeview = () => {
   const { token } = Authuser();
   const { id } = useParams();
   const [shop, setShop] = useState({});
-  const [dropdownStates, setDropdownStates] = useState({}); 
-  const [cart, setCart] = useState({});
+  const [dropdownStates, setDropdownStates] = useState({});
+  const [cart, setCart] = useState([]); 
   const [popupVisible, setPopupVisible] = useState(false);
   const [addedProduct, setAddedProduct] = useState("");
+
+  const [quantity, setQuantity] = useState("");
+
 
 
   const products = [
@@ -34,8 +38,29 @@ const Shoponeview = () => {
       img: "https://t4.ftcdn.net/jpg/02/66/03/21/360_F_266032107_lre5ZWBTTVJmMvYWyf3zYdb40QhBYDGA.jpg",
       price: 449,
     },
-    
   ];
+  const productData = {
+    "1kg": { price: 249, originalPrice: 324 },
+    "750g": { price: 200, originalPrice: 300 },
+    "500g": { price: 150, originalPrice: 250 },
+    "250g": { price: 100, originalPrice: 200 },
+  };
+
+
+  const handleAddToCart = () => {
+    if (quantity) {
+      const selectedProduct = productData[quantity];
+      const cartItem = {
+        quantity,
+        price: selectedProduct.price,
+        originalPrice: selectedProduct.originalPrice,
+      };
+      setCart((prevCart) => [...prevCart, cartItem]); // Add new item to the cart
+      alert(`Added ${quantity} to the cart`);
+    } else {
+      alert("Please select a quantity");
+    }
+  };
 
 
   const chatOptions = [
@@ -56,7 +81,6 @@ const Shoponeview = () => {
     },
   ];
 
-
   const toggleDropdownChat = (productName) => {
     setDropdownStates((prevStates) => ({
       ...prevStates,
@@ -67,11 +91,11 @@ const Shoponeview = () => {
   const addToCart = (productName, price) => {
     // Add product to the cart with name and price
     setCart((prevCart) => {
-    // Ensure prevCart is always an array
-    const updatedCart = Array.isArray(prevCart) ? [...prevCart] : [];
-    updatedCart.push({ name: productName, price });
-    return updatedCart;
-  });
+      // Ensure prevCart is always an array
+      const updatedCart = Array.isArray(prevCart) ? [...prevCart] : [];
+      updatedCart.push({ name: productName, price });
+      return updatedCart;
+    });
     // Set the added product's name and price to display in the popup
     setAddedProduct({ name: productName, price });
 
@@ -92,11 +116,6 @@ const Shoponeview = () => {
 
     alert("Viewing Cart:\n" + cartItems);
   };
-
-
-
-
-
 
   chatOptions.forEach((option) => {
     console.log(option.message); // Display the message
@@ -160,6 +179,74 @@ const Shoponeview = () => {
       }
     });
   };
+  const styles = {
+    cardContainer: {
+      display: "flex",
+      flexWrap: "wrap", // Allows wrapping of cards into multiple rows
+      justifyContent: "space-between", // Distributes cards evenly
+      gap: "20px", // Adds space between cards
+    },
+    card: {
+      width: "300px",
+      borderRadius: "15px",
+      overflow: "hidden",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      textAlign: "center",
+      fontFamily: "Arial, sans-serif",
+      margin: "20px auto",
+      // position: "relative",
+      backgroundColor: "#fff",
+padding:"30px"
+    },
+    image: {
+      width: "100%",
+      height: "auto",
+      display: "block",
+      borderRadius:"5px"
+    },
+    label: {
+      backgroundColor: "#a12030",
+      color: "#fff",
+      padding: "10px",
+      fontSize: "18px",
+      fontWeight: "bold",
+      position: "relative",
+      borderRadius: "5px",
+      height: "38px",
+    },
+    controls: {
+      padding: "15px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "20px",
+      width:"250px"
+    },
+    dropdown: {
+      width: "300px", // Sets a fixed width
+      padding: "8px", // Adds inner padding for better appearance
+      fontSize: "14px", // Sets font size for readability
+      border: "1px solid #ccc", // Adds a subtle border
+      borderRadius: "5px", // Rounds the corners
+      backgroundColor: "#f9f9f9", // Light background for a clean look
+      color: "#333", // Text color
+      outline: "none", // Removes default focus outline
+      cursor: "pointer", // Indicates interactivity
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", // Adds a subtle shadow
+      transition: "border-color 0.3s ease", // Smooth border transition
+    },
+    button: {
+      flex: "1",
+      backgroundColor: "#a12030",
+      color: "#fff",
+      border: "none",
+      borderRadius: "5px",
+      padding: "10px",
+      fontSize: "14px",
+      cursor: "pointer",
+      // marginBottom:"10px"
+    },
+  };
 
   return (
     <div className="container mt-5 shop-container">
@@ -210,7 +297,7 @@ const Shoponeview = () => {
         >
           Products
         </h2>
-        {/* <div className="products">
+        <div className="products">
         {products.map((product) => (
           <div key={product.name} className="product-card">
             <img src={product.img} alt={product.name} className="product-img" />
@@ -246,10 +333,9 @@ const Shoponeview = () => {
             )}
           </div>
         ))}
-      </div> */}
+      </div>
 
-
-<div className="products" style={{ display: "flex", flexWrap: "wrap", gap: "20px", padding: "20px" }}>
+        <div className="products" style={{ display: "flex", flexWrap: "wrap", gap: "20px", padding: "20px" }}>
   {products.map((product) => (
     <div
       key={product.name}
@@ -316,23 +402,109 @@ const Shoponeview = () => {
     </div>
   ))}
 </div>
+       
+       <div style={styles.cardContainer}>
 
-
-
-      {/* Popup */}
-      {popupVisible && (
-        <div className="popup">
-          <p>
-            {addedProduct.name} has been added to your cart for ₹
-            {addedProduct.price}!
-          </p>
-          <Link to='/viewcart'> <button onClick={viewCart} className="view-cart-button">
-            View Cart
-          </button></Link>
+      <div style={styles.card}>
+        <img
+          src="https://packmymeat.com/wp-content/uploads/2022/11/20230726_020541-jpg.webp"
+          alt="Chicken"
+          style={styles.image}
+        />
+        <div style={styles.label}>Chicken</div>
+        <div style={styles.controls} >
+   
+          <select
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            style={styles.dropdown}
+          >
+            <option value="1kg">1 kg - ₹249 (₹324)</option>
+            <option value="750g">750 gm - ₹200 (₹300)</option>
+            <option value="500g">500 gm - ₹150 (₹250)</option>
+            <option value="250g">250 gm - ₹100 (₹200)</option>
+          </select>
         </div>
-      )}
+
+      
+        {/* Price Display */}
+        <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+          {quantity && (
+            <>
+              <p
+                style={{
+                  fontSize: "15px",
+                  fontWeight: "bold",
+                  color: "#a12030",
+                  marginRight: "10px",
+                }}
+              >
+                ₹{productData[quantity].price}
+              </p>
+              <p
+                style={{
+                  textDecoration: "line-through",
+                  fontSize: "15px",
+                  color: "#999",
+                }}
+              >
+                ₹{productData[quantity].originalPrice}
+              </p>
+            </>
+          )}
+        </div>
+
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            fontFamily: "Arial, sans-serif",
+            justifyContent: "center",
+          }}
+        >
+         
+        </div>
+        <button onClick={handleAddToCart} style={styles.button}>
+          Add to Cart
+        </button>
       </div>
+      {/* Cart Summary */}
+      {/* <div style={{ marginTop: "30px" }}>
+        <h2>Cart</h2>
+        <ul>
+          {cart.map((item, index) => (
+            <li key={index}>
+              {item.quantity} - ₹{item.price} (Original Price: ₹{item.originalPrice})
+            </li>
+          ))}
+        </ul>
+      </div> */}
     </div>
+
+      {/* Card 2 */}
+ 
+      
+      {/* You can add more cards here following the same pattern */}
+    </div>
+
+        {/* Popup */}
+        {popupVisible && (
+          <div className="popup">
+            <p>
+              {addedProduct.name} has been added to your cart for ₹
+              {addedProduct.price}!
+            </p>
+            <Link to="/viewcart">
+              {" "}
+              <button onClick={viewCart} className="view-cart-button">
+                View Cart
+              </button>
+            </Link>
+          </div>
+        )}
+      </div>
+    
   );
 };
 
