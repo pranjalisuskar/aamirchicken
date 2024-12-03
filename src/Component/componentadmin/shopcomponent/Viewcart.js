@@ -1,27 +1,18 @@
-import React, {useCallback, useEffect, useState } from 'react';
-import './Viewcart.css';
-import Login from '../../Authetication/Loginr';
-import Register from '../../Authetication/Register';
-import { Link } from 'react-router-dom';
-
-
-// import React, {  useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import "./Viewcart.css";
+import Register from "../../Authetication/Register";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import "./Loginreg.css";
-// import Register from "./Register";
-// import Authuser from "./Authuser";
+
 import { Modal, ModalHeader, ModalBody, Form, Input, Button } from "reactstrap";
-import Authuser from '../../Authetication/Authuser';
+import Authuser from "../../Authetication/Authuser";
 
 const Viewcart = (props) => {
-  // const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-  // const [isLoginOpen, setIsLoginOpen] = useState(false);
-
-
+  const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
   const [showAddressSection, setShowAddressSection] = useState(false);
 
   const handleClick = () => {
@@ -39,7 +30,6 @@ const Viewcart = (props) => {
       price: 449,
     },
   ];
-
 
   const chatOptions = [
     {
@@ -63,13 +53,6 @@ const Viewcart = (props) => {
     setIsRegisterOpen(true);
   };
 
-
-
-
-
-
-
-
   const { http } = Authuser();
   const [modal, setModal] = useState(false);
   const [loginData, setLoginData] = useState({
@@ -88,7 +71,6 @@ const Viewcart = (props) => {
   const toggleModal = useCallback(() => {
     setModal((prev) => !prev);
   }, [modal]);
-  
 
   useEffect(() => {
     setModal(props.modal);
@@ -196,7 +178,6 @@ const Viewcart = (props) => {
       });
   };
 
-
   const [showDetails, setShowDetails] = useState(false);
 
   const toggleDetails = () => {
@@ -207,106 +188,118 @@ const Viewcart = (props) => {
     <div className="container d-flex">
       {/* Account Section */}
       <div className="account-section flex-grow-1">
-  <div className="account-contents">
-    <h5><strong>Account</strong></h5>
-    <p>To place your order now, log in to your existing account or sign up.</p>
-    <div className="button-group d-flex justify-content-between align-items-center jklk">
-      <button 
-        className="btn btn-light mx-2 cokl" 
-        onClick={() => setModal(!modal)}
-      >
-        Have an account? <strong>LOG IN</strong>
-      </button>
-      <button 
-        className="btn btn-danger mx-2 coi " 
-        onClick={handleRegisterClick}
-      >
-        New to Meatzo? <strong>SIGN UP</strong>
-      </button>
-    </div>
-  </div>
+        <div className="account-contents">
+          <h5>
+            <strong>Account</strong>
+          </h5>
+          <p>
+            To place your order now, log in to your existing account or sign up.
+          </p>
+          <div className="button-group d-flex justify-content-between align-items-center jklk">
+            <button style={{width:"200px"}}
+              className="btn btn-light mx-2 cokl"
+              onClick={() => setModal(!modal)}
+            >
+              Have an account? <strong>LOG IN / SIGN UP</strong>
+            </button>
+            {/* <button
+              className="btn btn-danger mx-2 coi "
+              onClick={handleRegisterClick}
+            >
+              New to Meatzo? <strong>SIGN UP</strong>
+            </button> */}
+          </div>
+        </div>
 
-  {/* Delivery Address Section */}
-  {showAddressSection && (
-    <div className="delivery-container">
-      <h2 className="section-title" onClick={handleClick}>Delivery Address</h2>
-      <div className="address-cards d-flex flex-wrap">
-        {/* Saved Address Card */}
-        <div className="address-card me-3">
-          <div className="address-details">
-            <span className="icon">🏠</span>
-            <div>
-              <h3>Home</h3>
-              <p>
-                at post phaltan, 987, Pocket 25, Subhash Place, Rohini, Delhi, 
-                110034, India
-              </p>
-              <strong>20 MINS</strong>
+        {/* Delivery Address Section */}
+        {showAddressSection && (
+          <div className="delivery-container">
+            <h2 className="section-title " style={{width:"100px"}}onClick={handleClick} >
+              Delivery Address
+            </h2>
+            <div className="address-cards d-flex flex-wrap">
+              {/* Saved Address Card */}
+              <div className="address-card me-3">
+                <div className="address-details">
+                  <span className="icon">🏠</span>
+                  <div>
+                    <h3>Home</h3>
+                    <p>
+                      at post phaltan, 987, Pocket 25, Subhash Place, Rohini,
+                      Delhi, 110034, India
+                    </p>
+                    <strong>20 MINS</strong>
+                  </div>
+                </div>
+                <button className="deliver-btn btn btn-success">
+                  Deliver Here
+                </button>
+              </div>
+
+              {/* Add New Address Card */}
+              <div className="address-card">
+                <h3>Add New Address</h3>
+                <button className="add-address-btn btn btn-outline-primary">
+                  ADD New Address
+                </button>
+              </div>
             </div>
           </div>
-          <button className="deliver-btn btn btn-success">Deliver Here</button>
-        </div>
+        )}
 
-        {/* Add New Address Card */}
-        <div className="address-card">
-          <h3>Add New Address</h3>
-          <button className="add-address-btn btn btn-outline-primary">
-            ADD New Address
-          </button>
-        </div>
-      </div>
-    </div>
-  )}
-
-  {/* Delivery Address Section - Toggled */}
-  <div className="delivery-address-container">
-    <div className="accontent">
-      <h5 onClick={toggleDetails}>Delivery Address</h5>
-    </div>
-    {showDetails && (
-      <div className="delivery-address-details d-flex flex-wrap">
-        <div className="address-info me-3">
-          <span className="home-icon">🏠</span>
-          <div className="address-text">
-            <p>Home</p>
-            <p>
-              at post phaltan, 987, Pocket 25, Subhash Place, Rohini, Delhi, 
-              110034, India
-            </p>
-            <p>20 MINS</p>
-            <button className="deliver-button btn btn-success" style={{ borderRadius: "10px" }}>
-              Deliver Here
-            </button>
+        {/* Delivery Address Section - Toggled */}
+        <div className="delivery-address-container">
+          <div className="accontent">
+            <h5 onClick={toggleDetails}>Delivery Address</h5>
           </div>
+          {showDetails && (
+            <div className="delivery-address-details d-flex flex-wrap">
+              <div className="address-info me-3">
+                <span className="home-icon">🏠</span>
+                <div className="address-text">
+                  <p>Home</p>
+                  <p>
+                    at post phaltan, 987, Pocket 25, Subhash Place, Rohini,
+                    Delhi, 110034, India
+                  </p>
+                  <p>20 MINS</p>
+                  <button
+                    className="deliver-button btn btn-success"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    Deliver Here
+                  </button>
+                </div>
+              </div>
+              <div className="add-new-address">
+                <h6>Add New Address</h6>
+                <button
+                  className="add-button btn btn-outline-primary"
+                  style={{ borderRadius: "10px" }}
+                >
+                  ADD New Address
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="add-new-address">
-          <h6>Add New Address</h6>
-          <button className="add-button btn btn-outline-primary" style={{ borderRadius: "10px" }}>
-            ADD New Address
-          </button>
+
+        {/* Payment Section */}
+        <div className="accontent">
+          <h5 className="">Payment</h5>
+          <Link to="/placeorder">
+            <button className="btn btn-primary place-order-btn">
+              Proceed to Pay
+            </button>
+          </Link>
         </div>
       </div>
-    )}
-  </div>
-
-  {/* Payment Section */}
-  <div className="accontent">
-    <h5 className="">Payment</h5>
-    <Link to="/placeorder">
-      <button className="btn btn-primary place-order-btn">
-        Proceed to Pay
-      </button>
-    </Link>
-  </div>
-</div>
-
 
       {/* Order Summary Section */}
       <div className="order-summary flex-grow-1 ml-4">
         <div className="indicator" />
-       
-     
-        <div className="order-contents">
+
+        {/* <div className="order-contents">
           <div className="order-header">
             <img
               src="https://www.shutterstock.com/image-photo/fresh-raw-chicken-basil-isolated-260nw-1064429528.jpg"
@@ -343,20 +336,37 @@ const Viewcart = (props) => {
             <strong>Total:</strong>
             <strong>Rs. 236.00</strong>
           </div>
-        </div>
+        </div> */}
 
-
+        {showCart && (
+          <div className="cart-details">
+            <h4>Cart Details</h4>
+            {cart.map((item, index) => (
+              <div key={index} className="cart-item">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="cart-item-image"
+                />
+                <div>
+                  <p>{item.name}</p>
+                  <p>{item.weight}</p>
+                  <p>Quantity: {item.quantity}</p>
+                  <p>Price: ₹{item.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-
-     
-
-
-
-          {/* Login Modal */}
-          <Modal id="showModal" isOpen={modal} toggle={toggleModal} centered>
+      {/* Login Modal */}
+      <Modal id="showModal" isOpen={modal} toggle={toggleModal} centered>
         <ModalHeader className="bg-light p-3" toggle={toggleModal}>
-          <h5 className="mx-auto" style={{ fontWeight: "bold",color:"#9a292f" }}>
+          <h5
+            className="mx-auto"
+            style={{ fontWeight: "bold", color: "#9a292f" }}
+          >
             Login
           </h5>
         </ModalHeader>
@@ -381,7 +391,7 @@ const Viewcart = (props) => {
                   marginLeft: "20px",
                   width: "92%",
                   maxWidth: "600px",
-                  fontWeight:"bold"
+                  fontWeight: "bold",
                 }}
                 type="text" // Use text to enable maxLength
                 placeholder="Enter Your Mobile Number"
@@ -436,32 +446,37 @@ const Viewcart = (props) => {
             {!register && (
               <>
                 {isOtpSent ? (
-                 <div className="mt-3">
-                 <Input
-                   type="text"
-                   placeholder="Enter Your OTP"
-                   value={otp}
-                   onChange={(e) => setOtp(e.target.value)}
-                   maxLength="6"
-                   style={{
-                    width: "92%",
-                    maxWidth: "600px",
-                     textAlign: "center",
-                     marginLeft:"20px ",
-                     fontWeight:"bold"
-               
-                   }}
-                 />
-                 <Button
-                 style={{marginLeft:"20px",width:"92%", maxWidth: "600px",height:"45px",backgroundColor:"#9a292f",fontWeight:"bold"}}
-                   type="button"
-                   className="btn btn-danger mt-3"
-                   onClick={verifyOtp}
-                 >
-                   Verify OTP
-                 </Button>
-               </div>
-               
+                  <div className="mt-3">
+                    <Input
+                      type="text"
+                      placeholder="Enter Your OTP"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                      maxLength="6"
+                      style={{
+                        width: "92%",
+                        maxWidth: "600px",
+                        textAlign: "center",
+                        marginLeft: "20px ",
+                        fontWeight: "bold",
+                      }}
+                    />
+                    <Button
+                      style={{
+                        marginLeft: "20px",
+                        width: "92%",
+                        maxWidth: "600px",
+                        height: "45px",
+                        backgroundColor: "#9a292f",
+                        fontWeight: "bold",
+                      }}
+                      type="button"
+                      className="btn btn-danger mt-3"
+                      onClick={verifyOtp}
+                    >
+                      Verify OTP
+                    </Button>
+                  </div>
                 ) : (
                   <div className="container mt-2">
                     <button type="submit" className="custom-login-btn mt-3">

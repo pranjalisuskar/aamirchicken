@@ -9,104 +9,7 @@ const Shoponeview = () => {
   const { id } = useParams();
   const [shop, setShop] = useState({});
   const [dropdownStates, setDropdownStates] = useState({});
-  const [cart, setCart] = useState([]); 
   const [popupVisible, setPopupVisible] = useState(false);
-  const [addedProduct, setAddedProduct] = useState("");
-
-  const [quantity, setQuantity] = useState("");
-
-
-
-  const products = [
-    {
-      name: "Egg",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1BeNXwduRlVooIfmtYmQNM_mLLuLdWxfGRHvu8lZljLcpHwNhBX7O30rJ4-JyEhJTX78&usqp=CAU",
-      price: 249,
-    },
-    {
-      name: "Chicken",
-      img: "https://i2.wp.com/mamaloli.com/wp-content/uploads/2012/02/kungpao-04.jpg",
-      price: 449,
-    },
-    {
-      name: "Fish",
-      img: "https://st4.depositphotos.com/1068090/39894/i/450/depositphotos_398948462-stock-photo-fresh-raw-fish-rudd-isolated.jpg",
-      price: 249,
-    },
-    {
-      name: "Mutton",
-      img: "https://t4.ftcdn.net/jpg/02/66/03/21/360_F_266032107_lre5ZWBTTVJmMvYWyf3zYdb40QhBYDGA.jpg",
-      price: 449,
-    },
-  ];
-  const productData = {
-    "1kg": { price: 249, originalPrice: 324 },
-    "750g": { price: 200, originalPrice: 300 },
-    "500g": { price: 150, originalPrice: 250 },
-    "250g": { price: 100, originalPrice: 200 },
-  };
-
-
-  const handleAddToCart = () => {
-    if (quantity) {
-      const selectedProduct = productData[quantity];
-      const cartItem = {
-        quantity,
-        price: selectedProduct.price,
-        originalPrice: selectedProduct.originalPrice,
-      };
-      setCart((prevCart) => [...prevCart, cartItem]); // Add new item to the cart
-      alert(`Added ${quantity} to the cart`);
-    } else {
-      alert("Please select a quantity");
-    }
-  };
-
-
-  const chatOptions = [
-    {
-      message: "1 kg - (22 - 28 pcs approx) 23%OFF Rs-249",
-      buttonLabel: "Add to Cart",
-      price: 249,
-    },
-    {
-      message: "23% OFF on 250g (1 - 2 pcs approx.) - ₹99",
-      buttonLabel: "Add to Cart",
-      price: 99,
-    },
-    {
-      message: "23% OFF on 1kg (4 - 6 pcs approx.) - ₹449",
-      buttonLabel: "Add to Cart",
-      price: 449,
-    },
-  ];
-
-  const toggleDropdownChat = (productName) => {
-    setDropdownStates((prevStates) => ({
-      ...prevStates,
-      [productName]: !prevStates[productName],
-    }));
-  };
-
-  const addToCart = (productName, price) => {
-    // Add product to the cart with name and price
-    setCart((prevCart) => {
-      // Ensure prevCart is always an array
-      const updatedCart = Array.isArray(prevCart) ? [...prevCart] : [];
-      updatedCart.push({ name: productName, price });
-      return updatedCart;
-    });
-    // Set the added product's name and price to display in the popup
-    setAddedProduct({ name: productName, price });
-
-    // Show the popup
-    setPopupVisible(true);
-
-    // Hide the popup after 2 seconds
-    setTimeout(() => {
-      setPopupVisible(false);
-    }, 2000);
-  };
 
   const viewCart = () => {
     // Generate a string representation of the cart showing product names and prices
@@ -116,11 +19,6 @@ const Shoponeview = () => {
 
     alert("Viewing Cart:\n" + cartItems);
   };
-
-  chatOptions.forEach((option) => {
-    console.log(option.message); // Display the message
-    console.log(option.buttonLabel); // Add button functionality here
-  });
 
   const getShopData = () => {
     fetch(`http://localhost:5001/api/shop/${id}`)
@@ -143,42 +41,6 @@ const Shoponeview = () => {
     getShopData();
   }, [id, token]);
 
-  // Function to toggle dropdown visibility for each product
-  // const toggleDropdownChat = (productName) => {
-  //   setDropdownStates((prevStates) => ({
-  //     ...prevStates,
-  //     [productName]: !prevStates[productName],
-  //   }));
-  // };
-
-  // // Add product to cart or increase its quantity
-  // const addToCart = (productName) => {
-  //   setCart((prevCart) => ({
-  //     ...prevCart,
-  //     [productName]: prevCart[productName] ? prevCart[productName] + 1 : 1,
-  //   }));
-  // };
-
-  // Increase quantity of a product in the cart
-  const incrementQuantity = (productName) => {
-    setCart((prevCart) => ({
-      ...prevCart,
-      [productName]: prevCart[productName] + 1,
-    }));
-  };
-
-  // Decrease quantity of a product in the cart
-  const decrementQuantity = (productName) => {
-    setCart((prevCart) => {
-      const newQuantity = prevCart[productName] - 1;
-      if (newQuantity > 0) {
-        return { ...prevCart, [productName]: newQuantity };
-      } else {
-        const { [productName]: _, ...restCart } = prevCart;
-        return restCart;
-      }
-    });
-  };
   const styles = {
     cardContainer: {
       display: "flex",
@@ -196,13 +58,13 @@ const Shoponeview = () => {
       margin: "20px auto",
       // position: "relative",
       backgroundColor: "#fff",
-padding:"30px"
+      padding: "30px",
     },
     image: {
       width: "100%",
       height: "auto",
       display: "block",
-      borderRadius:"5px"
+      borderRadius: "5px",
     },
     label: {
       backgroundColor: "#a12030",
@@ -220,7 +82,7 @@ padding:"30px"
       justifyContent: "center",
       alignItems: "center",
       gap: "20px",
-      width:"250px"
+      width: "250px",
     },
     dropdown: {
       width: "300px", // Sets a fixed width
@@ -246,6 +108,116 @@ padding:"30px"
       cursor: "pointer",
       // marginBottom:"10px"
     },
+  };
+
+  const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+
+  const products = [
+    {
+      id: 1,
+      name: "Chicken",
+      image:
+        "https://5.imimg.com/data5/ANDROID/Default/2021/11/TT/VP/LJ/30115384/product-jpeg-500x500.jpg",
+      prices: {
+        "250 gm": 100,
+        "500 gm": 180,
+        "750 gm": 250,
+        "1 kg": 320,
+      },
+    },
+    {
+      id: 2,
+      name: "Fish",
+      image:
+        "https://media.istockphoto.com/id/1393004403/photo/lots-of-rohu-fish-labeo-rohita-fish-arranged-in-line-in-indian-fish-market-rui-fish-sale-in.jpg?s=612x612&w=0&k=20&c=6i3EoHSBy7O0iaRuigxUPxJp9IfprTFMzsDBHo_HlAU=",
+      prices: {
+        "250 gm": 120,
+        "500 gm": 220,
+        "750 gm": 300,
+        "1 kg": 400,
+      },
+    },
+    {
+      id: 3,
+      name: "Mutton",
+      image:
+        "https://i0.wp.com/legpiece.in/wp-content/uploads/2021/05/Mutton-Curry-Cut.jpg?fit=640%2C640&ssl=1",
+      prices: {
+        "250 gm": 200,
+        "500 gm": 360,
+        "750 gm": 500,
+        "1 kg": 640,
+      },
+    },
+    {
+      id: 4,
+      name: "Egg",
+      image:
+        "https://media.istockphoto.com/id/520889612/photo/boiled-eggs-in-bowl.jpg?s=612x612&w=0&k=20&c=wwes11nnPnZu7IFz6SSSjhsfoBK-ZcTFsqH9Em72ClA=",
+      prices: {
+        "250 gm": 200,
+        "500 gm": 360,
+        "750 gm": 500,
+        "1 kg": 640,
+      },
+    },
+  ];
+
+  const [quantities, setQuantities] = useState(
+    products.reduce((acc, product) => {
+      acc[product.id] = { quantity: 1, weight: "250 gm" };
+      return acc;
+    }, {})
+  );
+
+  const handleQuantityChange = (productId, type) => {
+    setQuantities((prevQuantities) => {
+      const updatedQuantities = { ...prevQuantities };
+      if (type === "increment") {
+        if (updatedQuantities[productId].quantity < 6) {
+          updatedQuantities[productId].quantity += 1;
+        }
+      } else if (type === "decrement") {
+        if (updatedQuantities[productId].quantity > 1) {
+          updatedQuantities[productId].quantity -= 1;
+        }
+      }
+      return updatedQuantities;
+    });
+  };
+  
+
+  const handleWeightChange = (productId, weight) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [productId]: { ...prev[productId], weight },
+    }));
+  };
+
+  const handleAddToCart = (product) => {
+    const { weight, quantity } = quantities[product.id];
+    const item = {
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      weight,
+      quantity,
+      price: product.prices[weight] * quantity,
+    };
+
+    setCart((prevCart) => {
+      const existingProductIndex = prevCart.findIndex(
+        (p) => p.id === item.id && p.weight === item.weight
+      );
+      if (existingProductIndex > -1) {
+        const newCart = [...prevCart];
+        newCart[existingProductIndex].quantity += item.quantity;
+        newCart[existingProductIndex].price += item.price;
+        return newCart;
+      }
+      return [...prevCart, item];
+    });
   };
 
   return (
@@ -279,7 +251,8 @@ padding:"30px"
         <input
           type="text"
           className="form-control"
-          placeholder="Search for the products you love"
+          placeholder="Search For The Products You Love..."
+          style={{fontWeight:"bold"}}
         />
       </div>
       <div className="products-section">
@@ -297,214 +270,124 @@ padding:"30px"
         >
           Products
         </h2>
-        <div className="products">
-        {products.map((product) => (
-          <div key={product.name} className="product-card">
-            <img src={product.img} alt={product.name} className="product-img" />
-            <h5>{product.name}</h5>
-            <button
-              className="dropdown-button"
-              onClick={() => toggleDropdownChat(product.name)}
-            >
-              Select Options
-            </button>
 
-            {dropdownStates[product.name] && (
-              <div className="chat-dropdown">
-                {chatOptions.map((option, idx) => (
-                  <div key={idx} className="chat-option">
-                    <div className="option-message">{option.message}</div>
-                    <div
-                      className="option-button"
-                      onMouseEnter={() =>
-                        console.log(`Hovered on: ${option.buttonLabel}`)
-                      }
-                    >
-                      <button
-                        onClick={() => addToCart(product.name, option.price)} // Add to cart with price
-                        className="add-to-cart-button"
-                      >
-                        {option.buttonLabel}
-                      </button>
-                    </div>
-                  </div>
-                ))}
+        <div className="row">
+          <div className="product-list">
+            {products.map((product) => (
+              <div key={product.id} className="product-card">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="product-image"
+                />
+                <h5 style={{ fontWeight: "bold" }}>{product.name}</h5>
+                <select
+                  value={quantities[product.id].weight}
+                  onChange={(e) =>
+                    handleWeightChange(product.id, e.target.value)
+                  }
+                >
+                  {Object.keys(product.prices).map((weight) => (
+                    <option key={weight} value={weight}>
+                      {weight} - ₹{product.prices[weight]}
+                    </option>
+                  ))}
+                </select>
+                <div className="quantity-section">
+            <button
+              style={{
+                backgroundColor: "#9a292f",
+                borderRadius: "5px",
+                color: "white",
+                padding: "5px 10px",
+                border: "none",
+                cursor: "pointer",
+              }}
+              onClick={() =>
+                handleQuantityChange(product.id, "decrement")
+              }
+              disabled={quantities[product.id].quantity === 1}
+            >
+              -
+            </button>
+            <span style={{ margin: "0 10px" }}>
+              {quantities[product.id].quantity}
+            </span>
+            <button
+              style={{
+                backgroundColor: "#9a292f",
+                borderRadius: "5px",
+                color: "white",
+                padding: "5px 10px",
+                border: "none",
+                cursor: "pointer",
+              }}
+              onClick={() =>
+                handleQuantityChange(product.id, "increment")
+              }
+              disabled={quantities[product.id].quantity === 6}
+            >
+              +
+            </button>
+          </div>
+                <button
+                  className="add-to-cart-btn"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Add to Cart
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <Link to="/viewcart">
+            {cart.length > 0 && (
+              <div className="cart-section">
+                <p style={{marginRight:"20px"}}>{cart.length} Item Added</p>
+                <button onClick={() => setShowCart(true)} style={{backgroundColor:"#9a292f",borderRadius:"5px",fontWeight:"bold",width:"1100px",marginRight:"80px"}}>View Cart</button>
               </div>
             )}
-          </div>
-        ))}
-      </div>
+          </Link>
 
-        <div className="products" style={{ display: "flex", flexWrap: "wrap", gap: "20px", padding: "20px" }}>
-  {products.map((product) => (
-    <div
-      key={product.name}
-      className="product-card"
-      style={{
-        border: "1px solid #e0e0e0",
-        borderRadius: "10px",
-        width: "250px",
-        padding: "15px",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: "#fff",
-      }}
-    >
-      <img
-        src={product.img}
-        alt={product.name}
-        className="product-img"
-        style={{
-          width: "100%",
-          height: "150px",
-          objectFit: "cover",
-          borderRadius: "8px",
-          marginBottom: "10px",
-        }}
-      />
-      <h5 style={{ fontSize: "18px", margin: "10px 0", fontWeight: "bold", color: "#333" }}>
-        {product.name}
-      </h5>
-      <div
-        className="product-details"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "100%",
-          marginTop: "10px",
-        }}
-      >
-        <span style={{ fontSize: "16px", fontWeight: "bold", color: "#9a292f" }}>
-          ₹{product.price}
-        </span>
-        <button
-          className="add-to-cart-button"
-          onClick={() => addToCart(product.name, product.price)}
-          style={{
-            padding: "8px 12px",
-            backgroundColor: "#fc8019",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            fontSize: "14px",
-            width:"100px",
-            backgroundColor:"#9a292f"
-
-          }}
-        >
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  ))}
-</div>
-       
-       <div style={styles.cardContainer}>
-
-      <div style={styles.card}>
-        <img
-          src="https://packmymeat.com/wp-content/uploads/2022/11/20230726_020541-jpg.webp"
-          alt="Chicken"
-          style={styles.image}
-        />
-        <div style={styles.label}>Chicken</div>
-        <div style={styles.controls} >
-   
-          <select
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            style={styles.dropdown}
-          >
-            <option value="1kg">1 kg - ₹249 (₹324)</option>
-            <option value="750g">750 gm - ₹200 (₹300)</option>
-            <option value="500g">500 gm - ₹150 (₹250)</option>
-            <option value="250g">250 gm - ₹100 (₹200)</option>
-          </select>
-        </div>
-
-      
-        {/* Price Display */}
-        <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
-          {quantity && (
-            <>
-              <p
-                style={{
-                  fontSize: "15px",
-                  fontWeight: "bold",
-                  color: "#a12030",
-                  marginRight: "10px",
-                }}
-              >
-                ₹{productData[quantity].price}
-              </p>
-              <p
-                style={{
-                  textDecoration: "line-through",
-                  fontSize: "15px",
-                  color: "#999",
-                }}
-              >
-                ₹{productData[quantity].originalPrice}
-              </p>
-            </>
+          {showCart && (
+            <div className="cart-details">
+              <h4>Cart Details</h4>
+              {cart.map((item, index) => (
+                <div key={index} className="cart-item">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="cart-item-image"
+                  />
+                  <div>
+                    <p>{item.name}</p>
+                    <p>{item.weight}</p>
+                    <p>Quantity: {item.quantity}</p>
+                    <p>Price: ₹{item.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
+      </div>
 
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            fontFamily: "Arial, sans-serif",
-            justifyContent: "center",
-          }}
-        >
-         
+      {/* Popup */}
+      {/* {popupVisible && (
+        <div className="popup">
+          <p>
+            {addedProduct.name} has been added to your cart for ₹
+            {addedProduct.price}!
+          </p>
+          <Link to="/viewcart">
+            {" "}
+            <button onClick={viewCart} className="view-cart-button">
+              View Cart
+            </button>
+          </Link>
         </div>
-        <button onClick={handleAddToCart} style={styles.button}>
-          Add to Cart
-        </button>
-      </div>
-      {/* Cart Summary */}
-      {/* <div style={{ marginTop: "30px" }}>
-        <h2>Cart</h2>
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index}>
-              {item.quantity} - ₹{item.price} (Original Price: ₹{item.originalPrice})
-            </li>
-          ))}
-        </ul>
-      </div> */}
+      )} */}
     </div>
-
-      {/* Card 2 */}
- 
-      
-      {/* You can add more cards here following the same pattern */}
-    </div>
-
-        {/* Popup */}
-        {popupVisible && (
-          <div className="popup">
-            <p>
-              {addedProduct.name} has been added to your cart for ₹
-              {addedProduct.price}!
-            </p>
-            <Link to="/viewcart">
-              {" "}
-              <button onClick={viewCart} className="view-cart-button">
-                View Cart
-              </button>
-            </Link>
-          </div>
-        )}
-      </div>
-    
   );
 };
 

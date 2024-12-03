@@ -17,6 +17,7 @@ import Shoptable from './Component/componentadmin/shopcomponent/Shoptable';
 import Producttable from './Component/componentadmin/Productcomponent/Producttable';
 import DeliveryboyForm from './Component/componentadmin/Delivery-Boy/DeliveryboyForm';
 import TotalOrdersForm from './Component/componentadmin/TotalOrdersForm';
+import AddToCartPage from './AddToCartPage';
 
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
         <Route path='/producttable' element={<Master Rcf={Producttable}/>}/>
         <Route path='/deliveryboyform' element={<Master Rcf={DeliveryboyForm}/>}/>
         <Route path='/TotalOrdersForm' element={<Master Rcf={TotalOrdersForm}/>}/>
+        <Route path='/AddToCartPage' element={<Master Rcf={AddToCartPage}/>}/>
+
 
 
       </Routes>

@@ -64,13 +64,14 @@ const TotalOrdersForm = () => {
                       fontWeight: "bold",
                       marginBottom: "5px",
                       marginLeft: "5px",
+                      height:"40px"
                     }}
                   >
                     Total Orders List
                   </h5>
                 </Col>
                 <Col xs={12} sm={6} className="text-end">
-                  <button
+                  {/* <button
                     className="btn btn-light btn-sm "
                     onClick={toggleAddModal}
                     style={{
@@ -82,7 +83,7 @@ const TotalOrdersForm = () => {
                   >
                     <i className="ri-add-line" style={{ color: "#9a292f" }}></i>{" "}
                     Add Orders
-                  </button>
+                  </button> */}
                 </Col>
               </Row>
             </CardHeader>
