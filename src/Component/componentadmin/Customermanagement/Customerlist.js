@@ -14,24 +14,36 @@ import {
 
 
 // import DeleteModal from "../shopcomponent/Common/DeleteModal";
+
+import CustomerviewModal from "./CustomerviewModal";
 import CustomerEditmodal from "./CustomerEditmodal";
+import DeleteModal from "../shopcomponent/Common/DeleteModal";
 const Customerlist = () => {
 
-     // const [shopData, setShopData] = useState([]);
   const [addModal, setAddModal] = useState(false);
-  // const [detailsModal, setDetailsModal] = useState(false);
-  // const [selectedShop, setSelectedShop] = useState(null);
 
   const toggleAddModal = () => setAddModal((prev) => !prev);
-  // const toggleDetailsModal = () => setDetailsModal((prev) => !prev);
 
-  // const handleRowClick = (shop) => {
-  //   setSelectedShop(shop);
-  //   toggleDetailsModal();
-  // };
 
-//   const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
+  const handleDeleteOrder = () => {
+    console.log("Item deleted successfully");
+    setDeleteModal(false); // Close the modal after deletion
+  };
+
+  const [editModal, setEditModal] = useState(false);
+  const [viewModal, setToggleViewModal] = useState(false);
+  const [shopData, setShopData] = useState([]); // Shop data array
+  const [selectedShop, setSelectedShop] = useState(null); // Selected shop details
+
+  // Toggle View Modal
+  const toggleViewModal = (shop) => {
+    setSelectedShop(shop); // Set the selected shop for the modal
+    setToggleViewModal((prev) => !prev);
+  };
+
+ 
   const toggleEditModal = (shop) => {
     setSelectedShop(shop);
     setEditModal((prev) => !prev);
@@ -43,13 +55,9 @@ const Customerlist = () => {
   };
 
 
-  const [deleteModal, setDeleteModal] = useState(false);
+  
 
-  const handleDeleteOrder = () => {
-    console.log("Item deleted successfully");
-    setDeleteModal(false); // Close the modal after deletion
-  };
-
+ 
   useEffect(() => {
     const fetchShopData = async () => {
       try {
@@ -63,17 +71,9 @@ const Customerlist = () => {
     fetchShopData();
   }, []);
 
-  const [editModal, setEditModal] = useState(false);
-  const [viewModal,settoggleViewModal]=useState(false);
-  const [shopData, setShopData] = useState([]);
-   
+ 
 
-  const [selectedShop, setSelectedShop] = useState(null);
-
-  const toggleViewModal = (shop) => {
-    setSelectedShop(shop);
-    settoggleViewModal((prev) => !prev);
-  };
+  
   
 //   const toggleEditModal = (shop) => {
 //     setSelectedShop(shop);
@@ -90,11 +90,11 @@ const Customerlist = () => {
       className=""
       style={{ width: "1350px", marginLeft: "80px", marginBottom: "80px" }}
     >
-    {/* <DeleteModal
+    <DeleteModal
         isOpen={deleteModal}
         toggle={() => setDeleteModal(!deleteModal)}
         onDelete={handleDeleteOrder}
-      /> */}
+      />
 
       <div className="row" style={{ marginTop: "80px" }}>
         <div className="col-lg-12">
@@ -154,17 +154,17 @@ const Customerlist = () => {
                   </thead>
                   <tbody>
   {/* {shopData.map((shop, index) => ( */}
-    <tr>
+    <tr >
       <td>1</td>
-      <td>hjfjfj</td>
+      <td>tyuh</td>
+      <td>hjk</td>
+      <td>jkl</td>
+      <td>hnmk</td>
+      <td>hjn</td>
      
-      <td>yui</td>
-      <td>7899</td>
-      <td>hjhj</td>
-      <td>hjnnm</td>
-     
+      
       <td className="d-flex gap-2" style={{ border: "none" }}>
-        <span >
+        <span onClick={() => toggleViewModal()}>
           <i
             className="ri-eye-line"
             style={{
@@ -175,28 +175,30 @@ const Customerlist = () => {
             }}
           ></i>
         </span>
-        {/* <ShopviewModel
+        <CustomerviewModal
           isOpen={viewModal}
           toggle={toggleViewModal}
           shop={selectedShop}
-        /> */}
-        <span onClick={() => toggleEditModal()}>
-          <i
-            className="ri-edit-line"
-            style={{
-              fontSize: "1.2rem",
-              color: "green",
-              cursor: "pointer",
-            }}
-          ></i>
-        </span>
-        <CustomerEditmodal
-          isOpen={editModal}
-          toggle={toggleEditModal}
-        //   initialData={shop}
-          onSave={handleSave}
         />
-        <span >
+        <span onClick={() => toggleEditModal()}>
+                <i
+                  className="ri-edit-line"
+                  style={{
+                    fontSize: "1.2rem",
+                    color: "green",
+                    cursor: "pointer",
+                  }}
+                ></i>
+              </span>
+
+              {/* CustomerEditModal */}
+              <  CustomerEditmodal
+                isOpen={editModal}
+                toggle={toggleEditModal}
+                initialData={selectedShop}
+                onSave={handleSave}
+              />
+       <span onClick={() => setDeleteModal(true)}>
           <i
             className="ri-delete-bin-line"
             style={{

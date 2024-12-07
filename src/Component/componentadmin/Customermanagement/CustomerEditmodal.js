@@ -18,7 +18,7 @@ const CustomerEditmodal = ({ isOpen, toggle, initialData, onSave }) => {
   return (
     <div>
          <Modal show={isOpen} toggle={toggle} size="lg" centered>
-      <ModalHeader toggle={toggle} style={{fontWeight:'bold'}}>Shop Edit Modal</ModalHeader>
+      <ModalHeader toggle={toggle} style={{fontWeight:'bold'}}><h4>Customer Edit Modal</h4></ModalHeader>
       <ModalBody>
       <form
             className="shopform"
@@ -110,6 +110,19 @@ const CustomerEditmodal = ({ isOpen, toggle, initialData, onSave }) => {
                 />
               </div>
               <div className="form-group col-md-6 custom-input">
+                <button
+                  type="submit"
+                  className="submit-button"
+                  style={{
+                    width: "300px",
+                    marginLeft: "5px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Update
+                </button>
+              </div>
+              <div className="form-group col-md-6 custom-input">
                 {/* Hidden file input field */}
                 <input
                   type="file"
@@ -142,19 +155,7 @@ const CustomerEditmodal = ({ isOpen, toggle, initialData, onSave }) => {
                   Choose Images
                 </button>
               </div>
-              <div className="form-group col-md-6 custom-input">
-                <button
-                  type="submit"
-                  className="submit-button"
-                  style={{
-                    width: "300px",
-                    marginLeft: "5px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Update
-                </button>
-              </div>
+             
             </div>
             {/* <button type="submit" className="submit-button">
             Submit
