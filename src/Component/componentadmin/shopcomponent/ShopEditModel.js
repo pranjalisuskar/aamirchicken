@@ -18,8 +18,8 @@ const ShopEditModel = ({ isOpen, toggle, initialData, onSave }) => {
   };
 
   return (
-    <Modal show={isOpen} toggle={toggle} size="lg" centered>
-      <ModalHeader toggle={toggle} style={{fontWeight:'bold'}}>Shop Edit Modal</ModalHeader>
+    <Modal show={isOpen} onHide={toggle} size="lg" centered>
+      <ModalHeader closeButton style={{fontWeight:"bold"}}><h4>Shop Edit Modal</h4></ModalHeader>
       <ModalBody>
         <form
           className="shopform"

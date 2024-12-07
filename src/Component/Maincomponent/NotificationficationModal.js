@@ -12,8 +12,8 @@ import "./Header.css";
 const NotificationModal = ({ isOpen, toggle }) => {
   return (
     <Modal isOpen={isOpen} toggle={toggle} centered>
-      <ModalHeader className="text-center">
-        <span style={styles.modalHeaderText} className="noyt">Notifications</span>
+      <ModalHeader className="text-center" toggle={toggle}>
+        <span style={styles.modalHeaderText}>Notifications</span>
       </ModalHeader>
       <ModalBody>
         <div className="notification-item" style={styles.notificationItem}>
@@ -98,8 +98,8 @@ const styles = {
     fontWeight: "bold",
     padding: "10px 20px",
     color: "#333",
-    width: "1200%", // Ensures the button fits well within the modal
-    maxWidth: "400px", // Restricts the maximum width for a balanced look
+    width: "100%", // Ensures the button fits well within the modal
+    maxWidth: "420px", // Restricts the maximum width for a balanced look
     margin: "0 auto", // Centers the button horizontally
   },
 };
