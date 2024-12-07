@@ -225,6 +225,10 @@ const Content = () => {
 
       <div className="row mt-4">
         <div className="col-md-3 col-sm-6 mb-3">
+          <Link
+            to="/TrackOrderForm"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
           <div className="card p-3">
             <div className="d-flex align-items-center">
               {/* <i class="fas fa-tasks fa-2x mr-3"></i> */}
@@ -238,6 +242,7 @@ const Content = () => {
               </div>
             </div>
           </div>
+          </Link>
         </div>
         <div className="col-md-3 col-sm-6 mb-3">
           <Link
