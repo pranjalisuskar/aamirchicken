@@ -2,18 +2,19 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./Viewcart.css";
 import Register from "../../Authetication/Register";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Modal, ModalHeader, ModalBody, Form, Input, Button } from "reactstrap";
 import Authuser from "../../Authetication/Authuser";
 
-const Viewcart = (props) => {
+const Viewcart = (props, card) => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [cart, setCart] = useState([]);
-  const [showCart, setShowCart] = useState(false);
   const [showAddressSection, setShowAddressSection] = useState(false);
+
+  const location = useLocation();
+  const cart = location.state?.cart || [];
 
   const handleClick = () => {
     setShowAddressSection(true);
@@ -196,7 +197,8 @@ const Viewcart = (props) => {
             To place your order now, log in to your existing account or sign up.
           </p>
           <div className="button-group d-flex justify-content-between align-items-center jklk">
-            <button style={{width:"200px"}}
+            <button
+              style={{ width: "200px" }}
               className="btn btn-light mx-2 cokl"
               onClick={() => setModal(!modal)}
             >
@@ -214,7 +216,11 @@ const Viewcart = (props) => {
         {/* Delivery Address Section */}
         {showAddressSection && (
           <div className="delivery-container">
-            <h2 className="section-title " style={{width:"100px"}}onClick={handleClick} >
+            <h2
+              className="section-title "
+              style={{ width: "100px" }}
+              onClick={handleClick}
+            >
               Delivery Address
             </h2>
             <div className="address-cards d-flex flex-wrap">
@@ -297,51 +303,12 @@ const Viewcart = (props) => {
 
       {/* Order Summary Section */}
       <div className="order-summary flex-grow-1 ml-4">
-        <div className="indicator" />
+        {/* <div className="indicator" /> */}
 
-        {/* <div className="order-contents">
-          <div className="order-header">
-            <img
-              src="https://www.shutterstock.com/image-photo/fresh-raw-chicken-basil-isolated-260nw-1064429528.jpg"
-              alt="Product"
-              className="product-img"
-              style={{height:'70px',
-                width:'70px'
-              }}
-            />
-            <div>
-              <h5 className="shop-name"><strong>Balaji Chicken Shop</strong></h5>
-              <p>Available in your Kolhapur</p>
-            </div>
-          </div>
-          <div className="order-details">
-            <p><strong>Premium Chicken - 1 Full Chicken Curry Cut (Skinless)</strong></p>
-            <p>1 Full Chicken is Provided</p>
-          </div>
-          <h6 className="summary-title"><strong>Order Summary</strong></h6>
-          <div className="summary-item">
-            <span>Order</span>
-            <span>236</span>
-          </div>
-          <div className="summary-item">
-            <span>Taxes</span>
-            <span>Rs. 3.00</span>
-          </div>
-          <div className="summary-item">
-            <span>Delivery fees</span>
-            <span>Rs. 10.00</span>
-          </div>
-          <hr />
-          <div className="summary-total">
-            <strong>Total:</strong>
-            <strong>Rs. 236.00</strong>
-          </div>
-        </div> */}
-
-        {showCart && (
-          <div className="cart-details">
-            <h4>Cart Details</h4>
-            {cart.map((item, index) => (
+        {/* <div className="cart-page"> */}
+          {/* <h5>Cart Page</h5> */}
+          {cart.length > 0 ? (
+            cart.map((item, index) => (
               <div key={index} className="cart-item">
                 <img
                   src={item.image}
@@ -352,12 +319,15 @@ const Viewcart = (props) => {
                   <p>{item.name}</p>
                   <p>{item.weight}</p>
                   <p>Quantity: {item.quantity}</p>
-                  <p>Price: ₹{item.price}</p>
+                  <p>Total Price: ₹{item.price}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          ) : (
+            <p>Your cart is empty!</p>
+          )}
+          {/* <Link to="/">Go Back to Products</Link> */}
+        {/* </div> */}
       </div>
 
       {/* Login Modal */}

@@ -6,7 +6,7 @@ const Content = () => {
     <div className="content">
       {/* Top Bar */}
       <div className="top-bar">
-        <h5 style={{ fontWeight: "bold" }}>Admin Dashboard!</h5>
+        <h5 style={{ fontWeight: "bold" }}>Admin Dashboard..!</h5>
         <Link to="/shopadd">
           <button
             className="btn btn-success"
@@ -14,6 +14,7 @@ const Content = () => {
               backgroundColor: "#9a292f",
               width: "150px",
               marginLeft: "630px",
+              fontWeight:"bold"
             }}
           >
             Add Shop
@@ -22,7 +23,7 @@ const Content = () => {
         <Link to="/deliveryboyform">
           <button
             className="btn btn-success"
-            style={{ backgroundColor: "#9a292f", width: "150px" }}
+            style={{ backgroundColor: "#9a292f", width: "160px",fontWeight:"bold" }}
           >
             Add Delivery Boy
           </button>
@@ -289,4 +290,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default Content;

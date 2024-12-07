@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import "./Shoponeview.css";
 import Authuser from "../../Authetication/Authuser";
 import { borderRadius, width } from "@mui/system";
@@ -10,7 +10,7 @@ const Shoponeview = () => {
   const [shop, setShop] = useState({});
   const [dropdownStates, setDropdownStates] = useState({});
   const [popupVisible, setPopupVisible] = useState(false);
-
+  const navigate = useNavigate();
   const viewCart = () => {
     // Generate a string representation of the cart showing product names and prices
     const cartItems = cart
@@ -220,6 +220,10 @@ const Shoponeview = () => {
     });
   };
 
+  const handleViewCart =()=>{
+    navigate("/viewcart",{state:{cart}})
+  }
+
   return (
     <div className="container mt-5 shop-container">
       <div className="shop-header">
@@ -340,14 +344,20 @@ const Shoponeview = () => {
             ))}
           </div>
 
-          <Link to="/viewcart">
-            {cart.length > 0 && (
-              <div className="cart-section">
-                <p style={{marginRight:"20px"}}>{cart.length} Item Added</p>
-                <button onClick={() => setShowCart(true)} style={{backgroundColor:"#9a292f",borderRadius:"5px",fontWeight:"bold",width:"1100px",marginRight:"80px"}}>View Cart</button>
-              </div>
-            )}
-          </Link>
+          {/* style={{
+                  backgroundColor: "#9a292f",
+                  borderRadius: "5px",
+                  fontWeight: "bold",
+                  width: "200px",
+                  color: "#fff",
+                }} */}
+          {cart.length > 0 && (
+            <div className="cart-section">
+              <p style={{ marginRight: "20px" }}>{cart.length} Item(s) Added</p>
+             <button onClick={handleViewCart}>View Cart</button>
+            </div>
+          )}
+  
 
           {showCart && (
             <div className="cart-details">
@@ -369,6 +379,8 @@ const Shoponeview = () => {
               ))}
             </div>
           )}
+
+          
         </div>
       </div>
 

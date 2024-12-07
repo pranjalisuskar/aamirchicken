@@ -1,0 +1,51 @@
+/* EditModal.css */
+.edit-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-modal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .edit-modal .modal-title {
+    color: #333;
+  }
+  
+  .edit-modal .modal-body {
+    padding: 20px;
+  }
+  
+  .edit-modal .form-group label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .edit-modal .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+  }
+  
+  .edit-modal .form-control:focus {
+    border-color: #80bdff;
+    outline: none;
+  }
+  
+  .edit-modal .btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+  
+  .edit-modal .btn-secondary {
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+  

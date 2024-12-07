@@ -18,6 +18,7 @@ import Producttable from './Component/componentadmin/Productcomponent/Producttab
 import DeliveryboyForm from './Component/componentadmin/Delivery-Boy/DeliveryboyForm';
 import TotalOrdersForm from './Component/componentadmin/TotalOrdersForm';
 import AddToCartPage from './AddToCartPage';
+import ShopEditModel from './Component/componentadmin/shopcomponent/ShopEditModel';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
         <Route path='/'element={<Master Rcf={Home} />}/>
         <Route path='/shop/:id' element={<Master Rcf={Shoponeview}/>}/>
         <Route path='/dash' element={<Allcontent />}/>
-        <Route path='/shopdash' element={<ShopCards/>}/>
+        {/* <Route path='/shopdash' element={<ShopCards/>}/> */}
        <Route path='/product' element={<Master Rcf={Product}/>}/>
        <Route path='/shopadd' element={<Master Rcf={Addshps}/>}/>
         <Route path='/shoptale' element={<Master Rcf={Tableshop}/>}/>
@@ -44,6 +45,8 @@ function App() {
         <Route path='/deliveryboyform' element={<Master Rcf={DeliveryboyForm}/>}/>
         <Route path='/TotalOrdersForm' element={<Master Rcf={TotalOrdersForm}/>}/>
         <Route path='/AddToCartPage' element={<Master Rcf={AddToCartPage}/>}/>
+        <Route path='/ShopEditModel' element={<Master Rcf={ShopEditModel}/>}/>
+
 
 
 
