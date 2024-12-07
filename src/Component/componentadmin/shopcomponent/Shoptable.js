@@ -108,20 +108,19 @@ const Shoptable = () => {
                   </h5>
                 </Col>
                 <Col xs={12} sm={6} className="text-end">
-                  <button
-                    className="btn btn-light btn-sm "
-                    onClick={toggleAddModal}
-                    style={{
-                      marginBottom: "10px",
-                      width: "150px",
-                      marginRight: "5px",
-                      color: "#9a292f",
-                    }}
-                  >
-                    <i className="ri-add-line" style={{ color: "#9a292f" }}></i>{" "}
-                    Add Shop
-                  </button>
-                </Col>
+        <button
+          className="btn btn-light btn-sm"
+          onClick={toggleAddModal}
+          style={{
+            marginBottom: "10px",
+            width: "150px",
+            marginRight: "5px",
+            color: "#9a292f",
+          }}
+        >
+          <i className="ri-add-line" style={{ color: "#9a292f" }}></i> Add Shop
+        </button>
+      </Col>
               </Row>
             </CardHeader>
             <div>
@@ -219,7 +218,7 @@ const Shoptable = () => {
         </div>
       </div>
 
-      <Modal isOpen={addModal} toggle={toggleAddModal} size="lg">
+      <Modal isOpen={addModal} toggle={toggleAddModal} size="lg" centered>
         <ModalHeader toggle={toggleAddModal}>Add Shop</ModalHeader>
         <ModalBody>
           <form
