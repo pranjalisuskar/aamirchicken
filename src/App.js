@@ -21,6 +21,7 @@ import AddToCartPage from './AddToCartPage';
 import ShopEditModel from './Component/componentadmin/shopcomponent/ShopEditModel';
 import Customerlist from './Component/componentadmin/Customermanagement/Customerlist';
 import TrackOrderForm from './Component/componentadmin/TrackOrder/TrackOrderForm';
+import DeliveryBoyList from './Component/componentadmin/Delivery-Boy/DeliveryBoyList';
 
 
 function App() {
@@ -50,6 +51,8 @@ function App() {
         <Route path='/ShopEditModel' element={<Master Rcf={ShopEditModel}/>}/>
         <Route path='/customerlist' element={<Master Rcf={Customerlist}/>}/>
         <Route path='/TrackOrderForm' element={<Master Rcf={TrackOrderForm}/>}/>
+        <Route path='/DeliveryBoyList' element={<Master Rcf={DeliveryBoyList}/>}/>
+
 
 
 

@@ -52,20 +52,30 @@ const Content = () => {
           </div>
           </Link>
         </div>
+
+
         <div className="col-md-3 col-sm-6 mb-3">
+          <Link
+            to="/TrackOrderForm"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
           <div className="card p-3">
             <div className="d-flex align-items-center">
+              {/* <i class="fas fa-tasks fa-2x mr-3"></i> */}
               <i
-                className="fas fa-box fa-2x mr-3"
+                className="fas fa-calendar-day fa-2x mr-3"
                 style={{ color: "#9a292f", fontSize: 30 }}
               />
               <div>
-                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>New Order</h6>
-                <p>Manage Your New Order.</p>
+                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>Track Orders</h6>
+                <p>Manage Your Track Orders.</p>
               </div>
             </div>
           </div>
+          </Link>
         </div>
+
+       
        
 
         <div className="col-md-3 col-sm-6 mb-3">
@@ -116,21 +126,31 @@ const Content = () => {
         {/* Add more cards as needed */}
       </div>
       <div className="row mt-4">
-        <div className="col-md-3 col-sm-6 mb-3">
-          <div className="card p-3">
-            <div className="d-flex align-items-center">
-              {/* <i class="fas fa-tasks fa-2x mr-3"></i> */}
-              <i
-                className="fas fa-calendar-day fa-2x mr-3"
-                style={{ color: "#9a292f", fontSize: 30 }}
-              />
-              <div>
-                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>Shop Sales</h6>
-                <p>Manage your Shop Sales.</p>
+
+      <div className="col-md-3 col-sm-6 mb-3">
+          <Link
+            to="/DeliveryBoyList"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div className="card p-3">
+              <div className="d-flex align-items-center">
+                {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
+                <i
+                  className="fas fa-store-alt fa-2x mr-3"
+                  style={{ color: "#9a292f", fontSize: 30 }}
+                />
+                <div>
+                  <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
+                  Total Delivery Boy
+                  </h6>
+                  <p>Manage Your Total Delivery Boy.</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
+
+
         <div className="col-md-3 col-sm-6 mb-3">
           <Link
             to="/addproduct"
@@ -152,28 +172,6 @@ const Content = () => {
             </div>
           </Link>
         </div>
-
-        {/* <div className="col-md-3 col-sm-6 mb-3">
-          <Link
-            to="/shopadd"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <div className="card p-3">
-              <div className="d-flex align-items-center">
-                <i
-                  className="fas fa-store fa-2x mr-3"
-                  style={{ color: "#9a292f", fontSize: 30 }}
-                />
-                <div>
-                  <h6 style={{ fontWeight: "bold", fontSize: 18 }}>Add Shop / Delivery Boy</h6>
-                  <p>Manage your add shop.</p>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div> */}
-
-      
 
         <div className="col-md-3 col-sm-6 mb-3">
           <Link
@@ -226,26 +224,6 @@ const Content = () => {
       <div className="row mt-4">
         <div className="col-md-3 col-sm-6 mb-3">
           <Link
-            to="/TrackOrderForm"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-          <div className="card p-3">
-            <div className="d-flex align-items-center">
-              {/* <i class="fas fa-tasks fa-2x mr-3"></i> */}
-              <i
-                className="fas fa-calendar-day fa-2x mr-3"
-                style={{ color: "#9a292f", fontSize: 30 }}
-              />
-              <div>
-                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>Track Orders</h6>
-                <p>Manage Your Track Orders.</p>
-              </div>
-            </div>
-          </div>
-          </Link>
-        </div>
-        <div className="col-md-3 col-sm-6 mb-3">
-          <Link
             // to="/addproduct"
             style={{ textDecoration: "none", color: "inherit" }}
           >
@@ -266,31 +244,20 @@ const Content = () => {
           </Link>
         </div>
 
-  
-
-      
-
         <div className="col-md-3 col-sm-6 mb-3">
-          <Link
-            // to="/shoptable"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <div className="card p-3">
-              <div className="d-flex align-items-center">
-                {/* <i class="fas fa-dollar-sign fa-2x mr-3"></i> */}
-                <i
-                  className="fas fa-store-alt fa-2x mr-3"
-                  style={{ color: "#9a292f", fontSize: 30 }}
-                />
-                <div>
-                  <h6 style={{ fontWeight: "bold", fontSize: 18 }}>
-                  Total Delivery Boy
-                  </h6>
-                  <p>Manage Your Total Delivery Boy.</p>
-                </div>
+          <div className="card p-3">
+            <div className="d-flex align-items-center">
+              {/* <i class="fas fa-tasks fa-2x mr-3"></i> */}
+              <i
+                className="fas fa-calendar-day fa-2x mr-3"
+                style={{ color: "#9a292f", fontSize: 30 }}
+              />
+              <div>
+                <h6 style={{ fontWeight: "bold", fontSize: 18 }}>Shop Sales</h6>
+                <p>Manage your Shop Sales.</p>
               </div>
             </div>
-          </Link>
+          </div>
         </div>
 
       
