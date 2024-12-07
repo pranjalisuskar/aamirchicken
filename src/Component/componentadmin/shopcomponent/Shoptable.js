@@ -12,19 +12,31 @@ import {
 } from "reactstrap";
 import "./Viewcart.css";
 import ShopEditModel from "./ShopEditModel";
+import ShopviewModel from "./ShopviewModel";
+// import DeleteModal from "../../Components/Common/DeleteModal";
+
+import DeleteModal from "../shopcomponent/Common/DeleteModal";
 
 const Shoptable = () => {
   // const [shopData, setShopData] = useState([]);
   const [addModal, setAddModal] = useState(false);
-  const [detailsModal, setDetailsModal] = useState(false);
-  const [selectedShop, setSelectedShop] = useState(null);
+  // const [detailsModal, setDetailsModal] = useState(false);
+  // const [selectedShop, setSelectedShop] = useState(null);
 
   const toggleAddModal = () => setAddModal((prev) => !prev);
-  const toggleDetailsModal = () => setDetailsModal((prev) => !prev);
+  // const toggleDetailsModal = () => setDetailsModal((prev) => !prev);
 
-  const handleRowClick = (shop) => {
-    setSelectedShop(shop);
-    toggleDetailsModal();
+  // const handleRowClick = (shop) => {
+  //   setSelectedShop(shop);
+  //   toggleDetailsModal();
+  // };
+
+
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const handleDeleteOrder = () => {
+    console.log("Item deleted successfully");
+    setDeleteModal(false); // Close the modal after deletion
   };
 
   useEffect(() => {
@@ -41,15 +53,22 @@ const Shoptable = () => {
   }, []);
 
   const [editModal, setEditModal] = useState(false);
-  const [shopData, setShopData] = useState({
-    location: "123 Main St",
-    address: "City Center",
-    pincode: "123456",
-    mobile: "1234567890",
-    email: "example@example.com",
-  });
+  const [viewModal,settoggleViewModal]=useState(false);
+  const [shopData, setShopData] = useState([]);
+   
 
-  const toggleEditModal = () => setEditModal(!editModal);
+  const [selectedShop, setSelectedShop] = useState(null);
+
+  const toggleViewModal = (shop) => {
+    setSelectedShop(shop);
+    settoggleViewModal((prev) => !prev);
+  };
+  
+  const toggleEditModal = (shop) => {
+    setSelectedShop(shop);
+    setEditModal((prev) => !prev);
+  };
+  ;
 
   const handleSave = (updatedData) => {
     setShopData(updatedData);
@@ -61,6 +80,12 @@ const Shoptable = () => {
       className=""
       style={{ width: "1350px", marginLeft: "80px", marginBottom: "80px" }}
     >
+    <DeleteModal
+        isOpen={deleteModal}
+        toggle={() => setDeleteModal(!deleteModal)}
+        onDelete={handleDeleteOrder}
+      />
+
       <div className="row" style={{ marginTop: "80px" }}>
         <div className="col-lg-12">
           <div className="shadow-sm">
@@ -119,175 +144,74 @@ const Shoptable = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Chiken</td>
-                      <td>200</td>
-                      <td>abc</td>
-                      <td>Chiken</td>
-                      <td>200</td>
-                      <td>abc</td>
-                      <td>
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ReGjnihI1IwgIL8_KJRWOff8lZWFlJb7xg&s"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
+  {shopData.map((shop, index) => (
+    <tr key={shop.id || index}>
+      <td>{index + 1}</td>
+      <td>{shop.shopName}</td>
+      <td>{shop.shopLocation}</td>
+      <td>{shop.address}</td>
+      <td>{shop.pincode}</td>
+      <td>{shop.mobileNumber}</td>
+      <td>{shop.emailAddress}</td>
+      <td>
+        <img
+         src={"http://localhost:5001/uploads/shop/" + shop.shopImage}
+          alt={shop.name}
+          style={{
+            width: "50px",
+            height: "50px",
+            objectFit: "cover",
+          }}
+        />
+      </td>
+      <td className="d-flex gap-2" style={{ border: "none" }}>
+        <span onClick={() => toggleViewModal(shop)}>
+          <i
+            className="ri-eye-line"
+            style={{
+              fontSize: "1.2rem",
+              textDecoration: "none",
+              border: "none",
+              cursor: "pointer",
+            }}
+          ></i>
+        </span>
+        <ShopviewModel
+          isOpen={viewModal}
+          toggle={toggleViewModal}
+          shop={selectedShop}
+        />
+        <span onClick={() => toggleEditModal(shop)}>
+          <i
+            className="ri-edit-line"
+            style={{
+              fontSize: "1.2rem",
+              color: "green",
+              cursor: "pointer",
+            }}
+          ></i>
+        </span>
+        <ShopEditModel
+          isOpen={editModal}
+          toggle={toggleEditModal}
+          initialData={shop}
+          onSave={handleSave}
+        />
+        <span onClick={() => setDeleteModal(shop.id)}>
+          <i
+            className="ri-delete-bin-line"
+            style={{
+              fontSize: "1.2rem",
+              color: "red",
+              cursor: "pointer",
+            }}
+          ></i>
+        </span>
+      </td>
+    </tr>
+  ))}
+</tbody>
 
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span onClick={toggleEditModal}>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              cursor: "pointer", // Add cursor pointer for better UX
-                            }}
-                          ></i>
-                        </span>
-                        <ShopEditModel
-                          isOpen={editModal}
-                          toggle={toggleEditModal}
-                          initialData={shopData}
-                          onSave={handleSave}
-                        />
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Mutton</td>
-                      <td>100</td>
-                      <td>abc</td>
-                      <td>Chiken</td>
-                      <td>200</td>
-                      <td>abc</td>
-                      <td>
-                        <img
-                          src="https://i0.wp.com/legpiece.in/wp-content/uploads/2021/05/Mutton-Curry-Cut.jpg?fit=640%2C640&ssl=1"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Fish</td>
-                      <td>100</td>
-                      <td>abc</td>
-                      <td>Chiken</td>
-                      <td>200</td>
-                      <td>abc</td>
-                      <td>
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDVW2TRmrDC5HRAmDcluJZMvUitjSzIiXJ9A&s"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
                 </table>
               </div>
             </div>
@@ -441,7 +365,7 @@ const Shoptable = () => {
         </ModalBody>
       </Modal>
 
-      <Modal isOpen={detailsModal} toggle={toggleDetailsModal}>
+      {/* <Modal isOpen={detailsModal} toggle={toggleDetailsModal}>
         <ModalHeader toggle={toggleDetailsModal}>
           {selectedShop ? selectedShop.shopName : "Shop Details"}
         </ModalHeader>
@@ -462,7 +386,10 @@ const Shoptable = () => {
             "No details available."
           )}
         </ModalBody>
-      </Modal>
+      </Modal> */}
+
+
+      
     </div>
   );
 };

@@ -1,25 +1,13 @@
-// EditModal.js
-import React from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "react-bootstrap";
-import "./ShopEditModel.css"; // Import the CSS file
 
-const ShopEditModel = ({ isOpen, toggle, initialData, onSave }) => {
-  const [formData, setFormData] = React.useState(initialData);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+import React from 'react'
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formData); // Call the save function with the updated data
-    toggle(); // Close the modal
-  };
-
+const ShopviewModel = ({ isOpen, toggle, shop }) => {
   return (
-    <Modal show={isOpen} toggle={toggle} size="lg">
-      <ModalHeader toggle={toggle} style={{fontWeight:'bold'}}>Shop Edit Modal</ModalHeader>
+    <div>
+        <Modal isOpen={isOpen} toggle={toggle} size='lg'>
+      <ModalHeader toggle={toggle}>Shop Details</ModalHeader>
       <ModalBody>
         <form
           className="shopform"
@@ -144,7 +132,7 @@ const ShopEditModel = ({ isOpen, toggle, initialData, onSave }) => {
               </button>
             </div>
             <div className="form-group col-md-6 custom-input">
-              <button
+              {/* <button
                 type="submit"
                 className="submit-button"
                 style={{
@@ -153,8 +141,8 @@ const ShopEditModel = ({ isOpen, toggle, initialData, onSave }) => {
                   fontWeight: "bold",
                 }}
               >
-                Update
-              </button>
+                Submit
+              </button> */}
             </div>
           </div>
           {/* <button type="submit" className="submit-button">
@@ -162,8 +150,12 @@ const ShopEditModel = ({ isOpen, toggle, initialData, onSave }) => {
   </button> */}
         </form>
       </ModalBody>
+      <ModalFooter>
+        {/* <Button color="secondary" onClick={toggle}>Close</Button> */}
+      </ModalFooter>
     </Modal>
-  );
-};
+    </div>
+  )
+}
 
-export default ShopEditModel;
+export default ShopviewModel

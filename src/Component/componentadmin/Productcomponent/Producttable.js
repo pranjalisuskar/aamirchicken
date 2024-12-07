@@ -10,20 +10,38 @@ import {
   ModalBody,
   Row,
 } from "reactstrap";
+import Productedit from "./Productedit";
+import ProductviewModal from "./ProductviewModal";
+
+import DeleteModal from "../shopcomponent/Common/DeleteModal";
 
 const Producttable = () => {
-  const [shopData, setShopData] = useState([]);
   const [addModal, setAddModal] = useState(false);
   const [detailsModal, setDetailsModal] = useState(false);
-  const [selectedShop, setSelectedShop] = useState(null);
-  // const categories = ["Chicken", "Mutton", "Fish", "Egg"];
+  const [viewModal, setViewModal] = useState(false); // New state for view modal
+  const [selectedProduct, setSelectedProduct] = useState(null); // State for selected product
+  const [shopData, setShopData] = useState([]);
+  const [editModal, setEditModal] = useState(false);
 
+  const toggleEditModal = () => setEditModal((prev) => !prev);
   const toggleAddModal = () => setAddModal((prev) => !prev);
   const toggleDetailsModal = () => setDetailsModal((prev) => !prev);
+  const toggleViewModal = () => setViewModal((prev) => !prev); // Toggle for view modal
 
-  const handleRowClick = (shop) => {
-    setSelectedShop(shop);
-    toggleDetailsModal();
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const handleDeleteOrder = () => {
+    console.log("Item deleted successfully");
+    setDeleteModal(false); // Close the modal after deletion
+  };
+
+  const handleEditClick = (product) => {
+    toggleEditModal();
+  };
+
+  const handleViewClick = (product) => {
+    setSelectedProduct(product); // Set selected product for viewing
+    toggleViewModal(); // Open the product view modal
   };
 
   useEffect(() => {
@@ -40,35 +58,23 @@ const Producttable = () => {
   }, []);
 
   const categories = ["Chicken", "Mutton", "Fish", "Egg"];
+
   return (
-    <div
-      className=""
-      style={{ width: "1350px", marginLeft: "80px", marginBottom: "80px" }}
-    >
+    <div style={{ width: "1350px", marginLeft: "80px", marginBottom: "80px" }}>
+      
       <div className="row" style={{ marginTop: "80px" }}>
         <div className="col-lg-12">
           <div className="shadow-sm">
             <CardHeader className="bg-danger text-white rounded">
-              <Row
-                className="gy-3 align-items-center"
-                style={{ backgroundColor: "#9a292f" }}
-              >
+              <Row className="gy-3 align-items-center" style={{ backgroundColor: "#9a292f" }}>
                 <Col>
-                  <h5
-                    className="mb-0"
-                    style={{
-                      color: "white",
-                      fontWeight: "bold",
-                      marginBottom: "5px",
-                      marginLeft: "5px",
-                    }}
-                  >
+                  <h5 className="mb-0" style={{ color: "white", fontWeight: "bold", marginBottom: "5px", marginLeft: "5px" }}>
                     Product List
                   </h5>
                 </Col>
                 <Col xs={12} sm={6} className="text-end">
                   <button
-                    className="btn btn-light btn-sm "
+                    className="btn btn-light btn-sm"
                     onClick={toggleAddModal}
                     style={{
                       marginBottom: "10px",
@@ -77,18 +83,14 @@ const Producttable = () => {
                       color: "#9a292f",
                     }}
                   >
-                    <i className="ri-add-line" style={{ color: "#9a292f" }}></i>{" "}
-                    Add Product
+                    <i className="ri-add-line" style={{ color: "#9a292f" }}></i> Add Product
                   </button>
                 </Col>
               </Row>
             </CardHeader>
             <div>
               <div className="table-responsive">
-                <table
-                  className="table align-middle table-hover table-striped"
-                  style={{ width: "1350px" }}
-                >
+                <table className="table align-middle table-hover table-striped" style={{ width: "1350px" }}>
                   <thead>
                     <tr>
                       <th>Sr No</th>
@@ -100,443 +102,200 @@ const Producttable = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Chiken</td>
-                      <td>200</td>
-                      <td>abc</td>
-                      <td>
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ReGjnihI1IwgIL8_KJRWOff8lZWFlJb7xg&s"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
-
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
+                    {shopData.map((product, index) => (
+                      <tr key={product.id}>
+                        <td>{index + 1}</td>
+                        <td>{product.name}</td>
+                        <td>{product.price}</td>
+                        <td>{product.category}</td>
+                        <td>
+                          <img
+                            src={product.image}
+                            alt={product.name}
                             style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
+                              width: "50px",
+                              height: "50px",
+                              objectFit: "cover",
                             }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Mutton</td>
-                      <td>100</td>
-                      <td>abc</td>
-                      <td>
-                        <img
-                          src="https://i0.wp.com/legpiece.in/wp-content/uploads/2021/05/Mutton-Curry-Cut.jpg?fit=640%2C640&ssl=1"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Fish</td>
-                      <td>100</td>
-                      <td>abc</td>
-                      <td>
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDVW2TRmrDC5HRAmDcluJZMvUitjSzIiXJ9A&s"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
-                    <tr style={{ border: "none" }}>
-                      <td style={{ border: "none" }}>4</td>
-                      <td style={{ border: "none" }}>Eggs</td>
-                      <td style={{ border: "none" }}>100</td>
-                      <td style={{ border: "none" }}>abc</td>
-                      <td style={{ border: "none" }}>
-                        <img
-                          src="https://media.post.rvohealth.io/wp-content/uploads/2020/09/health-benefits-of-eggs-732x549-thumbnail-732x549.jpg"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
-                    <tr style={{ border: "none" }}>
-                      <td style={{ border: "none" }}>5</td>
-                      <td style={{ border: "none" }}>Chiken</td>
-                      <td style={{ border: "none" }}>100</td>
-                      <td style={{ border: "none" }}>abc</td>
-                      <td style={{ border: "none" }}>
-                        <img
-                          src="https://img.freepik.com/premium-photo/fried-chicken-legs-with-lemon-parsley_266870-45.jpg"
-                          alt="Image description"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </td>
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                    </tr>
+                          />
+                        </td>
+                        <td className="d-flex gap-2">
+                          <span>
+                            <i
+                              className="ri-eye-line"
+                              style={{ fontSize: "1.2rem" }}
+                              onClick={() => handleViewClick(product)} // Show view modal when clicked
+                            ></i>
+                          </span>
+                          <span>
+                            <i
+                              className="ri-edit-line text-success"
+                              style={{ fontSize: "1.2rem" }}
+                              onClick={() => handleEditClick(product)}
+                            ></i>
+                          </span>
+                          <span onClick={() => setDeleteModal(true)}>
+                            <i
+                              className="ri-delete-bin-line text-danger"
+                              style={{ fontSize: "1.2rem" }}
+                              // onClick={() => handleDeleteClick(product.id)}
+                            ></i>
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
+
+                <DeleteModal
+        isOpen={deleteModal}
+        toggle={() => setDeleteModal(!deleteModal)}
+        onDelete={handleDeleteOrder}
+      />
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Add Product Modal */}
       <Modal isOpen={addModal} toggle={toggleAddModal} size="lg">
         <ModalHeader toggle={toggleAddModal} className="modal-header">
           Add Product
         </ModalHeader>
         <ModalBody>
-          <form className="shopform" encType="multipart/form-data">
-            <div className="row">
-              {/* Shop Selection */}
-              <div
-                className="form-group col-md-6 custom-input"
-                style={{ position: "relative" }}
-              >
-                <select
-                  className="form-control triangle-input"
-                  name="category"
-                  // value={productData.category}
-                  // onChange={onInputChange}
-                  style={{
-                    fontWeight: "bold",
-                    // width: "50%",
-                    padding: "10px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    appearance: "none", // Remove default dropdown styling
-                    WebkitAppearance: "none", // For Safari
-                    MozAppearance: "none", // For Firefox
-                    background: "white",
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "right 10px center",
-                    backgroundSize: "25px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <option>Select Shop</option>
-                  <option>Cake Shop</option>
-                  <option>Aamir Shop</option>
-                </select>
-              </div>
+        <form className="shopform" encType="multipart/form-data">
+        <div className="row">
+          <div className="form-group col-md-6 col-sm-12 custom-input">
+            <select
+              className="form-control"
+              name="category"
+              style={{
+                fontWeight: "bold",
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                appearance: "none",
+                background: "white",
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 10px center",
+                backgroundSize: "25px",
+                cursor: "pointer",
+              }}
+            >
+              <option value="" disabled>
+                Select Shop
+              </option>
+              <option>Chicken Shop</option>
+            </select>
+          </div>
 
-              {/* Product Name */}
-              <div className="form-group col-md-6 custom-input">
-                <input
-                  className="form-control styled-input"
-                  type="text"
-                  name="productName"
-                  placeholder=" Enter Product Name"
-                  style={{ fontWeight: "bold" }}
-                />
-              </div>
+          <div className="form-group col-md-6 col-sm-12">
+            <input
+              className="form-control"
+              type="text"
+              name="productName"
+              placeholder="Enter Product Name"
+              style={{ fontWeight: "bold" }}
+            />
+          </div>
 
-              {/* Product Price */}
-              <div className="form-group col-md-6 custom-input">
-                <input
-                  className="form-control styled-input"
-                  type="text"
-                  name="price"
-                  placeholder="Enter Product Price"
-                  style={{ fontWeight: "bold", marginLeft: "30px" }}
-                />
-              </div>
+          <div className="form-group col-md-6 col-sm-12 custom-input">
+            <select
+              className="form-control"
+              name="productCategory"
+              style={{
+                fontWeight: "bold",
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                appearance: "none",
+                background: "white",
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 10px center",
+                backgroundSize: "25px",
+                cursor: "pointer",
+              }}
+            >
+              <option value="" disabled>
+                Select Product Category
+              </option>
+              <option>Example Category</option>
+            </select>
+          </div>
 
-              {/* Category Selection */}
-              <div
-                className="form-group col-md-6 custom-input"
-                style={{ position: "relative" }}
-              >
-                <select
-                  className="form-control triangle-input"
-                  name="category"
-                  // value={productData.category}
-                  // onChange={onInputChange}
-                  style={{
-                    fontWeight: "bold",
+          <div className="form-group col-md-6 col-sm-12">
+            <input
+              className="form-control"
+              type="text"
+              name="price"
+              placeholder="Enter Product Price"
+              style={{ fontWeight: "bold" }}
+            />
+          </div>
 
-                    marginRight: "50px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    appearance: "none",
-                    WebkitAppearance: "none",
-                    MozAppearance: "none",
-                    background: "white",
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "right 10px center",
-                    backgroundSize: "25px",
-                    cursor: "pointer",
-                    marginLeft: "5px",
-                  }}
-                >
-                  <option>Select Product Category</option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="form-group col-md-6 col-sm-12 custom-input">
+            <button
+              type="button"
+              className="btn btn-primary w-100"
+              style={{
+                backgroundColor: "#7a2226",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
+              Select Product Images
+            </button>
+            <input
+              type="file"
+              id="shopImages"
+              name="image_url"
+              multiple
+              className="form-control-file"
+              style={{ display: "none" }}
+            />
+          </div>
 
-              {/* Image Upload */}
-              <div className="form-group col-md-6 custom-input">
-                {/* Hidden file input field */}
-                <input
-                  type="file"
-                  id="shopImages"
-                  style={{ display: "none" }}
-                  accept="image/*" // Ensures only image files can be selected
-                  onChange={(e) => {
-                    const files = e.target.files;
-                    if (files && files.length > 0) {
-                      console.log("Selected files:", files); // Handle the selected files
-                    }
-                  }}
-                />
-
-                {/* Visible button to trigger file input */}
-                <button
-                  type="button"
-                  className="choose-images-button"
-                  onClick={() => document.getElementById("shopImages").click()}
-                  style={{
-                    width: "300px",
-                    marginLeft: "5px",
-                    backgroundColor: "#9a292f",
-                    borderRadius: "5px",
-                    marginLeft: "25px",
-                    height: "45px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Choose Images
-                </button>
-              </div>
-              <div className="form-group col-md-6 custom-input">
-                <button
-                  type="submit"
-                  className="submit-button"
-                  style={{
-                    width: "300px",
-                    marginLeft: "5px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
-          </form>
+          <div className="form-group col-md-6 col-sm-12">
+            <button
+              type="submit"
+              className="btn btn-success w-100"
+              style={{
+                fontWeight: "bold",
+                backgroundColor: "#9a292f",
+                color: "#fff",
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
         </ModalBody>
       </Modal>
 
-      <Modal isOpen={detailsModal} toggle={toggleDetailsModal}>
-        <ModalHeader toggle={toggleDetailsModal}>
-          {selectedShop ? selectedShop.shopName : "Shop Details"}
-        </ModalHeader>
-        <ModalBody>
-          {selectedShop ? (
-            <>
-              <p>
-                <strong>Location:</strong> {selectedShop.shopLocation}
-              </p>
-              <p>
-                <strong>Address:</strong> {selectedShop.address}
-              </p>
-              <p>
-                <strong>Pincode:</strong> {selectedShop.pincode}
-              </p>
-            </>
-          ) : (
-            "No details available."
-          )}
-        </ModalBody>
-      </Modal>
+      {/* Product View Modal */}
+      <ProductviewModal
+        isOpen={viewModal}
+        toggle={toggleViewModal}
+        product={selectedProduct} // Pass selected product to the modal
+      />
+
+      {/* Edit Modal */}
+      <Productedit
+        isOpen={editModal}
+        toggle={toggleEditModal}
+        // initialData={Product}
+        onSave={(updatedProduct) => {
+          const updatedData = shopData.map((product) =>
+            product.id === updatedProduct.id ? updatedProduct : product
+          );
+          setShopData(updatedData);
+          toggleEditModal();
+        }}
+      />
     </div>
   );
 };
