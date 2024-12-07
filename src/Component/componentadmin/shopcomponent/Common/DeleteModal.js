@@ -3,7 +3,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 
 const DeleteModal = ({ isOpen, toggle, onDelete }) => {
   return (
-    <Modal isOpen={isOpen} toggle={toggle}>
+    <Modal isOpen={isOpen} toggle={toggle} centered>
       <ModalHeader toggle={toggle}>Confirm Deletion</ModalHeader>
       <ModalBody>Are you sure you want to delete this item?</ModalBody>
       <ModalFooter>

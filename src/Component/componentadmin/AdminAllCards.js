@@ -33,9 +33,11 @@ const Content = () => {
       {/* Dashboard Cards */}
       <div className="row mt-4">
         <div className="col-md-3 col-sm-6 mb-3">
+        <Link to='/customerlist'  style={{ textDecoration: "none", color: "inherit" }}>
           <div className="card p-3">
             <div className="d-flex align-items-center">
               {/* <i class="fas fa-tasks fa-2x mr-3"></i> */}
+             
               <i
                 className="fas fa-tachometer-alt fa-2x mr-3"
                 style={{ color: "#9a292f", fontSize: 30 }}
@@ -44,8 +46,11 @@ const Content = () => {
                 <h6 style={{ fontWeight: "bold", fontSize: 18 }}>Customer Management</h6>
                 <p>View Your Customer.</p>
               </div>
+              
+
             </div>
           </div>
+          </Link>
         </div>
         <div className="col-md-3 col-sm-6 mb-3">
           <div className="card p-3">

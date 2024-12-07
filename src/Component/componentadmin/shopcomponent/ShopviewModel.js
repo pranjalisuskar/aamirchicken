@@ -6,7 +6,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 const ShopviewModel = ({ isOpen, toggle, shop }) => {
   return (
     <div>
-        <Modal isOpen={isOpen} toggle={toggle} size='lg'>
+        <Modal isOpen={isOpen} toggle={toggle} size='lg' centered>
       <ModalHeader toggle={toggle}>Shop Details</ModalHeader>
       <ModalBody>
         <form

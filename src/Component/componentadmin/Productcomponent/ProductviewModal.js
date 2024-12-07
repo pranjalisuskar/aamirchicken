@@ -5,7 +5,7 @@ const ProductviewModal =({ isOpen, toggle, shop })=> {
     
   return (
     <div>
-            <Modal isOpen={isOpen} toggle={toggle} size='lg'>
+            <Modal isOpen={isOpen} toggle={toggle} size='lg' centered>
       <ModalHeader toggle={toggle}>Product Details</ModalHeader>
       <ModalBody>
       <form className="shopform" encType="multipart/form-data">

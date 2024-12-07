@@ -17,7 +17,7 @@ const Productedit =  ({ isOpen, toggle, initialData, onSave }) => {
   };
   return (
     <div>
-  <Modal show={isOpen} toggle={toggle} size="lg" className="responsive-modal">
+  <Modal show={isOpen} toggle={toggle} size="lg" className="responsive-modal" centered>
     <ModalHeader toggle={toggle}  style={{ fontWeight: "bold" }}>Product Edit Modal</ModalHeader>
     <ModalBody>
       <form className="shopform" encType="multipart/form-data">

@@ -236,3 +236,52 @@ height: 50px;
 }
 
 
+
+
+/* Ensure icons are spaced and stacked properly on smaller screens */
+@media (max-width: 768px) {
+  .user-menu {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .d-flex {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .me-3 {
+    margin-right: 10px !important;
+  }
+
+  .dropdown-menu {
+    position: static !important; /* Adjust dropdown for mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .me-3 {
+    margin-bottom: 10px;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+}
+
+
+.noyt{
+  margin-right: 250px;
+}
+
+/* .view{
+  width: 420px;
+  background-color: #e4e3e3;
+} */
+
+

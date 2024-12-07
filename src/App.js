@@ -19,6 +19,7 @@ import DeliveryboyForm from './Component/componentadmin/Delivery-Boy/Deliveryboy
 import TotalOrdersForm from './Component/componentadmin/TotalOrdersForm';
 import AddToCartPage from './AddToCartPage';
 import ShopEditModel from './Component/componentadmin/shopcomponent/ShopEditModel';
+import Customerlist from './Component/componentadmin/Customermanagement/Customerlist';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route path='/TotalOrdersForm' element={<Master Rcf={TotalOrdersForm}/>}/>
         <Route path='/AddToCartPage' element={<Master Rcf={AddToCartPage}/>}/>
         <Route path='/ShopEditModel' element={<Master Rcf={ShopEditModel}/>}/>
+        <Route path='/customerlist' element={<Master Rcf={Customerlist}/>}/>
 
 
 
