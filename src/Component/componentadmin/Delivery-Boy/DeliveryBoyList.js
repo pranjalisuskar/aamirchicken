@@ -1,13 +1,34 @@
 import React, { useState } from "react";
-import { CardHeader, Col, Modal, ModalBody, ModalHeader, Row } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "remixicon/fonts/remixicon.css";
+import DeliveryboyEdit from "./DeliveryboyEdit";
+import Deliveryboyviewmodal from "./Deliveryboyviewmodal";
+import DeleteModal from "../shopcomponent/Common/DeleteModal";
 
 const DeliveryBoyList = () => {
   const [addModal, setAddModal] = useState(false);
-  const [detailsModal, setDetailsModal] = useState(false);
-  const [viewModal, setViewModal] = useState(false); // New state for view modal
-  const [selectedProduct, setSelectedProduct] = useState(null); // State for selected product
-  const [shopData, setShopData] = useState([]);
+
+  const toggleAddModal = () => setAddModal((prev) => !prev);
+
   const [editModal, setEditModal] = useState(false);
+  const toggleEditModal = () => {
+    // setSelectedShop(shop);
+    setEditModal((prev) => !prev);
+  };
+  const handleSave = (updatedData) => {
+    // setShopData(updatedData);
+    console.log("Updated shop data:", updatedData); // Handle the updated data (e.g., save to server)
+  };
+
+  const [viewModal, setToggleViewModal] = useState(false);
+
+  // Toggle View Modal
+  const toggleViewModal = (shop) => {
+    // setSelectedShop(shop); // Set the selected shop for the modal
+    setToggleViewModal((prev) => !prev);
+  };
+
   const [deleteModal, setDeleteModal] = useState(false);
 
   const handleDeleteOrder = () => {
@@ -15,79 +36,68 @@ const DeliveryBoyList = () => {
     setDeleteModal(false); // Close the modal after deletion
   };
 
-  const handleEditClick = (product) => {
-    toggleEditModal();
-  };
-
-  const handleViewClick = (product) => {
-    setSelectedProduct(product); // Set selected product for viewing
-    toggleViewModal(); // Open the product view modal
-  };
-
-  const toggleEditModal = () => setEditModal((prev) => !prev);
-  const toggleAddModal = () => setAddModal((prev) => !prev);
-  const toggleDetailsModal = () => setDetailsModal((prev) => !prev);
-  const toggleViewModal = () => setViewModal((prev) => !prev); // Toggle for view modal
-
   return (
-    <div
-    className=""
-    style={{ width: "1350px", marginLeft: "80px", marginBottom: "80px" }}
-  >
-  {/* <DeleteModal
-      isOpen={deleteModal}
-      toggle={() => setDeleteModal(!deleteModal)}
-      onDelete={handleDeleteOrder}
-    /> */}
-
-    <div className="row" style={{ marginTop: "80px" }}>
-      <div className="col-lg-12">
-        <div className="shadow-sm">
-          <CardHeader className="bg-danger text-white rounded">
-            <Row
-              className="gy-3 align-items-center"
-              style={{ backgroundColor: "#9a292f" }}
+    <div className="container-fluid" style={{ marginBottom: "80px" }}>
+      <DeleteModal
+        isOpen={deleteModal}
+        toggle={() => setDeleteModal(!deleteModal)}
+        onDelete={handleDeleteOrder}
+      />
+      <div className="row mt-5 px-2">
+        <div className="col-12">
+          <div className="shadow-sm">
+            <div
+              className="card-header bg-danger text-white rounded d-flex justify-content-between align-items-center"
+              style={{ backgroundColor: "#9a292f" ,height:"60px"}}
             >
-              <Col>
-                <h5
-                  className="mb-0"
-                  style={{
-                    color: "white",
-                    fontWeight: "bold",
-                    marginBottom: "5px",
-                    marginLeft: "5px",
-                  }}
-                >
-                  Total Delivery-Boy List
-                </h5>
-              </Col>
-              <Col xs={12} sm={6} className="text-end">
-                <button
-                  className="btn btn-light btn-sm "
-                  onClick={toggleAddModal}
-                  style={{
-                    marginBottom: "10px",
-                    width: "170px",
-                    marginRight: "5px",
-                    color: "#9a292f",
-                  }}
-                >
-                  <i className="ri-add-line" style={{ color: "#9a292f" }}></i>{" "}
-                  Add Delivery-Boy
-                </button>
-              </Col>
-            </Row>
-          </CardHeader>
-          <div>
+              <h5 className="mb-0" style={{ fontWeight: "bold" ,color:"white" ,marginLeft:"3%"}}>
+                Total Delivery-Boy List
+              </h5>
+              <Button
+  className="btn-light btn-sm responsive-button"
+  onClick={toggleAddModal}
+  style={{
+    color: "#9a292f",
+    fontWeight: "bold",
+    marginRight: "3%",
+  }}
+>
+  <i className="ri-add-line" style={{ color: "#9a292f" }}></i> Add Delivery-Boy
+</Button>
+
+<style jsx>{`
+  .responsive-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  @media (max-width: 768px) {
+    /* Tablet View */
+    .responsive-button {
+      font-size: 12px;
+      padding: 6px 12px;
+      margin-right: 2%;
+    }
+  }
+
+  @media (max-width: 576px) {
+    /* Mobile View */
+    .responsive-button {
+      font-size: 10px;
+      padding: 4px 8px;
+      margin-right: 1%;
+    }
+  }
+`}</style>
+
+            </div>
+
             <div className="table-responsive">
-              <table
-                className="table align-middle table-hover table-striped"
-                style={{ width: "1350px" }}
-              >
+              <table className="table align-middle table-hover table-striped">
                 <thead>
                   <tr>
                     <th>Sr No</th>
-                    <th> Full Name</th>
+                    <th>Full Name</th>
                     <th>Vehicle Type</th>
                     <th>Vehicle Number</th>
                     <th>Pincode</th>
@@ -99,115 +109,70 @@ const DeliveryBoyList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Harshala</td>
-                      <td>Bus</td>
-                      <td>2890</td>
-                      <td>413106</td>
-                      <td>8010333958</td>
-                      <td>harshalachavan@gmail.com</td>
-                      <td>8010333958</td>
-                      <td>3456</td>
+                  <tr>
+                    <td>1</td>
+                    <td>Harshala</td>
+                    <td>Bus</td>
+                    <td>2890</td>
+                    <td>413106</td>
+                    <td>8010333958</td>
+                    <td>harshalachavan@gmail.com</td>
+                    <td>8010333958</td>
+                    <td>3456</td>
+                    <td className="d-flex gap-2">
+                    <span onClick={() => toggleViewModal()}>
+          <i
+            className="ri-eye-line"
+            style={{
+              fontSize: "1.2rem",
+              textDecoration: "none",
+              border: "none",
+              cursor: "pointer",
+            }}
+          ></i>
+        </span>
 
-
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                   
-                    </tr>
-                  
-                    <tr>
-                      <td>2</td>
-                      <td>Harshala</td>
-                      <td>Bus</td>
-                      <td>2890</td>
-                      <td>413106</td>
-                      <td>8010333958</td>
-                      <td>harshalachavan@gmail.com</td>
-                      <td>8010333958</td>
-                      <td>3456</td>
-
-
-                      <td className="d-flex gap-2" style={{ border: "none" }}>
-                        <span>
-                          <i
-                            className="ri-eye-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-edit-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "green",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                        <span>
-                          <i
-                            className="ri-delete-bin-line"
-                            style={{
-                              fontSize: "1.2rem",
-                              color: "red",
-                              textDecoration: "none",
-                              border: "none",
-                            }}
-                          ></i>
-                        </span>
-                      </td>
-                   
-                    </tr>
-                  </tbody>
-
+        <Deliveryboyviewmodal
+          isOpen={viewModal}
+          toggle={toggleViewModal}
+          // shop={selectedShop}
+        />
+                      <span onClick={() => toggleEditModal()}>
+                            <i
+                              className="ri-edit-line"
+                              style={{
+                                fontSize: "1.2rem",
+                                color: "green",
+                                cursor: "pointer",
+                              }}
+                            ></i>
+                          </span>
+                       <DeliveryboyEdit
+                            isOpen={editModal}
+                            toggle={toggleEditModal}
+                            // initialData={shop}
+                            onSave={handleSave}
+                          />
+                      <i
+                        className="ri-delete-bin-line"
+                        style={{ fontSize: "1.2rem", color: "red" }}
+                        onClick={() => setDeleteModal(true)}
+                      ></i>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <Modal isOpen={addModal} toggle={toggleAddModal} size="lg">
-      <ModalHeader toggle={toggleAddModal}>Add TrackOrder</ModalHeader>
-      <ModalBody>
+      {/* Add Delivery-Boy Modal */}
+      <Modal show={addModal} onHide={toggleAddModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Add Delivery-Boy</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
         <form
           className="shopform"
           encType="multipart/form-data"
@@ -241,7 +206,7 @@ const DeliveryBoyList = () => {
                   cursor: "pointer",
                 }}
               >
-                <option>Select Shop</option>
+                <option>Select Vehicle Type</option>
                 <option>Cake Shop</option>
                 <option>Aamir Shop</option>
               </select>
@@ -251,19 +216,19 @@ const DeliveryBoyList = () => {
                 className="form-control triangle-input"
                 type="text"
                 name="price"
-                placeholder="Enter Shop Location"
+                placeholder="Enter Shop Full Name"
                 style={{ fontWeight: "bold" }}
               />
             </div>
-            <div className="form-group col-md-6 custom-input">
+            {/* <div className="form-group col-md-6 custom-input">
               <input
                 className="form-control triangle-input"
                 type="text"
                 name="category"
-                placeholder="Shop Address"
+                placeholder="Enter "
                 style={{ fontWeight: "bold", marginLeft: "30px" }}
               />
-            </div>
+            </div> */}
             <div className="form-group col-md-6 custom-input">
               <input
                 className="form-control triangle-input"
@@ -278,7 +243,7 @@ const DeliveryBoyList = () => {
                 className="form-control triangle-input"
                 type="tel"
                 name="category"
-                placeholder="Enter Mobile Number"
+                placeholder="Enter Contact Number"
                 pattern="[0-9]{10}"
                 style={{ fontWeight: "bold", marginLeft: "30px" }}
                 maxLength="10" // Restrict input length to 10 digits
@@ -299,45 +264,39 @@ const DeliveryBoyList = () => {
             </div>
             <div className="form-group col-md-6 custom-input">
               {/* Hidden file input field */}
+             
               <input
-                type="file"
-                id="shopImages"
-                style={{ display: "none" }}
-                accept="image/*" // Ensures only image files can be selected
-                onChange={(e) => {
-                  const files = e.target.files;
-                  if (files && files.length > 0) {
-                    console.log("Selected files:", files); // Handle the selected files
-                  }
-                }}
+                className="form-control triangle-input"
+                type="text"
+                name="category"
+                placeholder="Enter National Id/Passport"
+                style={{ fontWeight: "bold" }}
               />
-
               {/* Visible button to trigger file input */}
-              <button
-                type="button"
-                className="choose-images-button"
-                onClick={() => document.getElementById("shopImages").click()}
-                style={{
-                  width: "300px",
-                  marginLeft: "5px",
-                  backgroundColor: "#9a292f",
-                  borderRadius: "5px",
-                  marginLeft: "30px",
-                  height: "45px",
-                  fontWeight: "bold",
-                }}
-              >
-                Choose Images
-              </button>
+            
             </div>
             <div className="form-group col-md-6 custom-input">
+              {/* Hidden file input field */}
+             
+              <input
+                className="form-control triangle-input"
+                type="text"
+                name="category"
+                placeholder="Enter Emergency Number"
+                style={{ fontWeight: "bold" }}
+              />
+              {/* Visible button to trigger file input */}
+             
+            </div>
+            <div className="form-group col-md-12 custom-input">
               <button
                 type="submit"
                 className="submit-button"
                 style={{
                   width: "300px",
-                  marginLeft: "5px",
+                  marginLeft: "200px",
                   fontWeight: "bold",
+                  
                 }}
               >
                 Submit
@@ -345,13 +304,12 @@ const DeliveryBoyList = () => {
             </div>
           </div>
           {/* <button type="submit" className="submit-button">
-          Submit
-        </button> */}
+    Submit
+  </button> */}
         </form>
-      </ModalBody>
-    </Modal>
-
-  </div>
+        </Modal.Body>
+      </Modal>
+    </div>
   );
 };
 

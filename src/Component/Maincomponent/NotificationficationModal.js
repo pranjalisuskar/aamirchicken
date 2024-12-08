@@ -10,60 +10,45 @@ const NotificationModal = ({ isOpen, toggle }) => {
   };
   return (
     <Modal isOpen={isOpen} toggle={toggle} centered>
-      <ModalHeader className="text-center" toggle={toggle}>
-        <span style={styles.modalHeaderText}>Notifications</span>
-      </ModalHeader>
-      <ModalBody>
-        <div className="notification-item" style={styles.notificationItem}>
-          <p style={styles.text}>
-            A new order "<strong>AM001</strong>" has been placed by{" "}
-            <strong>[Harshala Chavan]</strong>. Please ensure smooth processing.
-          </p>
-          <Row>
-            <Col xs={6}>
-              <Button style={styles.button} color="light">
-                Accept
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button style={styles.button} color="light">
-                Reject
-              </Button>
-            </Col>
-          </Row>
-        </div>
-
-        {/* <div className="notification-item" style={styles.notificationItem}>
-          <p style={styles.text}>
-            A new order "<strong>AM002</strong>" has been placed by{" "}
-            <strong>[Harshala Chavan]</strong>. Please ensure smooth processing.
-          </p>
-          <Row>
-            <Col xs={6}>
-              <Button style={styles.button} color="light">
-                Accept
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button style={styles.button} color="light">
-                Reject
-              </Button>
-            </Col>
-          </Row>
-        </div> */}
-
-        <div style={styles.viewAllContainer}>
+    <ModalHeader className="text-center" toggle={toggle}>
+      <span style={styles.modalHeaderText}>Notifications</span>
+    </ModalHeader>
+    <ModalBody>
+      <div className="notification-item" style={styles.notificationItem}>
+        <p style={styles.text}>
+          A new order "<strong>AM001</strong>" has been placed by{" "}
+          <strong>[Harshala Chavan]</strong>. Please ensure smooth processing.
+        </p>
+        <Row>
+          <Col xs={6}>
+            <Button style={styles.button} color="light">
+              Accept
+            </Button>
+          </Col>
+          <Col xs={6}>
+            <Button style={styles.button} color="light">
+              Reject
+            </Button>
+          </Col>
+        </Row>
+      </div>
+  
+      <div style={styles.viewAllContainer}>
         <Button
-        style={styles.viewAllButton}
-        color="light"
-        className="view"
-        onClick={handleRedirect}
-      >
-        View All Notifications
-      </Button>
-        </div>
-      </ModalBody>
-    </Modal>
+          style={styles.viewAllButton}
+          color="light"
+          className="view"
+          onClick={() => {
+            handleRedirect();  // Your redirect function
+            toggle();           // Close the modal
+          }}
+        >
+          View All Notifications
+        </Button>
+      </div>
+    </ModalBody>
+  </Modal>
+  
   );
 };
 
