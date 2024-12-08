@@ -1,0 +1,39 @@
+@media (max-width: 768px) {
+    .custom-input {
+      margin-bottom: 15px;
+    }
+  
+    .choose-images-button {
+      font-size: 14px;
+    }
+  
+    .submit-button {
+      width: 100%;
+      font-size: 16px;
+    }
+    
+    .shopform {
+      padding: 15px;
+    }
+  
+    .modal-body {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .form-group.col-md-6 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  
+    .modal-header h5 {
+      font-size: 16px;
+    }
+    
+    .choose-images-button {
+      font-size: 12px;
+    }
+  }
+  
