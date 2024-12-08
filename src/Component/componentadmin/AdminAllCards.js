@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Content = () => {
+const Content = ({role}) => {
+  useEffect(() => {
+      console.log(role);
+  }, [role]);
+ 
+  
   return (
     <div className="content">
       {/* Top Bar */}

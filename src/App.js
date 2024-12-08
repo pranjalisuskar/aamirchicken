@@ -22,16 +22,22 @@ import ShopEditModel from './Component/componentadmin/shopcomponent/ShopEditMode
 import Customerlist from './Component/componentadmin/Customermanagement/Customerlist';
 import TrackOrderForm from './Component/componentadmin/TrackOrder/TrackOrderForm';
 import DeliveryBoyList from './Component/componentadmin/Delivery-Boy/DeliveryBoyList';
+import NotificationDetailPage from './Component/Maincomponent/NotificationDetailPage';
+import { useState } from 'react';
 
 
 function App() {
+  const [role, setRole] = useState(null);
+  const setsomethin =(set)=>{
+    setRole(set)
+  }
   return (
     <div className="App page-content">
       <BrowserRouter>
       <Routes>
         <Route path='/'element={<Master Rcf={Home} />}/>
         <Route path='/shop/:id' element={<Master Rcf={Shoponeview}/>}/>
-        <Route path='/dash' element={<Allcontent />}/>
+        <Route path='/dash' element={<Allcontent  role={role} />}/>
         {/* <Route path='/shopdash' element={<ShopCards/>}/> */}
        <Route path='/product' element={<Master Rcf={Product}/>}/>
        <Route path='/shopadd' element={<Master Rcf={Addshps}/>}/>
@@ -39,7 +45,7 @@ function App() {
         <Route path='/addproduct' element={<Master Rcf={Productadd}/>}/>
         <Route path="/product/:productId" element={< Master Rcf={Productdetails}/>} />
         <Route path='/productmaster' element={<Master Rcf={ProductMaster}/>}/>
-        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminLogin setsomethin={setsomethin}  role={role} />} />
         {/* <Route path="/shop/:id" element={<Shoponeview />} /> */}
         <Route path="/viewcart" element={< Master Rcf= {Viewcart } />}/>
         {/* <Route path='/placeorder' element={<Master Rcf={Placeorder}/>}/> */}
@@ -52,6 +58,8 @@ function App() {
         <Route path='/customerlist' element={<Master Rcf={Customerlist}/>}/>
         <Route path='/TrackOrderForm' element={<Master Rcf={TrackOrderForm}/>}/>
         <Route path='/DeliveryBoyList' element={<Master Rcf={DeliveryBoyList}/>}/>
+        <Route path='/NotificationDetailPage' element={<Master Rcf={NotificationDetailPage}/>}/>
+
 
 
 

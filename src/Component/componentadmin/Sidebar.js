@@ -1,26 +1,16 @@
 import React from 'react';
 import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-// import AddShoppingCartIcon from '@mui/icons-icons-material/AddShoppingCart';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import CancelIcon from '@mui/icons-material/Cancel';
-// import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-const Sidebar = () => {
+const Sidebar = ({role}) => {
+  console.log('====================================');
+  console.log(role);
+  console.log('====================================');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Check if screen size is small
 
@@ -32,9 +22,9 @@ const Sidebar = () => {
     </h4>
   </div>
   <nav className="nav flex-column">
-    <a className="nav-link text-white active" href="#" style={{marginRight: 10}}>
+    { role=="Admin" ?<a className="nav-link text-white active" href="#" style={{marginRight: 10}}>
       <i className="fas fa-tachometer-alt" /> Dashboard
-    </a>
+    </a>:null}
     <a className="nav-link text-white" href="#" style={{marginTop: 20}}>
       <i className="fas fa-box" /> New Order
     </a>

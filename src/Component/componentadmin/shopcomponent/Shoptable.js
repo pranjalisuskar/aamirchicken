@@ -31,7 +31,6 @@ const Shoptable = () => {
   //   toggleDetailsModal();
   // };
 
-
   const [deleteModal, setDeleteModal] = useState(false);
 
   const handleDeleteOrder = () => {
@@ -53,9 +52,8 @@ const Shoptable = () => {
   }, []);
 
   const [editModal, setEditModal] = useState(false);
-  const [viewModal,settoggleViewModal]=useState(false);
+  const [viewModal, settoggleViewModal] = useState(false);
   const [shopData, setShopData] = useState([]);
-   
 
   const [selectedShop, setSelectedShop] = useState(null);
 
@@ -63,13 +61,11 @@ const Shoptable = () => {
     setSelectedShop(shop);
     settoggleViewModal((prev) => !prev);
   };
-  
+
   const toggleEditModal = (shop) => {
     setSelectedShop(shop);
     setEditModal((prev) => !prev);
   };
-  ;
-
   const handleSave = (updatedData) => {
     setShopData(updatedData);
     console.log("Updated shop data:", updatedData); // Handle the updated data (e.g., save to server)
@@ -80,7 +76,7 @@ const Shoptable = () => {
       className=""
       style={{ width: "1350px", marginLeft: "80px", marginBottom: "80px" }}
     >
-    <DeleteModal
+      <DeleteModal
         isOpen={deleteModal}
         toggle={() => setDeleteModal(!deleteModal)}
         onDelete={handleDeleteOrder}
@@ -108,19 +104,20 @@ const Shoptable = () => {
                   </h5>
                 </Col>
                 <Col xs={12} sm={6} className="text-end">
-        <button
-          className="btn btn-light btn-sm"
-          onClick={toggleAddModal}
-          style={{
-            marginBottom: "10px",
-            width: "150px",
-            marginRight: "5px",
-            color: "#9a292f",
-          }}
-        >
-          <i className="ri-add-line" style={{ color: "#9a292f" }}></i> Add Shop
-        </button>
-      </Col>
+                  <button
+                    className="btn btn-light btn-sm"
+                    onClick={toggleAddModal}
+                    style={{
+                      marginBottom: "10px",
+                      width: "150px",
+                      marginRight: "5px",
+                      color: "#9a292f",
+                    }}
+                  >
+                    <i className="ri-add-line" style={{ color: "#9a292f" }}></i>{" "}
+                    Add Shop
+                  </button>
+                </Col>
               </Row>
             </CardHeader>
             <div>
@@ -143,74 +140,76 @@ const Shoptable = () => {
                     </tr>
                   </thead>
                   <tbody>
-  {shopData.map((shop, index) => (
-    <tr key={shop.id || index}>
-      <td>{index + 1}</td>
-      <td>{shop.shopName}</td>
-      <td>{shop.shopLocation}</td>
-      <td>{shop.address}</td>
-      <td>{shop.pincode}</td>
-      <td>{shop.mobileNumber}</td>
-      <td>{shop.emailAddress}</td>
-      <td>
-        <img
-         src={"http://localhost:5001/uploads/shop/" + shop.shopImage}
-          alt={shop.name}
-          style={{
-            width: "50px",
-            height: "50px",
-            objectFit: "cover",
-          }}
-        />
-      </td>
-      <td className="d-flex gap-2" style={{ border: "none" }}>
-        <span onClick={() => toggleViewModal(shop)}>
-          <i
-            className="ri-eye-line"
-            style={{
-              fontSize: "1.2rem",
-              textDecoration: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
-          ></i>
-        </span>
-        <ShopviewModel
-          isOpen={viewModal}
-          toggle={toggleViewModal}
-          shop={selectedShop}
-        />
-        <span onClick={() => toggleEditModal(shop)}>
-          <i
-            className="ri-edit-line"
-            style={{
-              fontSize: "1.2rem",
-              color: "green",
-              cursor: "pointer",
-            }}
-          ></i>
-        </span>
-        <ShopEditModel
-          isOpen={editModal}
-          toggle={toggleEditModal}
-          initialData={shop}
-          onSave={handleSave}
-        />
-        <span onClick={() => setDeleteModal(shop.id)}>
-          <i
-            className="ri-delete-bin-line"
-            style={{
-              fontSize: "1.2rem",
-              color: "red",
-              cursor: "pointer",
-            }}
-          ></i>
-        </span>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
+                    {shopData.map((shop, index) => (
+                      <tr key={shop.id || index}>
+                        <td>{index + 1}</td>
+                        <td>{shop.shopName}</td>
+                        <td>{shop.shopLocation}</td>
+                        <td>{shop.address}</td>
+                        <td>{shop.pincode}</td>
+                        <td>{shop.mobileNumber}</td>
+                        <td>{shop.emailAddress}</td>
+                        <td>
+                          <img
+                            src={
+                              "http://localhost:5001/uploads/shop/" +
+                              shop.shopImage
+                            }
+                            alt={shop.name}
+                            style={{
+                              width: "50px",
+                              height: "50px",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </td>
+                        <td className="d-flex gap-2" style={{ border: "none" }}>
+                          <span onClick={() => toggleViewModal(shop)}>
+                            <i
+                              className="ri-eye-line"
+                              style={{
+                                fontSize: "1.2rem",
+                                textDecoration: "none",
+                                border: "none",
+                                cursor: "pointer",
+                              }}
+                            ></i>
+                          </span>
+                          <ShopviewModel
+                            isOpen={viewModal}
+                            toggle={toggleViewModal}
+                            shop={selectedShop}
+                          />
+                          <span onClick={() => toggleEditModal(shop)}>
+                            <i
+                              className="ri-edit-line"
+                              style={{
+                                fontSize: "1.2rem",
+                                color: "green",
+                                cursor: "pointer",
+                              }}
+                            ></i>
+                          </span>
+                          <ShopEditModel
+                            isOpen={editModal}
+                            toggle={toggleEditModal}
+                            initialData={shop}
+                            onSave={handleSave}
+                          />
+                          <span onClick={() => setDeleteModal(shop.id)}>
+                            <i
+                              className="ri-delete-bin-line"
+                              style={{
+                                fontSize: "1.2rem",
+                                color: "red",
+                                cursor: "pointer",
+                              }}
+                            ></i>
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -386,9 +385,6 @@ const Shoptable = () => {
           )}
         </ModalBody>
       </Modal> */}
-
-
-      
     </div>
   );
 };

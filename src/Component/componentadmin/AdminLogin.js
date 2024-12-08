@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  // State for form fields and validation errors
+const Login = ({setsomethin,role}) => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [url, setUrl] = useState("");
   const [errors, setError] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  // Handle form submission
+  const goToUrl = (url,rolexy) => {
+    navigate(url);
+    setrolex(rolexy)
+  };
+  const setrolex=(rolex)=>{
+    setsomethin(rolex)
+  }
+  useEffect(() => {
+    if (!role) {
+      console.log("Role is not defined yet");
+      return;
+    }
+  
+    console.log("Role is defined:", role);
+    if (url) {
+      // navigate(url);
+      goToUrl(url,role)
+    }
+  }, [role, url]);
+ 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -26,8 +47,11 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        if (data.redirectUrl) {
-          navigate(data.redirectUrl); // Redirect to admin dashboard
+        if (data.redirectUrl && data.user.role) {
+          setrolex(data.user.role)
+          setUrl(data.redirectUrl)
+         
+          // Redirect to admin dashboard
         }
       } else {
         setError(data.message || "Login failed");

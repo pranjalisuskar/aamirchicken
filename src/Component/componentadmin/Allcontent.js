@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import Content from './AdminAllCards';
 import ShopCards from './ShopCards';
 
-const Allcontent = () => {
+const Allcontent = ({role}) => {
     
   return (
     <>
@@ -18,11 +18,11 @@ const Allcontent = () => {
       {/* Main Content Area */}
       {/* <Box sx={{ display: 'flex', flex: 1 }}> */}
         {/* Sidebar */}
-        <Sidebar />
+        <Sidebar role={role}/>
         
         {/* Content Area */}
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Content />
+          <Content role={role}/>
         </Box>
 {/* 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
