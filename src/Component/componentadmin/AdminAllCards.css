@@ -1,0 +1,32 @@
+.button-container {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the start */
+    align-items: center;
+    gap: 20px; /* Add spacing between buttons */
+    margin-top: 20px; /* Add margin at the top */
+  }
+  
+  .custom-button {
+    width: 160px;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  
+  .custom-button.logout {
+    background-color: #9a292f; /* Bootstrap Danger color */
+    color: white;
+  }
+  
+  .custom-button.add-shop {
+    background-color: #9a292f;
+    color: white;
+  }
+  
+  .custom-button.add-delivery {
+    background-color: #9a292f;
+    color: white;
+  }
+  

@@ -18,14 +18,14 @@ const DeleteModal = ({ isOpen, toggle, onDelete }) => {
         <Button
           color="danger"
           onClick={onDelete}
-          style={{ marginRight: "80px" }} // Adds spacing to the right of the Delete button
+          style={{ marginRight: "80px" }} 
         >
           Delete
         </Button>
         <Button
           color="danger"
           onClick={toggle}
-          style={{ marginLeft: "25px" }} // Adds spacing to the left of the Cancel button
+          style={{ marginLeft: "25px" }} 
         >
           Cancel
         </Button>
