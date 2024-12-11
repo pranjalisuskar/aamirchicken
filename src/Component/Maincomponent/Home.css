@@ -88,10 +88,15 @@
 }
 
 /* No Underline Links */
-.no-underline {
+/* .no-underline {
   text-decoration: none;
   font-weight: bold;
   color: #9a292f;
+} */
+.no-underline {
+  text-decoration: none;
+  color: inherit; /* Keeps the text color consistent */
+  font-weight: bold;
 }
 
 /* Fixed Card Layout */
@@ -144,7 +149,7 @@
   }
 
   .card-title {
-    font-size: 1rem;
+    /* font-size: 1rem; */
   }
 
   .card-body {
@@ -153,7 +158,17 @@
 
   .rating i {
     font-size: 0.8rem;
+    color: goldenrod;
   }
+  .text-gold {
+    color: gold;
+  }
+  
+  .text-secondary {
+    color: #ccc; /* Adjust for a secondary color */
+    opacity: 0.7; /* Optional for dim effect */
+  }
+  
 }
 
 @media (max-width: 576px) {

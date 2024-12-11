@@ -44,9 +44,9 @@ const Shoponeview = () => {
   const styles = {
     cardContainer: {
       display: "flex",
-      flexWrap: "wrap", // Allows wrapping of cards into multiple rows
-      justifyContent: "space-between", // Distributes cards evenly
-      gap: "20px", // Adds space between cards
+      flexWrap: "wrap", 
+      justifyContent: "space-between", 
+      gap: "20px", 
     },
     card: {
       width: "300px",

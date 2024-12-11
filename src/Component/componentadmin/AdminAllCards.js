@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import './AdminAllCards.css'
+import "./AdminAllCards.css";
 const Content = ({ role }) => {
   const navigate = useNavigate();
   // Log the role when it changes
@@ -65,6 +65,18 @@ const Content = ({ role }) => {
         description: "Manage your product master.",
       },
       {
+        path: "/shopadd",
+        icon: "fas fa-store-alt",
+        title: "Add Shops",
+        description: "Manage your add shops.",
+      },
+      {
+        path: "/deliveryboyform",
+        icon: "fas fa-store-alt",
+        title: "Add Delivery Boy",
+        description: "Manage your add delivery boy.",
+      },
+      {
         path: "/orderreturn",
         icon: "fas fa-plus-circle",
         title: "Order Return",
@@ -102,14 +114,11 @@ const Content = ({ role }) => {
       <div className="top-bar">
         <h5 style={{ fontWeight: "bold" }}>Admin Dashboard..!</h5>
         {role === "Admin" && (
-          <div className="button-container">
-          <button
-            className="btn custom-button logout"
-            onClick={logout}
-          >
-            Logout
-          </button>
-          <Link to="/shopadd">
+          <div className="">
+            <button className="btn custom-button logout" onClick={logout} style={{width:"100px"}}>
+              Logout
+            </button>
+            {/* <Link to="/shopadd">
             <button className="btn custom-button add-shop">
               Add Shop
             </button>
@@ -118,9 +127,8 @@ const Content = ({ role }) => {
             <button className="btn custom-button add-delivery">
               Add Delivery Boy
             </button>
-          </Link>
-        </div>
-        
+          </Link> */}
+          </div>
         )}
       </div>
 

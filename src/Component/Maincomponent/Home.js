@@ -70,7 +70,6 @@ const Home = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-
   return (
     <div className="page-content">
       <div className="container mt-5">
@@ -80,8 +79,8 @@ const Home = () => {
             color: "#9A292F",
             fontWeight: "bold",
             fontSize: "30px",
-            fontStyle: "italic",
-            textAlign:"center"
+            // fontStyle: "italic",
+            textAlign: "center",
           }}
         >
           Order Fresh Chicken & Egg Online In Your City
@@ -101,19 +100,19 @@ const Home = () => {
         </Slider>
       </div>
       <div className="container mt-5">
-        <Link to="/dash" className="">
-          <h2
-            className="text-center"
-            style={{
-              color: "#9A292F",
-              fontWeight: "bold",
-              fontSize: "30px",
-              fontStyle: "italic",
-            }}
-          >
-            Shops To Explore
-          </h2>
-        </Link>
+        {/* <Link to="/dash" className=""> */}
+        <h2
+          className="text-center"
+          style={{
+            color: "#9A292F",
+            fontWeight: "bold",
+            fontSize: "30px",
+            // fontStyle: "italic",
+          }}
+        >
+          Shops To Explore
+        </h2>
+        {/* </Link> */}
         <div className="row">
           {Array.isArray(shop) && shop.length > 0 ? (
             shop.map((item, index) => (
@@ -122,7 +121,14 @@ const Home = () => {
                 key={index}
               >
                 <Link to={`/shop/${item.id}`}>
-                  <div className="card shop-card shadow position-relative" style={{height:"380px",borderColor:"#9a292f"}}>
+                  <div
+                    className="card shop-card shadow position-relative"
+                    style={{
+                      height: "380px",
+                      borderColor: "#9a292f",
+                      backgroundColor: "#9a292f",
+                    }}
+                  >
                     <img
                       src={`http://localhost:5001/uploads/shop/${item.shopImage}`}
                       alt={item.shopName}
@@ -135,15 +141,21 @@ const Home = () => {
                       }}
                     />
                     <div className="card-body text-center">
-                      <h5 className="card-title">{item.shopName}</h5>
-                      <div className="rating">
-                        {Array.from({ length: 5 }, (_, i) => (
+                      <h5
+                        className="text-white no-underline"
+                        style={{ marginTop: "25px" }}
+                      >
+                        {item.shopName}
+                      </h5>
+
+                      <div className="rating text-gold">
+                        {[...Array(5)].map((_, i) => (
                           <i
                             key={i}
                             className={`fas fa-star ${
-                              i < item.rating ? "text-gold" : "text-secondary"
+                              i < item.rating ? "text-gold" : ""
                             }`}
-                          />
+                          ></i>
                         ))}
                       </div>
                     </div>

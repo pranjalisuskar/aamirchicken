@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "remixicon/fonts/remixicon.css";
+// import "remixicon/fonts/remixicon.css";
 import DeliveryboyEdit from "./DeliveryboyEdit";
 import Deliveryboyviewmodal from "./Deliveryboyviewmodal";
 import DeleteModal from "../shopcomponent/Common/DeleteModal";
